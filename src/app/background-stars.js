@@ -100,7 +100,7 @@ export default class BackgroundStars extends Base {
         this.ctx.save();
         this.ctx.globalCompositeOperation = 'lighter';
         this.ctx.globalAlpha = star.alpha;
-        this.ctx.fillStyle = this.color;
+        this.ctx.fillStyle = star.color;
         this.ctx.beginPath();
         this.ctx.moveTo(x, y);
         this.ctx.arc(x, y, star.radius, 0, Math.PI * 2, true);

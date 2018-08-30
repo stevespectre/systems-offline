@@ -12,10 +12,10 @@ import Controls from './controls.js';
 import CollisionDetection from './collision-detection.js';
 import Records from './records.js';
 
-const BACKGROUND_STARS_ON = true;
+
 
 export default class Space extends Base {
-    constructor() {
+    constructor(backgroundStars) {
         super();
 
         this.planets = [];
@@ -26,10 +26,10 @@ export default class Space extends Base {
         this.canvas = document.getElementById('space-canvas');
         this.ctx = this.canvas.getContext("2d", { alpha: true });
 
+        this.backgroundStars = backgroundStars;
         this.score = new Score();
         this.planet = new Planet();
         this.spaceShip = new Spaceship(this.ctx);
-        this.backgroundStars = new BackgroundStars(BACKGROUND_STARS_ON);
         this.controls = new Controls(this.spaceShip, this.backgroundStars);
         this.collisionDetection = new CollisionDetection();
         this.equipments = new Equipments();

@@ -93,7 +93,6 @@ export default class BackgroundStars extends Base {
     }
 
     renderStar(star) {
-        console.log('render', star);
         const x = Math.round(star.posX);
         const y = Math.round(star.posY);
 

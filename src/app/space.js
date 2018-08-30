@@ -33,7 +33,7 @@ export default class Space extends Base {
         this.controls = new Controls(this.spaceShip, this.backgroundStars);
         this.collisionDetection = new CollisionDetection();
         // this.equipment = new Equipment(this.ctx, this.planets);
-        this.gravity = new Gravity(this.planets, this.spaceShip, this.equipment);
+        this.gravity = new Gravity(this.planets, this.spaceShip);
         this.explosion = new Explosion();
         this.record = new Records();
     }
@@ -67,9 +67,7 @@ export default class Space extends Base {
         this._setDistance();
         if (this.traveledDistance % 100 == 0) this.score.updateScore();
         if (this.traveledDistance % 900 == 0 && this.profile.calcChance()) {
-            console.log('this.ctx',this.ctx);
             this.equipment = new Equipment(this.ctx, this.planets);
-            console.log('this.equipment',this.equipment);
         }
 
         this._clearCanvas();

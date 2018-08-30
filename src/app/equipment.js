@@ -32,10 +32,12 @@ export default class Equipment extends Base {
 
     setX(x) {
         this.equipment.x = x;
+        return this;
     }
 
     setY(y) {
         this.equipment.y = y;
+        return this;
     }
 
     getRandomX() {

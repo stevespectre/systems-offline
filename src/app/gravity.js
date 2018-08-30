@@ -5,7 +5,7 @@ class Gravity {
     constructor(planets, spaceShip, equipment) {
         this.planets = planets;
         this.spaceShip = spaceShip;
-        this.equipment = equipment;
+        // this.equipment = equipment;
     }
 
     /*addGravityEffect(planets, spaceShip) {
@@ -16,7 +16,8 @@ class Gravity {
         return this.newAngle;
     }*/
 
-    calcGravityImpact() {
+    calcGravityImpact(equipment) {
+        this.equipment = equipment;
         let newAngle = DEFAULT_ROTATION_ANGLE;
 
         this.shipFrontX = this.spaceShip.x + (this.spaceShip.width / 2);
@@ -27,13 +28,8 @@ class Gravity {
         }
 
         this.planets.forEach(planet => {
-            console.log('planet',planet);
             this._calcElementNewPosition(planet, newAngle);
         });
-
-        if (this.equipment) {
-            this._calcElementNewPosition(this.equipment, newAngle);
-        }
 
         return newAngle;
 
@@ -57,11 +53,15 @@ class Gravity {
 
     _transformRotatedPoints(angle) {
         this.planets.map(planet => {
-            this._doTansform(planet, angle)
+            this._doTransform(planet, angle)
         });
+
+        if (this.equipment) {
+            this._doTransform(this.equipment, angle);
+        }
     }
 
-    _doTansform(object, angle) {
+    _doTransform(object, angle) {
         const newX = ((object.getX() - this.shipFrontX) * Math.cos(angle) - (object.getY() - this.shipFrontY) * Math.sin(angle)) + this.shipFrontX;
         const newY = ((object.getX() - this.shipFrontX) * Math.sin(angle) + (object.getY() - this.shipFrontY) * Math.cos(angle)) + this.shipFrontY;
 

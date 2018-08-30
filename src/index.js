@@ -1,4 +1,3 @@
-//  './app/main'
 import './styles/index.scss'
 
 import Menu from './app/menu.js'

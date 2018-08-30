@@ -62,8 +62,10 @@ export default class Space extends Base {
             this._gameOver();
         }
 
+        this._setDistance();
+        if (this.traveledDistance % 100 == 0) this.score.updateScore();
+
         this._clearCanvas();
-        // this.spaceShip.render();
         this.gravity.calcGravityImpact();
         this.backgroundStars.render();
         this._renderPlanets();
@@ -71,6 +73,10 @@ export default class Space extends Base {
         if (this.collisionDetection.checkObjectCollision(this.planets, this.spaceShip)) {
             this.gameIsOver = true;
         }
+    }
+
+    _setDistance() {
+        this.traveledDistance += this.spaceShip.getSpeed();
     }
 
     _addEarth() {
@@ -188,65 +194,6 @@ export default class Space extends Base {
 
         this.clearCanvas();
         this.drawPlanets();
-    }*/
-
-    /*addNewPlanet() {
-        this.planets.push(this.planet.getRandomPlanet(this.planets));
-    }*/
-
-
-
-    /*calculatePlanetsNewPositions() {
-        this.planets.forEach(planet => {
-            if (planet.y > this.windowHeight + (planet.radius * 2) ) {
-                return this.keepPlanetInView(planet);
-            }
-            planet.y += this.spaceShip.getSpeed();
-        });
-    }*/
-
-    /*keepPlanetInView(planet) {
-        planet.color = this.planet.getRandomPlanetColor();
-        planet.gravityRadius = this.planet.getRandomPlanetOuterRadius();
-        planet.radius = this.planet.getPlanetRadius(planet.gravityRadius);
-        planet.y = 0 - Math.floor(Math.random() * (planet.gravityRadius * 1.5));
-        planet.x = this.calculateXCoordinateWithoutCollision(planet);
-    }
-
-    calculateXCoordinateWithoutCollision(planet) {
-        let newPlanetX = this.planet.getRandomPlanetXPos();
-        planet.x = newPlanetX;
-        while (this.collisionDetection.checkCirclesCollision(this.planets, planet)) {
-            newPlanetX = planet.x = this.planet.getRandomPlanetXPos();
-            planet.y = planet.y - this.planet.minRadius;
-        }
-
-        return newPlanetX;
-    }*/
-
-    /*createSpaceShip() {
-        this.spaceShip = new Spaceship();
-        // this.spaceShip.drawShip(this.context);
-    }*/
-
-    /*drawPlanets() {
-        this.planets.forEach(planet => {
-
-            this.ctx.globalAlpha = 0.1;
-            this.ctx.beginPath();
-            this.ctx.arc(planet.x, planet.y, planet.gravityRadius, 0, 2*Math.PI);
-            this.ctx.fillStyle = '#ffffff';
-            this.ctx.fill();
-            this.ctx.closePath();
-            this.ctx.globalAlpha = 1;
-
-            this.ctx.beginPath();
-            this.ctx.arc(planet.x, planet.y, planet.radius, 0, 2*Math.PI);
-            this.ctx.fillStyle = planet.color;
-            this.ctx.fill();
-            this.ctx.closePath();
-
-        });
     }*/
 
 

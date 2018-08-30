@@ -19,7 +19,12 @@ module.exports = {
         colors: ['#333333', '#666666', '#999999']
     },
     profile: {
-        chance: 0.5
+        chance: 0.5,
+        beamRadius: 200
+    },
+    beam: {
+        radius: 200,
+        color: '#5fccff'
     },
     equipments: {
         /*beam: {
@@ -29,12 +34,10 @@ module.exports = {
         },*/
         plasma: {
             frequency: 50,
-            radius: 20,
+            radius: 50,
             color: '#ff0000',
             x: 0,
             y: 0
-        },
-        a: {},
-        b: {}
+        }
     }
 };

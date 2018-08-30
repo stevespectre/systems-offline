@@ -32,7 +32,7 @@ export default class Space extends Base {
         this.spaceShip = new Spaceship(this.ctx);
         this.controls = new Controls(this.spaceShip, this.backgroundStars);
         this.collisionDetection = new CollisionDetection();
-        this.equipments = new Equipments();
+        this.equipments = new Equipments(this.ctx);
         this.gravity = new Gravity(this.planets, this.spaceShip);
         this.explosion = new Explosion();
         this.record = new Records();
@@ -67,13 +67,14 @@ export default class Space extends Base {
         this._setDistance();
         if (this.traveledDistance % 100 == 0) this.score.updateScore();
         if (this.traveledDistance % 500 == 0 && this.profile.calcChance()) {
-            this.equipments.spawnEquipment();
+            this.equipment = this.equipments.spawnEquipment();
         }
 
         this._clearCanvas();
         this.gravity.calcGravityImpact();
         this.backgroundStars.render();
         this.spaceShip.render();
+        if (this.equipment) this.equipments.render(this.equipment);
         this._renderPlanets();
 
         if (this.collisionDetection.checkObjectCollision(this.planets, this.spaceShip)) {

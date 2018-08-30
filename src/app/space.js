@@ -12,8 +12,6 @@ import Controls from './controls.js';
 import CollisionDetection from './collision-detection.js';
 import Records from './records.js';
 
-
-
 export default class Space extends Base {
     constructor() {
         super();
@@ -47,16 +45,16 @@ export default class Space extends Base {
         this.backgroundStars.init();
         this.controls.addLightSpeedButton();
 
-        this._startGame();
+        return this;
+    }
+
+    startGame() {
+        this.interval = setInterval(this._render.bind(this), 30);
     }
 
     _setSpaceDimensions() {
         this.canvas.width = this.windowWidth;
         this.canvas.height = this.windowHeight;
-    }
-
-    _startGame() {
-        this.interval = setInterval(this._render.bind(this), 30);
     }
 
     _render() {

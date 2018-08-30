@@ -21,6 +21,7 @@ export default class BackgroundStars extends Base {
     init() {
         this.createBackgroundStars();
         this.render();
+        return this;
     }
 
     render() {

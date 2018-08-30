@@ -5,7 +5,7 @@ export default class Menu {
 
     init() {
         document.getElementById('start').addEventListener('click', ()=> {
-            this.space.init();
+            this.space.startGame();
             document.body.classList.add('game')
         })
     }

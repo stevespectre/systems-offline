@@ -4,31 +4,37 @@ export default class BackgroundStars extends Base {
     constructor() {
         super();
 
-        this.backgroundStars = document.getElementById('space-background-stars');
-        this.backgroundStars.width = this.windowWidth;
-        this.backgroundStars.height = this.windowHeight;
-        this.ctxStars = this.backgroundStars.getContext("2d", { alpha: false });
-        this.velocity = {x:0, y: -3};
+        this.canvas = document.getElementById('space-background-stars');
+        this.canvas.width = this.windowWidth;
+        this.canvas.height = this.windowHeight;
+        this.ctx = this.canvas.getContext('2d', { alpha: false });
+        this.velocity = { x: 0, y: -3 };
         this.minRadius = 2;
         this.maxRadius = 3;
         this.starColor = '#fff';
         this.starsBg = 'rgba(0,0,0,.5)';
-        this.starDensity = 4;
+        this.bigStarDensity = 40;
+        this.smallStarDensity = 80;
         this.stars = [];
     }
 
-    initBackgroundStars() {
+    init() {
         this.createBackgroundStars();
-        this.drawFrame();
+        this.renderFrame();
+    }
+
+    renderFrame() {
+        this.clearCanvas();
+        this.renderStars();
     }
 
     createBackgroundStars() {
-        for (let i = 0; i < (this.starDensity*10); i++) {
-            let rad = this.maxRadius;
-            this.createStar(rad);
-            rad = this.minRadius;
-            this.createStar(rad);
-            this.createStar(rad);
+        while (this.bigStarDensity--) {
+            this.createStar(this.maxRadius);
+        }
+
+        while (this.smallStarDensity--) {
+            this.createStar(this.minRadius);
         }
     }
 
@@ -38,7 +44,7 @@ export default class BackgroundStars extends Base {
 
     generateStar(rad) {
         return {
-            alpha: Math.round((Math.random() * 100 - 70) + 70),
+            alpha: this.getRandomBrightness(),
             radius: rad || Math.random() * 2,
             color: this.starColor,
             posX: Math.floor(Math.random() * this.windowWidth),
@@ -46,47 +52,48 @@ export default class BackgroundStars extends Base {
         }
     }
 
-    drawFrame() {
-        this.clearCanvas();
-        this.drawStar();
+    getRandomBrightness() {
+        return Math.round((Math.random() * 100 - 70) + 70);
     }
 
     clearCanvas() {
-        this.ctxStars.fillStyle = this.starsBg;
-        this.ctxStars.fillRect(0, 0, this.windowWidth, this.windowHeight);
+        this.ctx.fillStyle = this.starsBg;
+        this.ctx.fillRect(0, 0, this.windowWidth, this.windowHeight);
     }
 
-    drawStar() {
-        var s = this.stars.length;
-        while(s--) {
-            var star = this.stars[s];
-            this.updateStars(star);
-            this.starRender(star);
-        }
+    renderStars() {
+        this.stars.map(star => {
+            this.updateStarPosition(star);
+            this.renderStar(star);
+        });
     }
 
-    updateStars(star) {
+    updateStarPosition(star) {
         star.posY += this.velocity.y === 0 ? this.velocity.y : (this.velocity.y / (1- star.radius));
 
+        this.eventuallyKeepStarOnCanvas(star);
+    }
+
+    eventuallyKeepStarOnCanvas(star) {
         if(star.posY > this.windowHeight){
             star.posY = 0;
         }
     }
 
-    starRender(star) {
-        var x = Math.round(star.posX),
-            y = Math.round(star.posY);
+    renderStar(star) {
+        const x = Math.round(star.posX);
+        const y = Math.round(star.posY);
 
-        this.ctxStars.save();
-        this.ctxStars.globalCompositeOperation = 'lighter';
-        this.ctxStars.globalAlpha = star.alpha;
-        this.ctxStars.fillStyle = star.color;
-        this.ctxStars.beginPath();
-        this.ctxStars.moveTo(x, y);
-        this.ctxStars.arc(x, y, star.radius, 0, Math.PI * 2, true);
-        this.ctxStars.closePath();
-        this.ctxStars.fill();
-        this.ctxStars.restore();
+        this.ctx.save();
+        this.ctx.globalCompositeOperation = 'lighter';
+        this.ctx.globalAlpha = star.alpha;
+        this.ctx.fillStyle = star.color;
+        this.ctx.beginPath();
+        this.ctx.moveTo(x, y);
+        this.ctx.arc(x, y, star.radius, 0, Math.PI * 2, true);
+        this.ctx.closePath();
+        this.ctx.fill();
+        this.ctx.restore();
     }
 
 }

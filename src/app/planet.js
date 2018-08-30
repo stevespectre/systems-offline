@@ -5,16 +5,16 @@ export default class Planet extends Base {
     constructor() {
         super();
         this.planetColors = [
-            'yellow',
+            '#999999',
             '#666666',
-            'red'
+            '#444444'
         ];
         this.maxPlanetInARow = 3;
-        this.maxPlanets = 1;
+        this.maxPlanets = 7;
         this.gridForPlanet = this.windowWidth / this.maxPlanetInARow;
         this.minRadius;
         this.maxRadius;
-        this.gravityPlanetRate = 0.33;
+        this.gravityPlanetRate = 0.53;
         this.gridFillRate = 0.78;
         this.earth = {
             radius: 75,

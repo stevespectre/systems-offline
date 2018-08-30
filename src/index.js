@@ -9,7 +9,7 @@ const space = new Space();
 const menu = new Menu();
 const backgroundStars = new BackgroundStars();
 
-backgroundStars.initBackgroundStars();
+backgroundStars.init();
 menu.addEventListeners(space);
 
 // space.setupStartScene()

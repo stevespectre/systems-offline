@@ -37,7 +37,7 @@ export default class Space extends Base {
         this.setSpaceDimensions();
         this.planet.calculatePlanetSizes();
 
-        for (let i = 0; i < this.planet.maxPlanets; i++) {
+        while(this.planet.maxPlanets--) {
             this.addNewPlanet();
         }
 
@@ -55,7 +55,7 @@ export default class Space extends Base {
         for (let i = 2; i < this.planets.length; i++) {
             let p = this.planets[i];
             p.y = Math.floor(Math.random() * (this.windowHeight/3)*2) - this.windowHeight/6;
-            p.x = this.calculateXCoordinateWithoutCollision(this.planets[i]);
+            p.x = this.calculateXCoordinateWithoutCollision(p);
         }
     }
 
@@ -69,13 +69,14 @@ export default class Space extends Base {
     }
 
     setFirstPlanetCoordinates(moon) {
+        console.log('moon',moon);
         moon.x = this.windowWidth / 2 + moon.radius + ((moon.gravityRadius - moon.radius) / 2 );
         //moon.x = this.windowWidth / 2;
         moon.y = (this.windowHeight / 3) * 2;
     }
 
     initBackgroundStars() {
-        this.backgroundStars.initBackgroundStars();
+        this.backgroundStars.init();
     }
 
     startGame() {
@@ -100,7 +101,7 @@ export default class Space extends Base {
 
         if (this.traveledDistance % 10 == 0) {
 
-            this.backgroundStars.drawFrame();
+            this.backgroundStars.renderFrame();
 
             if (this.collisionDetection.checkObjectCollision(this.planets, this.spaceShip)) {
                 this.gameIsOver = true;

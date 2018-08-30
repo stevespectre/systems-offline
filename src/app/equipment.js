@@ -2,18 +2,16 @@ import Base from './base.js';
 import CollisionDetection from './collision-detection';
 import config from './config';
 
-export default class Equipments extends Base {
+export default class Equipment extends Base {
     constructor(ctx, planets = []) {
+        console.log('ctx',ctx);
         super();
         this.ctx = ctx;
         this.planets = planets;
         this.equipments = config.equipments;
 
         this.collisionDetection = new CollisionDetection();
-    }
-
-    spawnEquipment() {
-        return this.getRandomEquipment();
+        this.getRandomEquipment();
     }
 
     getRandomEquipment() {
@@ -32,6 +30,14 @@ export default class Equipments extends Base {
         return this.equipment.y;
     }
 
+    setX(x) {
+        this.equipment.x = x;
+    }
+
+    setY(y) {
+        this.equipment.y = y;
+    }
+
     getRandomX() {
         return Math.floor(Math.random() * this.windowWidth)
     }
@@ -42,7 +48,6 @@ export default class Equipments extends Base {
     }
 
     _calculatePosition(speed) {
-        console.log('speed',this.equipment.y);
         this.equipment.y += speed;
     }
 
@@ -53,10 +58,12 @@ export default class Equipments extends Base {
     }
 
     renderEquipment() {
+        this.ctx.save();
         this.ctx.beginPath();
         this.ctx.arc(this.equipment.x, this.equipment.y, this.equipment.radius, 0, 2 * Math.PI);
         this.ctx.fillStyle = this.equipment.color;
         this.ctx.fill();
         this.ctx.closePath();
+        this.ctx.restore();
     }
 }

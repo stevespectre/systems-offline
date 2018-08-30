@@ -2,9 +2,10 @@ const DEFAULT_ROTATION_ANGLE = 0.015;
 
 class Gravity {
 
-    constructor(planets, spaceShip) {
+    constructor(planets, spaceShip, equipment) {
         this.planets = planets;
         this.spaceShip = spaceShip;
+        this.equipment = equipment;
     }
 
     /*addGravityEffect(planets, spaceShip) {
@@ -26,33 +27,45 @@ class Gravity {
         }
 
         this.planets.forEach(planet => {
-
-            const distanceX = planet.getX() - this.shipFrontX;
-            const distanceY = planet.getY() - this.shipFrontY;
-
-            const realDistance = Math.sqrt((distanceX * distanceX) + (distanceY * distanceY));
-
-            if (this._isWithinGravityField(planet, realDistance)) {
-                const direction = distanceX > 0 ? -1 : 1;
-                this._transformPlanetPoints(newAngle * direction);
-            }
+            console.log('planet',planet);
+            this._calcElementNewPosition(planet, newAngle);
         });
+
+        if (this.equipment) {
+            this._calcElementNewPosition(this.equipment, newAngle);
+        }
 
         return newAngle;
 
+    }
+
+    _calcElementNewPosition(object, newAngle) {
+        const distanceX = object.getX() - this.shipFrontX;
+        const distanceY = object.getY() - this.shipFrontY;
+
+        const realDistance = Math.sqrt((distanceX * distanceX) + (distanceY * distanceY));
+
+        if (this._isWithinGravityField(object, realDistance)) {
+            const direction = distanceX > 0 ? -1 : 1;
+            this._transformRotatedPoints(newAngle * direction);
+        }
     }
 
     _isWithinGravityField(planet, distance) {
         return distance <= planet.gravityRadius && distance > planet.radius
     }
 
-    _transformPlanetPoints(angle) {
+    _transformRotatedPoints(angle) {
         this.planets.map(planet => {
-            const newX = ((planet.getX() - this.shipFrontX) * Math.cos(angle) - (planet.getY() - this.shipFrontY) * Math.sin(angle)) + this.shipFrontX;
-            const newY = ((planet.getX() - this.shipFrontX) * Math.sin(angle) + (planet.getY() - this.shipFrontY) * Math.cos(angle)) + this.shipFrontY;
-
-            planet.setX(newX).setY(newY);
+            this._doTansform(planet, angle)
         });
+    }
+
+    _doTansform(object, angle) {
+        const newX = ((object.getX() - this.shipFrontX) * Math.cos(angle) - (object.getY() - this.shipFrontY) * Math.sin(angle)) + this.shipFrontX;
+        const newY = ((object.getX() - this.shipFrontX) * Math.sin(angle) + (object.getY() - this.shipFrontY) * Math.cos(angle)) + this.shipFrontY;
+
+        object.setX(newX).setY(newY);
     }
 
 }

@@ -6,7 +6,7 @@ import Moon from './moon';
 import Spaceship from './spaceship.js';
 import Score from './score.js';
 import Explosion from './explosion.js';
-import Equipments from './equipments.js';
+import Equipment from './equipment.js';
 import Gravity from './gravity.js';
 import Profile from './profile.js';
 import Controls from './controls.js';
@@ -32,8 +32,8 @@ export default class Space extends Base {
         this.spaceShip = new Spaceship(this.ctx);
         this.controls = new Controls(this.spaceShip, this.backgroundStars);
         this.collisionDetection = new CollisionDetection();
-        this.equipments = new Equipments(this.ctx, this.planets);
-        this.gravity = new Gravity(this.planets, this.spaceShip);
+        // this.equipment = new Equipment(this.ctx, this.planets);
+        this.gravity = new Gravity(this.planets, this.spaceShip, this.equipment);
         this.explosion = new Explosion();
         this.record = new Records();
     }
@@ -67,14 +67,16 @@ export default class Space extends Base {
         this._setDistance();
         if (this.traveledDistance % 100 == 0) this.score.updateScore();
         if (this.traveledDistance % 900 == 0 && this.profile.calcChance()) {
-            this.equipment = this.equipments.spawnEquipment();
+            console.log('this.ctx',this.ctx);
+            this.equipment = new Equipment(this.ctx, this.planets);
+            console.log('this.equipment',this.equipment);
         }
 
         this._clearCanvas();
-        this.gravity.calcGravityImpact();
+        this.gravity.calcGravityImpact(this.equipment);
         this.backgroundStars.render();
         this.spaceShip.render();
-        if (this.equipment != undefined) this._renderEquipments();
+        if (this.equipment != undefined) this._renderEquipment();
         this._renderPlanets();
 
         if (this.collisionDetection.checkObjectCollision(this.planets, this.spaceShip)) {
@@ -110,9 +112,9 @@ export default class Space extends Base {
         this.planets.forEach(planet => planet.render(speed));
     }
 
-    _renderEquipments() {
+    _renderEquipment() {
         const speed = this.spaceShip.getSpeed();
-        this.equipments.render(speed);
+        this.equipment.render(speed);
     }
 
     _clearCanvas() {

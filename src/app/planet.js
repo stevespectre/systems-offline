@@ -116,7 +116,7 @@ export default class Planet extends Base {
     }
 
     _renderSunLitSurfice() {
-        const sunlitRadius = this.radius / 1.3;
+        const sunlitRadius = this.radius / 1.13;
         const radialDifference = this.radius - sunlitRadius;
         this.ctx.globalAlpha = 0.1;
         this.ctx.fillStyle = '#ffffff';
@@ -139,7 +139,7 @@ class Craters {
         this.craters.forEach(c => c.render());
     }
 
-    _generateRandomCraters() {
+    _generateRandomCraters() {  
         const craters = [];
         const count = Math.floor(Math.random() * config.planet.maxCraterCount);
         for(let i = 0; i <= count; i++) {

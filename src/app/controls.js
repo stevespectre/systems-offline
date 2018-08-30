@@ -6,7 +6,7 @@ class Controls {
         this.backgroundStars = backgroundStars;
     }
 
-    addLightSpeedButton() {
+    init() {
         document.getElementById('burst').addEventListener('mousedown', () => {
             this.burst();
         });

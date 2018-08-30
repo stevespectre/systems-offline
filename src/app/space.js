@@ -43,7 +43,7 @@ export default class Space extends Base {
         this._addPlanets();
 
         this.backgroundStars.init();
-        this.controls.addLightSpeedButton();
+        this.controls.init();
 
         return this;
     }

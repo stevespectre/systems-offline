@@ -70,11 +70,6 @@ export default class Space extends Base {
         this.backgroundStars.render();
         this._renderPlanets();
 
-        this.traveledDistance += this.spaceShip.getSpeed();
-        if (this.traveledDistance % 100 == 0) {
-            this.score.updateScore();
-        }
-
         if (this.collisionDetection.checkObjectCollision(this.planets, this.spaceShip)) {
             this.gameIsOver = true;
         }

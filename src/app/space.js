@@ -68,6 +68,7 @@ export default class Space extends Base {
         this._clearCanvas();
         this.gravity.calcGravityImpact();
         this.backgroundStars.render();
+        this.spaceShip.render();
         this._renderPlanets();
 
         if (this.collisionDetection.checkObjectCollision(this.planets, this.spaceShip)) {

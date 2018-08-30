@@ -22,8 +22,8 @@ class CollisionDetection {
         for (let i = 0; i < planets.length; i++) {
             const planet = planets[i];
 
-            const distanceX = planet.getX() - planetToPlace.getX();
-            const distanceY = planet.getY() - planetToPlace.getY();
+            const distanceX = planet.x - planetToPlace.x;
+            const distanceY = planet.y - planetToPlace.y;
 
             const realDistance = Math.sqrt( (distanceX * distanceX) + (distanceY * distanceY) );
 

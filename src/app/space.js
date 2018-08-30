@@ -8,6 +8,7 @@ import Score from './score.js';
 import Explosion from './explosion.js';
 import Equipments from './equipments.js';
 import Gravity from './gravity.js';
+import Profile from './profile.js';
 import Controls from './controls.js';
 import CollisionDetection from './collision-detection.js';
 import Records from './records.js';
@@ -19,7 +20,7 @@ export default class Space extends Base {
         this.planets = [];
         this.gameIsOver = false;
         this.traveledDistance = 0;
-        this.maxPlanets = 3;
+        this.maxPlanets = 4;
 
         this.canvas = document.getElementById('space-canvas');
         this.ctx = this.canvas.getContext("2d", { alpha: true });
@@ -27,6 +28,7 @@ export default class Space extends Base {
         this.backgroundStars = new BackgroundStars();
         this.score = new Score();
         this.planet = new Planet();
+        this.profile = new Profile();
         this.spaceShip = new Spaceship(this.ctx);
         this.controls = new Controls(this.spaceShip, this.backgroundStars);
         this.collisionDetection = new CollisionDetection();
@@ -64,6 +66,9 @@ export default class Space extends Base {
 
         this._setDistance();
         if (this.traveledDistance % 100 == 0) this.score.updateScore();
+        if (this.traveledDistance % 500 == 0 && this.profile.calcChance()) {
+            this.equipments.spawnEquipment();
+        }
 
         this._clearCanvas();
         this.gravity.calcGravityImpact();

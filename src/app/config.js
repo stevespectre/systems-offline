@@ -16,5 +16,24 @@ module.exports = {
         maxInARow: 3,
         gravityRate: 0.53,
         colors: ['#333333', '#666666', '#999999']
+    },
+    profile: {
+        chance: 0.5
+    },
+    equipments: {
+        /*beam: {
+            color: '#ffffff',
+            speed: 10,
+            radius: 50
+        },*/
+        plasma: {
+            frequency: 50,
+            radius: 20,
+            color: '#ff0000',
+            x: 0,
+            y: 0
+        },
+        a: {},
+        b: {}
     }
 };

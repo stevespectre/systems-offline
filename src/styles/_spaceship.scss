@@ -1,0 +1,94 @@
+.gameover {
+  #ship {
+    opacity: 0;
+  }
+}
+
+#ship {
+  position: absolute;
+  bottom: 90px;
+  left: 50%;
+  width: 20px;
+  height: 40px;
+  transform: translateX(-50%);
+  z-index: 1080;
+  transition: opacity .9s;
+
+  #hull {
+    width: 20px;
+    height: 100%;
+    background: #CCE9F9;
+    border-radius: 50% 50% 0 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 1080;
+
+    &::after {
+      content: '';
+      width: 50%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #93C7EF;
+      border-radius: 0 100% 0 0;
+    }
+  }
+  #wings {
+    position: absolute;
+    top: 15px;
+    left: -10px;
+
+    border-bottom: 25px solid #195857;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    height: 0;
+    width: 40px;
+    z-index: 1040;
+  }
+
+  #thrust {
+    position: absolute;
+    top: 100%;
+    left: 1px;
+    width: 18px;
+    height: 10px;
+    border-radius: 0 0 90px 90px;
+    background: $thrust;
+    animation-name: thrust;
+    animation-duration: .1s;
+    animation-iteration-count: infinite;
+
+    div {
+      position: absolute;
+      top: 0;
+      left: 5px;
+      width: 8px;
+      height: 6px;
+      border-radius: 0 0 90px 90px;
+      background: $thrust2;
+      animation-name: thrust;
+      animation-duration: .2s;
+      animation-delay: .3s;
+      animation-iteration-count: infinite;
+    }
+  }
+
+  &.burst {
+    #thrust {
+      height: 13px;
+      background: $burst;
+      div {
+        height: 8px;
+        background: $burst2;
+      }
+    }
+  }
+
+}
+
+@keyframes thrust {
+  0% {border-radius: 0 0 90px 110px;}
+  50% {border-radius: 0 0 110px 90px;}
+  100% {border-radius: 0 0 90px 110px;}
+}

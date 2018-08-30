@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>OffLine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+</head>
+<body>
+<canvas id="space-background-stars" class="background"></canvas>
+<canvas id="space-canvas"></canvas>
+<canvas id="effects"></canvas>
+<div id="hud">
+  <span id="score">0</span>
+  <button id="burst">Lightspeed</button>
+  <ul id="equipments">
+    <li id="beam"><div></div></li>
+    <li id="plasma"><div></div></li>
+  </ul>
+</div>
+
+<div id="ship">
+  <div id="hull"></div>
+  <div id="wings"></div>
+  <div id="cockpit"></div>
+  <div id="thrust"><div></div></div>
+</div>
+<h2 id="msg-gameover">GAME OVER!</h2>
+<div id="menu-gameover">
+
+  <section>
+    <p id="new-record">Congratulation! New record!</p>
+    <p>Your score: <span id="end-score"></span></p>
+    <p>Record: <span id="record"></span></p>
+    <ul>
+      <li id="restart">Restart</li>
+    </ul>
+  </section>
+</div>
+
+<div id="menu">
+  <ul>
+    <li id="start">Start</li>
+    <li>Records</li>
+  </ul>
+</div>
+
+</body>
+</html>

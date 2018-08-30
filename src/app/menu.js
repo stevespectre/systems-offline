@@ -1,7 +1,11 @@
 export default class Menu {
-    addEventListeners(space) {
+    constructor(space) {
+        this.space = space;
+    }
+
+    init() {
         document.getElementById('start').addEventListener('click', ()=> {
-            space.init();
+            this.space.init();
             document.body.classList.add('game')
         })
     }

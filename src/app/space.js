@@ -15,7 +15,7 @@ import Records from './records.js';
 
 
 export default class Space extends Base {
-    constructor(backgroundStars) {
+    constructor() {
         super();
 
         this.planets = [];
@@ -26,7 +26,7 @@ export default class Space extends Base {
         this.canvas = document.getElementById('space-canvas');
         this.ctx = this.canvas.getContext("2d", { alpha: true });
 
-        this.backgroundStars = backgroundStars;
+        this.backgroundStars = new BackgroundStars();
         this.score = new Score();
         this.planet = new Planet();
         this.spaceShip = new Spaceship(this.ctx);
@@ -44,7 +44,7 @@ export default class Space extends Base {
         this._addMoon();
         this._addPlanets();
 
-        // this.backgroundStars.init();
+        this.backgroundStars.init();
         this.controls.addLightSpeedButton();
 
         this._startGame();
@@ -122,7 +122,6 @@ export default class Space extends Base {
         setTimeout(() => {
             location.reload();
         }, 10000);
-
     }
 
     /*setupStartScene() {

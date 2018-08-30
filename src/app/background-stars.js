@@ -19,7 +19,6 @@ export default class BackgroundStars extends Base {
     }
 
     init() {
-        console.log('init');
         this.createBackgroundStars();
         this.render();
     }

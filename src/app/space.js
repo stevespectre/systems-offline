@@ -112,12 +112,10 @@ export default class Space extends Base {
         this.explosion.explode();
         document.body.classList.add('gameover');
 
-        let score = this.score.getScore();
+        const score = this.score.getScore();
         document.getElementById('end-score').innerHTML = score;
         if (this.record.checkNewRecord(score)) {
             this.record.setRecord(score);
-            console.log('score',score);
-
             document.getElementById('new-record').classList.add('show');
         }
 
@@ -127,74 +125,5 @@ export default class Space extends Base {
             location.reload();
         }, 10000);
     }
-
-    /*setupStartScene() {
-        //this.setSpaceDimensions();
-        //this.planet.calculatePlanetSizes();
-
-        // this.setStartingPlanetToEarth(this.planets[0]);
-        // this.setFirstPlanetCoordinates(this.planets[1]);
-        this.setPlanetsStartingPosition();
-
-        //this.drawPlanets();
-        this.createSpaceShip();
-        //this.backgroundStars.init();
-        //this.controls.addLightSpeedButton();
-        // this.startGame();
-    }
-
-    setPlanetsStartingPosition() {
-        for (let i = 2; i < this.planets.length; i++) {
-            let p = this.planets[i];
-            p.y = Math.floor(Math.random() * (this.windowHeight/3)*2) - this.windowHeight/6;
-            p.x = this.calculateXCoordinateWithoutCollision(p);
-        }
-    }*/
-
-    /*setStartingPlanetToEarth(earth) {
-        let earthParams = this.planet.getEarthParams();
-        earth.x = earthParams.x;
-        earth.y = earthParams.y;
-        earth.color = earthParams.color;
-        earth.radius = earthParams.radius;
-        earth.gravityRadius = 1;
-    }*/
-
-    /*setFirstPlanetCoordinates(moon) {
-        console.log('moon',moon);
-        moon.x = this.windowWidth / 2 + moon.radius + ((moon.gravityRadius - moon.radius) / 2 );
-        //moon.x = this.windowWidth / 2;
-        moon.y = (this.windowHeight / 3) * 2;
-    }*/
-
-
-
-    /*updateGameArea() {
-        if (this.gameIsOver) {
-            this.gameOver();
-        }
-        this.calculatePlanetsNewPositions();
-        this.traveledDistance += this.spaceShip.getSpeed();
-        if (this.score.getScore() % 5 == 0) {
-
-        }
-        if (this.traveledDistance % 100 == 0) {
-            this.score.updateScore();
-        }
-        if (this.traveledDistance % 10 == 0) {
-
-            this.backgroundStars.renderFrame();
-
-            if (this.collisionDetection.checkObjectCollision(this.planets, this.spaceShip)) {
-                this.gameIsOver = true;
-            }
-
-            this.gravity.addGravityEffect(this.planets, this.spaceShip);
-        }
-
-        this.clearCanvas();
-        this.drawPlanets();
-    }*/
-
 
 }

@@ -2,16 +2,16 @@ class CollisionDetection {
 
     checkObjectCollision(planets, spaceShip) {
         for (let i = 0; i < planets.length; i++) {
-            let p = planets[i];
-            let shipFrontX = spaceShip.posX + (spaceShip.shipWidth / 2);
-            let shipFrontY = spaceShip.posY;
+            const planet = planets[i];
+            const shipFrontX = spaceShip.x + (spaceShip.width / 2);
+            const shipFrontY = spaceShip.y;
 
-            let distanceX = p.x - shipFrontX;
-            let distanceY = p.y - shipFrontY;
+            const distanceX = planet.getX() - shipFrontX;
+            const distanceY = planet.getY() - shipFrontY;
 
-            let realDistance = Math.sqrt( (distanceX * distanceX) + (distanceY * distanceY) );
+            const realDistance = Math.sqrt( (distanceX * distanceX) + (distanceY * distanceY) );
 
-            if (realDistance <= p.radius) {
+            if (realDistance <= planet.radius) {
                 return true;
             }
         }
@@ -20,14 +20,14 @@ class CollisionDetection {
 
     checkCirclesCollision(planets, planetToPlace) {
         for (let i = 0; i < planets.length; i++) {
-            let p = planets[i];
+            const planet = planets[i];
 
-            let distanceX = p.x - planetToPlace.x;
-            let distanceY = p.y - planetToPlace.y;
+            const distanceX = planet.getX() - planetToPlace.getX();
+            const distanceY = planet.getY() - planetToPlace.getY();
 
-            let realDistance = Math.sqrt( (distanceX * distanceX) + (distanceY * distanceY) );
+            const realDistance = Math.sqrt( (distanceX * distanceX) + (distanceY * distanceY) );
 
-            if (realDistance <= (p.gravityRadius + planetToPlace.gravityRadius + (planetToPlace.gravityRadius * 1.5))
+            if (realDistance <= (planet.gravityRadius + planetToPlace.gravityRadius + (planetToPlace.gravityRadius * 1.5))
                 && realDistance != 0) {
                 return true;
             }

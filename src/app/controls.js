@@ -1,34 +1,46 @@
-class Controls {
+const SPACE_KEY_CODE = 32;
 
-    addLightSpeedButton(spaceShip, backgroundStars) {
+class Controls {
+    constructor(spaceShip, backgroundStars) {
+        this.spaceShip = spaceShip;
+        this.backgroundStars = backgroundStars;
+    }
+
+    addLightSpeedButton() {
         document.getElementById('burst').addEventListener('mousedown', () => {
-            console.log('this.spaceShip.actualSpeed',spaceShip);
-            spaceShip.actualSpeed = spaceShip.burstSpeed;
+            this.burst();
         });
 
         document.getElementById('burst').addEventListener('mouseup', () => {
-            console.log('this.spaceShip.actualSpeed',spaceShip.actualSpeed);
-            spaceShip.actualSpeed = spaceShip.standardSpeed;
+            this.standard();
         });
 
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', e => {
             e = e || window.event;
-            if (e.keyCode == 32) {
-                spaceShip.actualSpeed = spaceShip.burstSpeed;
-                spaceShip.switchBurstSpeedGraphicOn();
-                backgroundStars.velocity.y = -7;
+            if (e.keyCode == SPACE_KEY_CODE) {
+                this.burst();
             }
         });
 
-        document.addEventListener('keyup', function(e) {
+        document.addEventListener('keyup', e => {
             e = e || window.event;
-            if (e.keyCode == 32) {
-                spaceShip.actualSpeed = spaceShip.standardSpeed;
-                spaceShip.switchBurstSpeedGraphicOff();
-                backgroundStars.velocity.y = -2;
+            if (e.keyCode == SPACE_KEY_CODE) {
+                this.standard();
             }
         });
     };
+
+    burst() {
+        this.spaceShip.speedBurst();
+        this.backgroundStars.speedBurst();
+        this.spaceShip.switchBurstSpeedGraphicOn();
+    }
+
+    standard() {
+        this.spaceShip.speedStandard();
+        this.backgroundStars.speedStandard();
+        this.spaceShip.switchBurstSpeedGraphicOff();
+    }
 }
 
 module.exports = Controls;

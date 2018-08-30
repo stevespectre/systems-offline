@@ -1,47 +1,57 @@
-class Gravity {
-    addGravityEffect(planets, spaceShip) {
+const DEFAULT_ROTATION_ANGLE = 0.015;
 
+class Gravity {
+
+    constructor(planets, spaceShip) {
+        this.planets = planets;
+        this.spaceShip = spaceShip;
+    }
+
+    /*addGravityEffect(planets, spaceShip) {
         this.planets = planets;
         this.spaceShip = spaceShip;
         this.rotationAngle = 0.021;
         this.newAngle = this.calcGravityImpact();
         return this.newAngle;
-    }
+    }*/
 
     calcGravityImpact() {
-        let newAngle = this.rotationAngle;
+        let newAngle = DEFAULT_ROTATION_ANGLE;
 
-        if (this.spaceShip.actualSpeed == this.spaceShip.burstSpeed) {
+        this.shipFrontX = this.spaceShip.x + (this.spaceShip.width / 2);
+        this.shipFrontY = this.spaceShip.y;
+
+        if (this.spaceShip.isOnBurstSpeed()) {
             newAngle = newAngle / 3;
         }
 
-        for (let i = 0; i < this.planets.length; i++) {
-            let p = this.planets[i];
-            this.shipFrontX = this.spaceShip.posX + (this.spaceShip.shipWidth / 2);
-            this.shipFrontY = this.spaceShip.posY;
+        this.planets.forEach(planet => {
 
-            let distanceX = p.x - this.shipFrontX;
-            let distanceY = p.y - this.shipFrontY;
+            const distanceX = planet.getX() - this.shipFrontX;
+            const distanceY = planet.getY() - this.shipFrontY;
 
-            let realDistance = Math.sqrt( (distanceX * distanceX) + (distanceY * distanceY) );
+            const realDistance = Math.sqrt((distanceX * distanceX) + (distanceY * distanceY));
 
-            if (realDistance <= p.gravityRadius && realDistance > p.radius) {
+            if (this._isWithinGravityField(planet, realDistance)) {
                 const direction = distanceX > 0 ? -1 : 1;
-                this.transformPlanetPoints(newAngle * direction);
+                this._transformPlanetPoints(newAngle * direction);
             }
-        }
+        });
 
         return newAngle;
 
     }
 
-    transformPlanetPoints(angle) {
-        this.planets.map(planet => {
-            const newX = (planet.x - this.shipFrontX) * Math.cos(angle) - (planet.y - this.shipFrontY) * Math.sin(angle);
-            const newY = (planet.x - this.shipFrontX) * Math.sin(angle) + (planet.y - this.shipFrontY) * Math.cos(angle);
+    _isWithinGravityField(planet, distance) {
+        return distance <= planet.gravityRadius && distance > planet.radius
+    }
 
-            planet.x = newX + this.shipFrontX;
-            planet.y = newY + this.shipFrontY;
+    _transformPlanetPoints(angle) {
+        this.planets.map(planet => {
+            const newX = ((planet.getX() - this.shipFrontX) * Math.cos(angle) - (planet.getY() - this.shipFrontY) * Math.sin(angle)) + this.shipFrontX;
+            const newY = ((planet.getX() - this.shipFrontX) * Math.sin(angle) + (planet.getY() - this.shipFrontY) * Math.cos(angle)) + this.shipFrontY;
+
+            planet.setX(newX).setY(newY);
         });
     }
 

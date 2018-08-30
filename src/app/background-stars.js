@@ -1,31 +1,43 @@
 import Base from './base.js';
+import config from './config';
 
 export default class BackgroundStars extends Base {
     constructor() {
         super();
-
         this.canvas = document.getElementById('space-background-stars');
         this.canvas.width = this.windowWidth;
         this.canvas.height = this.windowHeight;
         this.ctx = this.canvas.getContext('2d', { alpha: false });
         this.velocity = { x: 0, y: -3 };
-        this.minRadius = 2;
-        this.maxRadius = 3;
-        this.starColor = '#fff';
+        this.minRadius = config.stars.minRadius;
+        this.maxRadius = config.stars.maxRadius;
+        this.starColor = config.stars.color;
         this.starsBg = 'rgba(0,0,0,.5)';
-        this.bigStarDensity = 40;
-        this.smallStarDensity = 80;
+        this.bigStarDensity = config.stars.bigStarDensity;
+        this.smallStarDensity = config.stars.smallStarDensity;
         this.stars = [];
     }
 
     init() {
+        console.log('init');
         this.createBackgroundStars();
-        this.renderFrame();
+        this.render();
     }
 
-    renderFrame() {
+    render() {
+        if (!config.stars.enabled) {
+            return;
+        }
         this.clearCanvas();
         this.renderStars();
+    }
+
+    speedBurst() {
+        this.velocity.y = config.spaceship.burstSpeed / 2 * -1;
+    }
+
+    speedStandard() {
+        this.velocity.y = config.spaceship.speed/2 * -1;
     }
 
     createBackgroundStars() {
@@ -81,13 +93,14 @@ export default class BackgroundStars extends Base {
     }
 
     renderStar(star) {
+        console.log('render', star);
         const x = Math.round(star.posX);
         const y = Math.round(star.posY);
 
         this.ctx.save();
         this.ctx.globalCompositeOperation = 'lighter';
         this.ctx.globalAlpha = star.alpha;
-        this.ctx.fillStyle = star.color;
+        this.ctx.fillStyle = this.color;
         this.ctx.beginPath();
         this.ctx.moveTo(x, y);
         this.ctx.arc(x, y, star.radius, 0, Math.PI * 2, true);

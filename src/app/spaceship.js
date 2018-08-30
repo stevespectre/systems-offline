@@ -1,30 +1,43 @@
 import Base from './base.js';
+import config from './config';
 
 export default class Spaceship extends Base {
-    constructor() {
+    constructor(ctx) {
         super();
-        this.standardSpeed = 5;
-        this.burstSpeed = this.standardSpeed * 3;
-        this.actualSpeed = this.standardSpeed;
-        this.shipWidth = 15;
-        this.shipHeight = 40;
-        this.posX = this.windowWidth/2 - (this.shipWidth / 2);
-        this.posY = this.windowHeight - 150 + (this.shipHeight / 2);
+        this.element = document.getElementById('ship');
+        this.ctx = ctx;
+        this.standardSpeed = config.spaceship.speed;
+        this.burstSpeed = config.spaceship.burstSpeed;
+        this.speed = this.standardSpeed;
+        this.width = 15;
+        this.height = 40;
+        this.x = this.windowWidth / 2 - (this.width / 2);
+        this.y = this.windowHeight - 150 + (this.height / 2);
+    }
+
+    getSpeed() {
+        return this.speed;
+    }
+
+    isOnBurstSpeed() {
+        return this.speed === this.burstSpeed;
+    }
+
+    speedBurst() {
+        this.speed = this.burstSpeed;
+        this.element.classList.add('burst');
+    }
+
+    speedStandard() {
+        this.speed = this.standardSpeed;
+        this.element.classList.remove('burst');
     }
 
     switchBurstSpeedGraphicOn() {
-        document.getElementById('ship').classList.add('burst');
+        this.element.classList.add('burst');
     }
 
     switchBurstSpeedGraphicOff() {
-        document.getElementById('ship').classList.remove('burst');
+        this.element.classList.remove('burst');
     }
-
-    /*drawShip(context) {
-        context.beginPath();
-        context.rect(this.posX, this.posY, this.shipWidth, this.shipHeight);
-        context.fillStyle = 'transparent';
-        context.fill();
-        context.closePath();
-    }*/
 }

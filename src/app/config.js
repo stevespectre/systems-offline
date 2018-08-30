@@ -16,6 +16,7 @@ module.exports = {
         gridFillRate: 0.57,
         maxInARow: 3,
         gravityRate: 0.53,
+        maxCraterCount: 5,
         colors: ['#333333', '#666666', '#999999']
     },
     profile: {

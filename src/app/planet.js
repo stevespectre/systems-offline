@@ -2,8 +2,9 @@ import Base from './base.js';
 import CollisionDetection from './collision-detection';
 import config from './config';
 
-export default class Planet extends Base {
+const TWO_PI = 2 * Math.PI;
 
+export default class Planet extends Base {
     constructor(ctx, planets = []) {
         super();
         this.ctx = ctx;
@@ -44,6 +45,8 @@ export default class Planet extends Base {
         this._calculatePosition(speed);
         this._renderGravityField();
         this._renderPlanet();
+        this._renderSunLitSurfice();
+        this.craters.render();
     }
 
     _generateRandomParameters() {
@@ -53,8 +56,9 @@ export default class Planet extends Base {
         this.x = this._getRandomX();
         this.y = Math.floor(Math.random() * (this.windowHeight/3)*2) - this.windowHeight/6;
         this._checkCollision();
+        this.craters = new Craters(this.ctx, this);
     }
-
+    
     _calculatePosition(speed) {
         if (this._isOutOfView()) {
             this._generateRandomParameters();
@@ -95,7 +99,7 @@ export default class Planet extends Base {
 
     _renderPlanet() {
         this.ctx.beginPath();
-        this.ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+        this.ctx.arc(this.x, this.y, this.radius, 0, TWO_PI);
         this.ctx.fillStyle = this.color;
         this.ctx.fill();
         this.ctx.closePath();
@@ -104,11 +108,89 @@ export default class Planet extends Base {
     _renderGravityField() {
         this.ctx.globalAlpha = 0.1;
         this.ctx.beginPath();
-        this.ctx.arc(this.x, this.y, this.gravityRadius, 0, 2 * Math.PI);
+        this.ctx.arc(this.x, this.y, this.gravityRadius, 0, TWO_PI);
         this.ctx.fillStyle = '#ffffff';
         this.ctx.fill();
         this.ctx.closePath();
         this.ctx.globalAlpha = 1;
     }
 
+    _renderSunLitSurfice() {
+        const sunlitRadius = this.radius / 1.3;
+        const radialDifference = this.radius - sunlitRadius;
+        this.ctx.globalAlpha = 0.1;
+        this.ctx.fillStyle = '#ffffff';
+        this.ctx.beginPath();
+        this.ctx.arc(this.x - (radialDifference / 2), this.y - (radialDifference / 2), sunlitRadius, 0, TWO_PI);
+        this.ctx.fill();
+        this.ctx.closePath();
+    }
+}
+
+class Craters {
+    constructor(ctx, planet) {
+        this.ctx = ctx;
+        this.planet = planet;
+        this.collisionDetection = new CollisionDetection();
+        this.craters = this._generateRandomCraters();
+    }
+
+    render() {
+        this.craters.forEach(c => c.render());
+    }
+
+    _generateRandomCraters() {
+        const craters = [];
+        const count = Math.floor(Math.random() * config.planet.maxCraterCount);
+        for(let i = 0; i <= count; i++) {
+            craters.push(this._getRandomCrater(craters));
+        }
+
+        return craters;
+    }
+
+    _getRandomCrater(craters) {
+        const crater = new Crater(this.ctx, this.planet);
+        if (this.collisionDetection.checkCirclesCollision(craters, crater)) {
+            return this._getRandomCrater(craters);
+        }
+
+        return crater;
+    }
+}
+
+class Crater {
+    constructor(ctx, planet) {
+        this.ctx = ctx;
+        this.planet = planet;
+
+        const maxRadius = this.planet.radius / 5;
+        const minRadius = maxRadius / 2;
+
+        this.radius = Math.floor(Math.random() * maxRadius) + minRadius;
+        this.radialDifference = this.planet.radius - this.radius;
+
+        // todo only to support collision detection - refactor needed!
+        this.gravityRadius = this.radius;
+
+        this.x = this.radialDifference / Math.floor(Math.random() * 10) - 10;
+        this.y = this.radialDifference / Math.floor(Math.random() * 10) - 10;
+    }
+
+    getY() {
+        return this.y;
+    }
+
+    getX() {
+        return this.x;
+    }
+
+    render() {
+        this.ctx.beginPath();
+        this.ctx.globalAlpha = 0.1;
+        this.ctx.fillStyle = '#000000';
+        this.ctx.arc(this.planet.x - this.x, this.planet.y - this.y, this.radius, 0, TWO_PI);
+        this.ctx.fill();
+        return this;
+    }
 }

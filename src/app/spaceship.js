@@ -15,8 +15,7 @@ export default class Spaceship extends Base {
         this.x = this.windowWidth / 2 - (this.width / 2);
         this.y = this.windowHeight - 150 + (this.height / 2);
 
-        this.particles = {};
-        this.particleIndex = 0;
+        this.particles = [];
         this.particleNum = 0.001;
     }
 
@@ -60,11 +59,9 @@ export default class Spaceship extends Base {
         }
 
         for(let i in this.particles) {
-            const particle = this.particles[i];
-            this.particles[i].draw();
-
-            if(particle.x > this.windowWidth || particle.y > this.windowHeight){
-                delete this.particles[particle.id];
+            const particle = this.particles[i].draw();
+            if(particle.isOutOfView()){
+                this.particles.splice(i, 1);
             }
         }
     }
@@ -72,6 +69,6 @@ export default class Spaceship extends Base {
     _addParticle() {
         const x = this.x + this.width / 2;
         const y = this.y + this.height;
-        this.particles[this.particleIndex++] = new Particle(this.ctx, x, y).get('bottom');
+        this.particles.push(new Particle(this.ctx, x, y));
     }
 }

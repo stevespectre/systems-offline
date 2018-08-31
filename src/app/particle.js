@@ -19,7 +19,7 @@ export default class Particle extends Base {
         this.vy = 4;
         this.size = Math.random() * 2;
         this.growth = ( Math.abs(this.vx) + Math.abs(this.vy) ) * 0.04;
-        this.color = this.colors[Math.floor(Math.random() * 3)];
+        this.color = this.colors[Math.floor(Math.random() * this.colors.length)];
     }
 
     isOutOfView() {
@@ -33,7 +33,7 @@ export default class Particle extends Base {
         this.ctx.globalAlpha = 1;
         this.ctx.fillStyle = this.color;
         this.ctx.beginPath();
-        this.ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+        this.ctx.arc(this.x, this.y, this.size, 0, this.TWO_PI);
         this.ctx.fill();
         this.ctx.closePath();
         

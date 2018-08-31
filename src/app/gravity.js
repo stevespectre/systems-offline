@@ -1,20 +1,11 @@
 const DEFAULT_ROTATION_ANGLE = 0.015;
 
-class Gravity {
-
+export default class Gravity {
     constructor(planets = [], spaceShip, equipments = []) {
         this.planets = planets;
         this.spaceShip = spaceShip;
         this.equipments = equipments;
     }
-
-    /*addGravityEffect(planets, spaceShip) {
-        this.planets = planets;
-        this.spaceShip = spaceShip;
-        this.rotationAngle = 0.021;
-        this.newAngle = this.calcGravityImpact();
-        return this.newAngle;
-    }*/
 
     calcGravityImpact() {
         let newAngle = DEFAULT_ROTATION_ANGLE;
@@ -59,5 +50,3 @@ class Gravity {
     }
 
 }
-
-module.exports = Gravity;

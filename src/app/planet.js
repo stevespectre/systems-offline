@@ -34,6 +34,8 @@ export default class Planet extends BaseObject {
         this.radius = this._getPlanetRadius();
         this.x = this._getRandomX();
         this.y = Math.floor(Math.random() * (this.windowHeight/3)*2) - this.windowHeight/6;
+        this.vx = Math.floor(Math.random() * config.planet.maxVelocity);
+        this.vy = Math.floor(Math.random() * config.planet.maxVelocity);
         this._checkCollision();
         this.craters = new Craters(this.ctx, this);
     }
@@ -46,7 +48,8 @@ export default class Planet extends BaseObject {
             return;
         }
 
-        this.y += speed;
+        this.y += speed + this.vy;
+        this.x += this.vx;
     }
 
     _isOutOfView() {

@@ -24,6 +24,7 @@ module.exports = {
         maxInARow: 3,
         gravityRate: 0.52,
         maxCraterCount: 5,
+        maxVelocity: 0, // to move planets randomly, 0: disabled
         colors: ['#333333', '#666666', '#999999']
     },
     profile: {

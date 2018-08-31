@@ -47,13 +47,11 @@ export default class Controls {
 
     burst() {
         this.spaceShip.speedBurst();
-        this.backgroundStars.speedBurst();
         this.spaceShip.switchBurstSpeedGraphicOn();
     }
 
     standard() {
         this.spaceShip.speedStandard();
-        this.backgroundStars.speedStandard();
         this.spaceShip.switchBurstSpeedGraphicOff();
     }
 }

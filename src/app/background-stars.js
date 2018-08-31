@@ -24,20 +24,15 @@ export default class BackgroundStars extends Base {
         return this;
     }
 
-    render() {
+    render(speed = 0) {
         if (!config.stars.enabled) {
             return;
         }
+
+        this.velocity.y = speed / 2 * -1;
+
         this.clearCanvas();
         this.renderStars();
-    }
-
-    speedBurst() {
-        this.velocity.y = config.spaceship.burstSpeed / 2 * -1;
-    }
-
-    speedStandard() {
-        this.velocity.y = config.spaceship.speed/2 * -1;
     }
 
     createBackgroundStars() {

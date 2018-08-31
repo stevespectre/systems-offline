@@ -86,6 +86,8 @@ export default class Space extends Base {
     }
 
     _render() {
+        const speed = this.spaceShip.getSpeed();
+        
         if (this.gameIsOver) {
             this._gameOver();
         }
@@ -96,10 +98,10 @@ export default class Space extends Base {
         this._clearCanvas();
         this.equipment.eventuallyAdd(this.traveledDistance);
         this.gravity.calcGravityImpact();
-        this.backgroundStars.render();
+        this.backgroundStars.render(speed);
         this.spaceShip.render();
-        this._renderEquipment();
-        this._renderPlanets();
+        this.equipment.render(speed);
+        this.planets.forEach(planet => planet.render(speed));
 
         if (this.collisionDetection.checkObjectCollision(this.planets, this.spaceShip)) {
             this.gameIsOver = true;
@@ -127,16 +129,6 @@ export default class Space extends Base {
             const planet = new Planet(this.ctx, this.planets);
             this.planets.push(planet);
         }
-    }
-
-    _renderPlanets() {
-        const speed = this.spaceShip.getSpeed();
-        this.planets.forEach(planet => planet.render(speed));
-    }
-
-    _renderEquipment() {
-        const speed = this.spaceShip.getSpeed();
-        this.equipment.render(speed);
     }
 
     _clearCanvas() {

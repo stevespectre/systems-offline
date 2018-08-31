@@ -1,17 +1,17 @@
-import Base from './base.js';
-import BackgroundStars from './background-stars.js';
-import Planet from './planet.js';
+import Base from './base';
+import BackgroundStars from './background-stars';
+import Planet from './planet';
 import Earth from './earth';
 import Moon from './moon';
-import Spaceship from './spaceship.js';
-import Score from './score.js';
-import Explosion from './explosion.js';
-import Equipment from './equipment.js';
-import Gravity from './gravity.js';
-import Profile from './profile.js';
-import Controls from './controls.js';
-import CollisionDetection from './collision-detection.js';
-import Records from './records.js';
+import Spaceship from './spaceship';
+import Score from './score';
+import Explosion from './explosion';
+import Equipment from './equipment';
+import Gravity from './gravity';
+import Profile from './profile';
+import Controls from './controls';
+import CollisionDetection from './collision-detection';
+import Records from './records';
 
 export default class Space extends Base {
     constructor() {
@@ -23,17 +23,17 @@ export default class Space extends Base {
         this.maxPlanets = 4;
 
         this.canvas = document.getElementById('space-canvas');
-        this.ctx = this.canvas.getContext("2d", { alpha: true });
+        this.ctx = this.canvas.getContext('2d', { alpha: true });
 
         this.backgroundStars = new BackgroundStars();
         this.score = new Score();
-        this.planet = new Planet();
         this.profile = new Profile();
         this.spaceShip = new Spaceship(this.ctx);
         this.controls = new Controls(this.spaceShip, this.backgroundStars);
+        this.equipment = new Equipment(this.ctx, this.planets);
+        this.gravity = new Gravity(this.planets, this.spaceShip, this.equipment.get());
+
         this.collisionDetection = new CollisionDetection();
-        // this.equipment = new Equipment(this.ctx, this.planets);
-        this.gravity = new Gravity(this.planets, this.spaceShip);
         this.explosion = new Explosion();
         this.record = new Records();
     }
@@ -66,15 +66,13 @@ export default class Space extends Base {
 
         this._setDistance();
         if (this.traveledDistance % 100 == 0) this.score.updateScore();
-        if (this.traveledDistance % 900 == 0 && this.profile.calcChance()) {
-            this.equipment = new Equipment(this.ctx, this.planets);
-        }
-
+        
         this._clearCanvas();
-        this.gravity.calcGravityImpact(this.equipment);
+        this.equipment.eventuallyAdd(this.traveledDistance);
+        this.gravity.calcGravityImpact();
         this.backgroundStars.render();
         this.spaceShip.render();
-        if (this.equipment != undefined) this._renderEquipment();
+        this._renderEquipment();
         this._renderPlanets();
 
         if (this.collisionDetection.checkObjectCollision(this.planets, this.spaceShip)) {

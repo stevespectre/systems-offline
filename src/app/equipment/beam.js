@@ -1,14 +1,14 @@
 import EquipmentBase from './equipment-base';
 
-export default class Plasma extends EquipmentBase {
+export default class Beam extends EquipmentBase {
     init() {
-        this.radius = 50;
-        this.color = '#ff0000';
+        this.radius = 25;
+        this.color = 'green';
         this.x = this._getXWithoutPlanetCollision();
         this.y = 0;
     }
 
     activate() {
-        console.info('[equipment] Plasma ACTIVE');
+        console.info('[equipment] Beam ACTIVE');
     }
 }

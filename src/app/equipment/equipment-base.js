@@ -2,13 +2,21 @@ import Base from '../base';
 import CollisionDetection from '../collision-detection';
 
 export default class EquipmentBase extends Base {
-    constructor(ctx, planets) {
+    constructor(ctx, planets, spaceShip) {
         super();
         this.ctx = ctx;
         this.planets = planets;
+        this.spaceShip = spaceShip;
         this.collisionDetection = new CollisionDetection();
-        this.x = this._getXWithoutCollision();
-        this.y = 0;
+        this.init();
+    }
+
+    init() {
+        throw Error('[Equipment].init() method needs to be implemented in child class');
+    }
+
+    activate() {
+        throw Error('[Equipment].activate() method needs to be implemented in child class');
     }
 
     getX() {
@@ -44,11 +52,15 @@ export default class EquipmentBase extends Base {
         return this.x > this.windowWidth || this.y > this.windowHeight;
     }
 
+    isPickedUpBySpacehip() {
+        return this.collisionDetection.isCollisedWithObject(this, this.spaceShip);
+    }
+
     _calculatePosition(speed) {
         this.y += speed;
     }
 
-    _getXWithoutCollision() {
+    _getXWithoutPlanetCollision() {
         this.x = this._getRandomX();
         if (this.collisionDetection.checkCirclesCollision(this.planets, this)) {
             return this._getXWithoutCollision();

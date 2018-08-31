@@ -1,20 +1,28 @@
 class CollisionDetection {
 
-    checkObjectCollision(planets, spaceShip) {
-        for (let i = 0; i < planets.length; i++) {
-            const planet = planets[i];
-            const shipFrontX = spaceShip.x + (spaceShip.width / 2);
-            const shipFrontY = spaceShip.y;
-
-            const distanceX = planet.getX() - shipFrontX;
-            const distanceY = planet.getY() - shipFrontY;
-
-            const realDistance = Math.sqrt( (distanceX * distanceX) + (distanceY * distanceY) );
-
-            if (realDistance <= planet.radius) {
+    checkObjectCollision(objects, spaceShip) {
+        for (let i = 0; i < objects.length; i++) {
+            const object = objects[i];
+            if (this.isCollisedWithObject(object, spaceShip)) {
                 return true;
             }
         }
+        return false;
+    }
+
+    isCollisedWithObject(object, spaceShip) {
+        const shipFrontX = spaceShip.x + (spaceShip.width / 2);
+        const shipFrontY = spaceShip.y;
+
+        const distanceX = object.getX() - shipFrontX;
+        const distanceY = object.getY() - shipFrontY;
+
+        const realDistance = Math.sqrt( (distanceX * distanceX) + (distanceY * distanceY) );
+
+        if (realDistance <= object.radius) {
+            return true;
+        }
+
         return false;
     }
 

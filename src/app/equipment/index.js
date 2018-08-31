@@ -1,13 +1,16 @@
 import Base from '../base';
 import Plasma from './plasma';
+import Beam from './beam';
 
 export default class Equipment extends Base {
-    constructor(ctx, planets = []) {
+    constructor(ctx, planets = [], spaceShip) {
         super();
         this.ctx = ctx;
         this.planets = planets;
+        this.spaceShip = spaceShip;
         this.possibleEquipments = [
-            Plasma
+            Plasma,
+            Beam
         ];
 
         this.equipments = [];
@@ -34,6 +37,13 @@ export default class Equipment extends Base {
     render(speed) {
         for(let i in this.equipments) {
             const equipment = this.equipments[i].render(speed);
+
+            if(equipment.isPickedUpBySpacehip()) {
+                equipment.activate();
+                this.equipments.splice(i, 1);
+                continue;
+            }
+
             if(equipment.isOutOfView()){
                 this.equipments.splice(i, 1);
             }
@@ -44,7 +54,7 @@ export default class Equipment extends Base {
         const randomKey = Math.floor(Math.random() * this.possibleEquipments.length);
         const equipment = this.possibleEquipments[randomKey];
 
-        this.equipments.push(new equipment(this.ctx, this.planets));
+        this.equipments.push(new equipment(this.ctx, this.planets, this.spaceShip));
         return this;
     }
 }

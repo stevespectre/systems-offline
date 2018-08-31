@@ -5,6 +5,7 @@ export default class Menu {
 
     init() {
         document.getElementById('start').addEventListener('click', ()=> {
+            console.log('start');
             this.space.startGame();
             document.body.classList.add('game')
         });
@@ -12,7 +13,7 @@ export default class Menu {
         document.getElementById('restart').addEventListener('click', ()=> {
             document.body.classList.remove('gameover');
             document.body.classList.add('game');
-            this.space.startGame();
+            //this.space.init().startGame();
         })
     }
 }

@@ -11,6 +11,17 @@
   }
 }
 
+.menu {
+  opacity: 0;
+  transform: translateX(200vw);
+  transition: transform .3s;
+
+  &.active {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 #menu {
   position: absolute;
   top: 0;

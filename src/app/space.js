@@ -20,7 +20,7 @@ export default class Space extends Base {
         this.planets = [];
         this.gameIsOver = false;
         this.traveledDistance = 0;
-        this.maxPlanets = 4;
+        this.maxPlanets = 5;
 
         this.canvas = document.getElementById('space-canvas');
         this.ctx = this.canvas.getContext('2d', { alpha: true });
@@ -121,6 +121,7 @@ export default class Space extends Base {
         clearInterval(this.interval);
         this.explosion.render(this.spaceShip);
         document.body.classList.add('gameover');
+        document.body.classList.remove('game');
 
         const score = this.score.getScore();
         document.getElementById('end-score').innerHTML = score;

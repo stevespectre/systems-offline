@@ -7,6 +7,12 @@ export default class Menu {
         document.getElementById('start').addEventListener('click', ()=> {
             this.space.startGame();
             document.body.classList.add('game')
+        });
+
+        document.getElementById('restart').addEventListener('click', ()=> {
+            document.body.classList.remove('gameover');
+            document.body.classList.add('game');
+            this.space.startGame();
         })
     }
 }

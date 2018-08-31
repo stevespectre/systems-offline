@@ -99,7 +99,6 @@ export default class Planet extends Base {
     }
 
     _renderPlanet() {
-        this.ctx.globalAlpha = 1;
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius, 0, TWO_PI);
         this.ctx.fillStyle = this.color;
@@ -109,13 +108,11 @@ export default class Planet extends Base {
 
     _renderGravityField() {
         this.ctx.globalCompositeOperation = 'destination-over';
-        this.ctx.globalAlpha = 0.1;
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.gravityRadius, 0, TWO_PI);
-        this.ctx.fillStyle = '#ffffff';
+        this.ctx.fillStyle = 'rgba(255,255,255,.1)';
         this.ctx.fill();
         this.ctx.closePath();
-        this.ctx.globalAlpha = 1;
         this.ctx.globalCompositeOperation = 'source-over';
     }
 
@@ -192,8 +189,7 @@ class Crater {
 
     render() {
         this.ctx.beginPath();
-        this.ctx.globalAlpha = 0.1;
-        this.ctx.fillStyle = '#000000';
+        this.ctx.fillStyle = 'rgba(0,0,0,.1)';
         this.ctx.arc(this.planet.x - this.x, this.planet.y - this.y, this.radius, 0, TWO_PI);
         this.ctx.fill();
         this.ctx.closePath();

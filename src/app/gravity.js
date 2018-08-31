@@ -2,10 +2,10 @@ const DEFAULT_ROTATION_ANGLE = 0.015;
 
 class Gravity {
 
-    constructor(planets, spaceShip = [], equipment = []) {
+    constructor(planets = [], spaceShip, equipments = []) {
         this.planets = planets;
         this.spaceShip = spaceShip;
-        this.equipment = equipment;
+        this.equipments = equipments;
     }
 
     /*addGravityEffect(planets, spaceShip) {
@@ -48,7 +48,7 @@ class Gravity {
 
     _transformObjects(angle) {
         this.planets.forEach(p => this._doTransform(p, angle));
-        this.equipment.forEach(e => this._doTransform(e, angle));
+        this.equipments.forEach(e => this._doTransform(e, angle));
     }
 
     _doTransform(object, angle) {

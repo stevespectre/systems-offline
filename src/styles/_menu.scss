@@ -4,6 +4,13 @@
   }
 }
 
+.gameover {
+  #menu {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
 #menu {
   position: absolute;
   top: 0;

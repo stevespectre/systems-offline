@@ -6,7 +6,7 @@ module.exports = {
         posYOffset: -150,
         engineParticlesEnabled: true,
         turn: {
-            enabled: true,
+            enabled: false,
             duration: 1000,
             angle: 4
         }

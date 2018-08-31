@@ -1,5 +1,3 @@
-const DEFAULT_ROTATION_ANGLE = 0.015;
-
 export default class Gravity {
     constructor(planets = [], spaceShip, equipments = []) {
         this.planets = planets;
@@ -8,19 +6,15 @@ export default class Gravity {
     }
 
     calcGravityImpact() {
-        let newAngle = DEFAULT_ROTATION_ANGLE;
+        this.shipFrontX = this.spaceShip.getX() + (this.spaceShip.width / 2);
+        this.shipFrontY = this.spaceShip.getY();
 
-        this.shipFrontX = this.spaceShip.x + (this.spaceShip.width / 2);
-        this.shipFrontY = this.spaceShip.y;
-
-        if (this.spaceShip.isOnBurstSpeed()) {
-            newAngle = newAngle / 3;
-        }
-
-        this.planets.forEach(p => this._calcElementNewPosition(p, newAngle));
+        this.planets.forEach(p => this._calObjectGravityImpect(p));
     }
 
-    _calcElementNewPosition(object, newAngle) {
+    _calObjectGravityImpect(object) {
+        const objectGravityForce = object.gravityRadius / 1500 / this.spaceShip.getSpeed();
+
         const distanceX = object.getX() - this.shipFrontX;
         const distanceY = object.getY() - this.shipFrontY;
 
@@ -28,13 +22,16 @@ export default class Gravity {
 
         if (this._isWithinGravityField(object, realDistance)) {
             const direction = distanceX > 0 ? -1 : 1;
-            const angle = newAngle * direction;
+            const angle = objectGravityForce * direction;
             this.rotateObjects(angle);
+                        
+            // this.spaceShip.decreaseSpeed(0.01 * realDistance);
+            this.spaceShip.decreaseSpeed(0.01);
         }
     }
 
     _isWithinGravityField(planet, distance) {
-        return distance <= planet.gravityRadius && distance > planet.radius
+        return distance <= planet.gravityRadius && distance >= planet.radius
     }
 
     rotateObjects(angle) {

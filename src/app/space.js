@@ -26,13 +26,13 @@ export default class Space extends Base {
         this.canvas = document.getElementById('space-canvas');
         this.ctx = this.canvas.getContext('2d', { alpha: true });
 
-        this.backgroundStars = new BackgroundStars();
         this.score = new Score();
         this.profile = new Profile();
         this.spaceShip = new Spaceship(this.ctx);
         this.controls = new Controls(this.spaceShip, this.backgroundStars, this);
         this.equipment = new Equipment(this.ctx, this.planets, this.spaceShip);
         this.gravity = new Gravity(this.planets, this.spaceShip, this.equipment.get());
+        this.backgroundStars = new BackgroundStars();
 
         this.collisionDetection = new CollisionDetection();
         this.explosion = new Explosion();
@@ -87,15 +87,14 @@ export default class Space extends Base {
 
     _render() {
         const speed = this.spaceShip.getSpeed();
-        
+
         if (this.gameIsOver) {
             this._gameOver();
         }
 
         this._setDistance();
-        if (this.traveledDistance % 100 == 0) this.score.updateScore();
-        
         this._clearCanvas();
+        this.score.updateScore(this.traveledDistance);
         this.equipment.eventuallyAdd(this.traveledDistance);
         this.gravity.calcGravityImpact();
         this.backgroundStars.render(speed);

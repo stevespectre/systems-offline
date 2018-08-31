@@ -44,7 +44,7 @@ export default class Planet extends Base {
     render(speed) {
         this._calculatePosition(speed);
         this._renderPlanet();
-        this._renderSunShadowSurface();
+        this._renderSunLightSurface();
         this._renderGravityField();
 
         this.craters.render();
@@ -119,11 +119,11 @@ export default class Planet extends Base {
         this.ctx.globalCompositeOperation = 'source-over';
     }
 
-    _renderSunShadowSurface() {
+    _renderSunLightSurface() {
         const xOffset = this.radius / 3 ;
         this.ctx.globalCompositeOperation = 'source-atop';
 
-        this.ctx.fillStyle = '#aaa';
+        this.ctx.fillStyle = 'rgba(255,255,255,.1)';
         this.ctx.beginPath();
         this.ctx.arc(this.x - xOffset, this.y, this.radius, 0, TWO_PI);
         this.ctx.fill();

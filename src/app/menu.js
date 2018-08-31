@@ -15,5 +15,14 @@ export default class Menu {
             document.body.classList.add('game');
             //this.space.init().startGame();
         })
+
+        document.querySelectorAll('.nav').forEach(menu => {
+           menu.addEventListener('click', () => {
+               const id = menu.id;
+               document.querySelectorAll('.menu').forEach(menu => menu.classList.remove('active'));
+               document.getElementById(`menu-${id}`).classList.add('active');
+
+           });
+        });
     }
 }

@@ -38,7 +38,7 @@ class Gravity {
         if (this._isWithinGravityField(object, realDistance)) {
             const direction = distanceX > 0 ? -1 : 1;
             const angle = newAngle * direction;
-            this._transformObjects(angle);
+            this.rotateObjects(angle);
         }
     }
 
@@ -46,7 +46,7 @@ class Gravity {
         return distance <= planet.gravityRadius && distance > planet.radius
     }
 
-    _transformObjects(angle) {
+    rotateObjects(angle) {
         this.planets.forEach(p => this._doTransform(p, angle));
         this.equipments.forEach(e => this._doTransform(e, angle));
     }

@@ -1,9 +1,14 @@
-const SPACE_KEY_CODE = 32;
+import config from './config';
 
-class Controls {
-    constructor(spaceShip, backgroundStars) {
+const SPACE_KEY_CODE = 32;
+const LEFT_ARROW_KEY_CODE = 37;
+const RIGHT_ARROW_KEY_CODE = 39;
+
+export default class Controls {
+    constructor(spaceShip, backgroundStars, space) {
         this.spaceShip = spaceShip;
         this.backgroundStars = backgroundStars;
+        this.space = space;
     }
 
     init() {
@@ -19,6 +24,16 @@ class Controls {
             e = e || window.event;
             if (e.keyCode == SPACE_KEY_CODE) {
                 this.burst();
+            }
+
+            if(e.keyCode == LEFT_ARROW_KEY_CODE && config.spaceship.turn.enabled) {
+                console.info('[turn] Left');
+                this.space.turn(config.spaceship.turn.angle);
+            }
+
+            if(e.keyCode == RIGHT_ARROW_KEY_CODE && config.spaceship.turn.enabled) {
+                console.info('[turn] Right');
+                this.space.turn(config.spaceship.turn.angle * -1);
             }
         });
 
@@ -42,5 +57,3 @@ class Controls {
         this.spaceShip.switchBurstSpeedGraphicOff();
     }
 }
-
-module.exports = Controls;

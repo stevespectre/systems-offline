@@ -12,6 +12,7 @@ import Profile from './profile';
 import Controls from './controls';
 import CollisionDetection from './collision-detection';
 import Records from './records';
+import config from './config';
 
 export default class Space extends Base {
     constructor() {
@@ -29,7 +30,7 @@ export default class Space extends Base {
         this.score = new Score();
         this.profile = new Profile();
         this.spaceShip = new Spaceship(this.ctx);
-        this.controls = new Controls(this.spaceShip, this.backgroundStars);
+        this.controls = new Controls(this.spaceShip, this.backgroundStars, this);
         this.equipment = new Equipment(this.ctx, this.planets, this.spaceShip);
         this.gravity = new Gravity(this.planets, this.spaceShip, this.equipment.get());
 
@@ -51,7 +52,32 @@ export default class Space extends Base {
     }
 
     startGame() {
-        this.interval = setInterval(this._render.bind(this), 30);
+        this.interval = setInterval(this._render.bind(this), config.fps);
+    }
+
+    turn(angle) {
+        const start = Date.now();
+
+        // cancel previous turn
+        if (this.animationInterval) {
+            clearInterval(this.animationInterval);
+        }
+        
+        this.animationInterval = setInterval(() => {
+            const now = Date.now();
+            if (now - start >= config.spaceship.turn.duration) {
+                clearInterval(this.animationInterval);
+            }
+
+            const p = (now - start) / config.spaceship.turn.duration;
+            const rotationAngle = angle * this._easingOutCube(p);
+
+            this.gravity.rotateObjects(rotationAngle / 1000);
+        }, config.fps);
+    }
+
+    _easingOutCube(n){
+        return --n * n * n + 1;
     }
 
     _setSpaceDimensions() {

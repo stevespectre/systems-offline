@@ -1,9 +1,15 @@
 module.exports = {
+    fps: 30,
     spaceship: {
         speed: 5,
         burstSpeed: 5 * 3,
+        posYOffset: -150,
         engineParticlesEnabled: true,
-        posYOffset: -150
+        turn: {
+            enabled: false,
+            duration: 1000,
+            angle: 4
+        }
     },
     stars: {
         enabled: true,

@@ -4,102 +4,159 @@ export default class Explosion extends Base {
     constructor() {
         super();
         this.canvas = document.getElementById('effects');
-        this.context = this.canvas.getContext("2d", { alpha: true });
-        this.colors = ["#6A0000", "#900000", "#902B2B", "#A63232", "#A62626", "#FD5039", "#C12F2A", "#FF6540", "#f93801"]
-        this.minRadius = 2;
-        this.maxRadius = 6;
-        this.maxGrowRadius = 150;
-        this.growSpeed = 2;
-        this.grow = true;
-        this.maxGrowSpeed = 3;
-        this.velocity = 0.2;
-        this.centerX = this.windowWidth/2;
-        this.centerY = (this.windowHeight/3)*2;
-        this.startingDistanceOffset = this.maxRadius / 2;
-        this.numberOfParticles = 3;
+        this.ctx = this.canvas.getContext("2d", { alpha: true });
         this.particles = [];
-        this.angles = [-1, 1];
+        this.numParticles = 200;
     }
 
-    setCanvasDimensions() {
+    _setCanvasDimensions() {
         this.canvas.width = this.windowWidth;
         this.canvas.height = this.windowHeight;
     }
 
-    explode() {
+    render() {
+        this._setCanvasDimensions();
+        for(var i = 0; i<this.numParticles; i++){
+            this.particles.push(new Particle(this.windowWidth/2,(this.windowHeight/3)*2,Math.random()*10,Math.random()*2*Math.PI));
+        }
+        this.interval = setInterval(this._renderParticles.bind(this), 30);
+    }
 
-        this.setCanvasDimensions();
-        for (let i = 0; i < this.numberOfParticles; i++){
-            this.particles.push(this.createParticle());
+    _renderParticles(){
+        this._clearCanvas();
+        let i;
+        for(i=0; i< this.numParticles/3; i++){
+            this.ctx.beginPath();
+            this.ctx.arc(this.particles[i].position.getX(),this.particles[i].position.getY(), 4, 0, Math.PI*2);
+            this.ctx.fill();
+            console.log('this.particles[i]',this.particles[i]);
+            this.particles[i].update();
         }
 
-        this.interval = setInterval(this.updateExplosion.bind(this), 30);
+        for(i; i< this.numParticles*2/3; i++){
+            this.ctx.beginPath();
+            this.ctx.arc(this.particles[i].position.getX(),this.particles[i].position.getY(), 2, 0, Math.PI*2);
+            this.ctx.fill();
+
+            this.particles[i].update();
+        }
+
+        for(i; i< this.numParticles; i++){
+            this.ctx.beginPath();
+            this.ctx.arc(this.particles[i].position.getX(),this.particles[i].position.getY(), 3, 0, Math.PI*2);
+            this.ctx.fill();
+
+            this.particles[i].update();
+        }
     }
 
-    drawParticles(){
-        this.particles.forEach(p => {
-            this.context.beginPath();
-            this.context.arc(p.x, p.y, p.r, 0, 2*Math.PI);
-            this.context.fillStyle = p.c;
-            this.context.fill();
-            this.context.closePath();
-        });
+    _clearCanvas() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+}
+
+class Vector {
+    constructor(x,y) {
+        this.x = x;
+        this.y = y;
+        this._generateVector();
     }
 
-    createParticle() {
+    getX(){
+        return this.x;
+    }
+    getY(){
+        return this.y;
+    }
+    setX(x){
+        this.x = x;
+    }
+    setY(y){
+        this.y = y;
+    }
+    setAngle(angle){
+        const length = this.getLength();
+        this.x = Math.cos(angle)*length;
+        this.y = Math.sin(angle)*length;
+    }
+    setLength(length){
+        const angle = this.getAngle();
+        this.x = Math.cos(angle)*length;
+        this.y = Math.sin(angle)*length;
+    }
+    getAngle(){
+        return Math.atan2(this.y,this.x);
+    }
+    getLength() {
+        return (Math.sqrt(this.x*this.x+this.y*this.y));
+    }
+    _generateVector(){
+
+        this.setX(this.x);
+        this.setY(this.y);
+
+        // return obj;
+    }
+    add(v2){
+        const x = this.x + v2.x;
+        const y = this.y + v2.y;
+
+        return this._generateVector(x,y);
+    }
+    addTo(v2){
+        v2.x += this.getX();
+        v2.y += this.getY();
+    }
+    subtract(v2){
+        const x = this.x - v2.x;
+        const y = this.y - v2.y;
+
+        const o = this._generateVector(x,y);
+        return o;
+    }
+    subtractFrom(v2){
+        v2.setX(v2.getX() - this.getX());
+        v2.setY(v2.getY() - this.getY());
+    }
+    multiply(val){
+        this.x *= val;
+        this.y *= val;
+    }
+}
+
+class Particle {
+    constructor(x, y, speed, angle, grav) {
+        this.position = null;
+        this.velocity = null;
+        this.color = 'red';
+        this.x = x;
+        this.y = y;
+        this.speed = speed;
+        this.angle = angle;
+        this.grav = grav;
+        //this.vector = new Vector();
+        this._generateParticle();
+    }
+
+    _generateParticle(){
+        let particle = this._generateParams();
+        this._setParticleVelocity(particle, this.speed, this.angle);
+        return particle;
+    }
+
+    _generateParams() {
         return {
-            x: this.getRandomX(),
-            y: this.getRandomY(),
-            r: this.getRandomRadius(),
-            c: this.getRandomColor(),
-            aX: this.getRandomAngle(),
-            aY: this.getRandomAngle()
+            position: new Vector(this.x,this.y),
+            velocity: new Vector(0,0)
         }
     }
 
-    getRandomX() {
-        return this.windowWidth / 2 + Math.floor(Math.random() * this.startingDistanceOffset * 2) - this.startingDistanceOffset;
+    _setParticleVelocity(particle, speed, angle) {
+        particle.velocity.setLength(speed);
+        particle.velocity.setAngle(angle);
     }
 
-    getRandomY() {
-        return ((this.windowWidth / 3) * 2) + Math.floor(Math.random() * this.startingDistanceOffset * 2) - this.startingDistanceOffset;
-    }
-
-    getRandomRadius() {
-        return Math.floor(Math.random() * (this.maxRadius - this.minRadius + 1) + this.minRadius);
-    }
-
-    getRandomColor() {
-        return this.colors[Math.floor(Math.random() * this.colors.length)];
-    }
-
-    getRandomAngle() {
-        return this.angles[Math.floor(Math.random() * this.angles.length)];
-    }
-
-    updateExplosion() {
-        this.clearCanvas();
-        this.modifyGrowSpeed();
-        this.updateParticlePositions();
-        this.drawParticles();
-    }
-
-    modifyGrowSpeed() {
-        if (this.growSpeed <= this.maxGrowSpeed) {
-            this.growSpeed += this.velocity;
-        }
-    }
-
-    updateParticlePositions() {
-
-        this.particles.forEach(p => {
-            p.r += this.growSpeed;
-            p.x += this.velocity * p.aX;
-            p.y += this.velocity * p.aY;
-        });
-    }
-
-    clearCanvas() {
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    update(){
+        this.velocity.addTo(this.position);
     }
 }

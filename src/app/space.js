@@ -119,7 +119,7 @@ export default class Space extends Base {
 
     _gameOver() {
         clearInterval(this.interval);
-        this.explosion.explode();
+        this.explosion.render();
         document.body.classList.add('gameover');
 
         const score = this.score.getScore();

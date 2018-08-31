@@ -6,8 +6,7 @@ export default class Explosion extends Base {
         this.canvas = document.getElementById('effects');
         this.ctx = this.canvas.getContext("2d", { alpha: true });
         this.particles = [];
-        this.numParticles = 180;
-        this.colors = [];
+        this.numParticles = 150;
     }
 
     _setCanvasDimensions() {
@@ -28,24 +27,26 @@ export default class Explosion extends Base {
         this._clearCanvas();
         let i;
         for(i=0; i< this.numParticles/3; i++){
+            this.ctx.fillStyle = this.particles[i].color;
             this.ctx.beginPath();
-            this.ctx.arc(this.particles[i].position.getX(),this.particles[i].position.getY(), 4, 0, Math.PI*2);
+            this.ctx.arc(this.particles[i].position.getX(),this.particles[i].position.getY(), 5, 0, Math.PI*2);
             this.ctx.fill();
             this.particles[i].update();
         }
 
         for(i; i< this.numParticles*2/3; i++){
+            this.ctx.fillStyle = this.particles[i].color;
             this.ctx.beginPath();
-            this.ctx.arc(this.particles[i].position.getX(),this.particles[i].position.getY(), 2, 0, Math.PI*2);
+            this.ctx.arc(this.particles[i].position.getX(),this.particles[i].position.getY(), 3, 0, Math.PI*2);
             this.ctx.fill();
 
             this.particles[i].update();
         }
 
         for(i; i< this.numParticles; i++){
-            this.ctx.fillStyle = this.color;
+            this.ctx.fillStyle = this.particles[i].color;
             this.ctx.beginPath();
-            this.ctx.arc(this.particles[i].position.getX(),this.particles[i].position.getY(), 3, 0, Math.PI*2);
+            this.ctx.arc(this.particles[i].position.getX(),this.particles[i].position.getY(), 4, 0, Math.PI*2);
             this.ctx.fill();
 
             this.particles[i].update();
@@ -106,13 +107,23 @@ class Particle {
     constructor(x, y, speed, angle, grav) {
         this.position = null;
         this.velocity = null;
-        this.color = 'red';
+        this.colors = [
+            'rgba(105, 13, 8,'+ (Math.random() + .5) +')',
+            'rgba(227,82,22,'+ (Math.random() + .5) +')',
+            'rgba(237,160,77,'+ (Math.random() + .5) +')',
+            'rgba(248,224,133,'+ (Math.random() + .5) +')'
+        ];
+        this.color = this._getRandomColor();
         this.x = x;
         this.y = y;
         this.speed = speed;
         this.angle = angle;
         this.grav = grav;
         this._generateParticle();
+    }
+
+    _getRandomColor() {
+        return this.colors[Math.floor(Math.random() * 3)];
     }
 
     _generateParticle(){

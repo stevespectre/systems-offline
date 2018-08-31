@@ -60,12 +60,11 @@ export default class Equipment extends Base {
     }
 
     renderEquipment() {
-        this.ctx.save();
+        this.ctx.globalAlpha = 1;
         this.ctx.beginPath();
         this.ctx.arc(this.equipment.x, this.equipment.y, this.equipment.radius, 0, 2 * Math.PI);
         this.ctx.fillStyle = this.equipment.color;
         this.ctx.fill();
         this.ctx.closePath();
-        this.ctx.restore();
     }
 }

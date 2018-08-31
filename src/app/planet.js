@@ -1,10 +1,8 @@
-import Base from './base.js';
+import BaseObject from './base-object';
 import CollisionDetection from './collision-detection';
 import config from './config';
 
-const TWO_PI = 2 * Math.PI;
-
-export default class Planet extends Base {
+export default class Planet extends BaseObject {
     constructor(ctx, planets = []) {
         super();
         this.ctx = ctx;
@@ -21,24 +19,6 @@ export default class Planet extends Base {
 
         this.collisionDetection = new CollisionDetection();
         this._generateRandomParameters();
-    }
-
-    getX() {
-        return this.x;
-    }
-
-    getY() {
-        return this.y;
-    }
-
-    setX(x) {
-        this.x = x;
-        return this;
-    }
-
-    setY(y) {
-        this.y = y;
-        return this;
     }
 
     render(speed) {
@@ -100,7 +80,7 @@ export default class Planet extends Base {
 
     _renderPlanet() {
         this.ctx.beginPath();
-        this.ctx.arc(this.x, this.y, this.radius, 0, TWO_PI);
+        this.ctx.arc(this.x, this.y, this.radius, 0, this.TWO_PI);
         this.ctx.fillStyle = this.color;
         this.ctx.fill();
         this.ctx.closePath();
@@ -109,7 +89,7 @@ export default class Planet extends Base {
     _renderGravityField() {
         this.ctx.globalCompositeOperation = 'destination-over';
         this.ctx.beginPath();
-        this.ctx.arc(this.x, this.y, this.gravityRadius, 0, TWO_PI);
+        this.ctx.arc(this.x, this.y, this.gravityRadius, 0, this.TWO_PI);
         this.ctx.fillStyle = 'rgba(255,255,255,.1)';
         this.ctx.fill();
         this.ctx.closePath();
@@ -122,7 +102,7 @@ export default class Planet extends Base {
 
         this.ctx.fillStyle = 'rgba(255,255,255,.1)';
         this.ctx.beginPath();
-        this.ctx.arc(this.x - xOffset, this.y, this.radius, 0, TWO_PI);
+        this.ctx.arc(this.x - xOffset, this.y, this.radius, 0, this.TWO_PI);
         this.ctx.fill();
         this.ctx.closePath();
         this.ctx.globalCompositeOperation = 'source-over';
@@ -161,8 +141,9 @@ class Craters {
     }
 }
 
-class Crater {
+class Crater extends BaseObject {
     constructor(ctx, planet) {
+        super();
         this.ctx = ctx;
         this.planet = planet;
 
@@ -179,18 +160,10 @@ class Crater {
         this.y = this.radialDifference / Math.floor(Math.random() * 10) - 10;
     }
 
-    getY() {
-        return this.y;
-    }
-
-    getX() {
-        return this.x;
-    }
-
     render() {
         this.ctx.beginPath();
         this.ctx.fillStyle = 'rgba(0,0,0,.1)';
-        this.ctx.arc(this.planet.x - this.x, this.planet.y - this.y, this.radius, 0, TWO_PI);
+        this.ctx.arc(this.planet.x - this.x, this.planet.y - this.y, this.radius, 0, this.TWO_PI);
         this.ctx.fill();
         this.ctx.closePath();
         return this;

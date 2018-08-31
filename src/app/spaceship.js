@@ -1,8 +1,8 @@
-import Base from './base.js';
+import BaseObject from './base-object';
 import config from './config';
 import Particle from './particle';
 
-export default class Spaceship extends Base {
+export default class Spaceship extends BaseObject {
     constructor(ctx) {
         super();
         this.element = document.getElementById('ship');
@@ -19,20 +19,12 @@ export default class Spaceship extends Base {
         this.particleNum = 0.001;
     }
 
-    getX() {
-        return this.x;
-    }
-
-    getY() {
-        return this.y;
-    }
-
     setX() {
         return this.windowWidth / 2 - (this.width / 2)
     }
 
     setY() {
-        return (this.windowHeight - config.posYOffset) + (this.height / 2)
+        return (this.windowHeight - config.spaceship.posYOffset) + (this.height / 2)
     }
 
     getSpeed() {

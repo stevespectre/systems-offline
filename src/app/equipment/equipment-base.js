@@ -1,7 +1,7 @@
-import Base from '../base';
+import BaseObject from '../base-object';
 import CollisionDetection from '../collision-detection';
 
-export default class EquipmentBase extends Base {
+export default class EquipmentBase extends BaseObject {
     constructor(ctx, planets, spaceShip) {
         super();
         this.ctx = ctx;
@@ -17,24 +17,6 @@ export default class EquipmentBase extends Base {
 
     activate() {
         throw Error('[Equipment].activate() method needs to be implemented in child class');
-    }
-
-    getX() {
-        return this.x;
-    }
-
-    getY() {
-        return this.y;
-    }
-
-    setX(x) {
-        this.x = x;
-        return this;
-    }
-
-    setY(y) {
-        this.y = y;
-        return this;
     }
 
     render(speed) {

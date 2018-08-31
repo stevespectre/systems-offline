@@ -1,5 +1,4 @@
 import BaseObject from './base-object';
-import CollisionDetection from './collision-detection';
 import config from './config';
 
 export default class Planet extends BaseObject {
@@ -17,7 +16,6 @@ export default class Planet extends BaseObject {
         this.maxRadius = this.gridForPlanet * this.gridFillRate;
         this.minRadius = (this.maxRadius / 3) * 2;
 
-        this.collisionDetection = new CollisionDetection();
         this._generateRandomParameters();
     }
 
@@ -109,11 +107,11 @@ export default class Planet extends BaseObject {
     }
 }
 
-class Craters {
+class Craters extends BaseObject {
     constructor(ctx, planet) {
+        super();
         this.ctx = ctx;
         this.planet = planet;
-        this.collisionDetection = new CollisionDetection();
         this.craters = this._generateRandomCraters();
     }
 
@@ -163,7 +161,7 @@ class Crater extends BaseObject {
     render() {
         this.ctx.beginPath();
         this.ctx.fillStyle = 'rgba(0,0,0,.1)';
-        this.ctx.arc(this.planet.x - this.x, this.planet.y - this.y, this.radius, 0, this.TWO_PI);
+        this.ctx.arc(this.planet.getX() - this.x, this.planet.getY() - this.y, this.radius, 0, this.TWO_PI);
         this.ctx.fill();
         this.ctx.closePath();
         return this;

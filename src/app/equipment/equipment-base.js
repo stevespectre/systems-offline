@@ -1,5 +1,4 @@
 import BaseObject from '../base-object';
-import CollisionDetection from '../collision-detection';
 
 export default class EquipmentBase extends BaseObject {
     constructor(ctx, planets, spaceShip) {
@@ -7,7 +6,6 @@ export default class EquipmentBase extends BaseObject {
         this.ctx = ctx;
         this.planets = planets;
         this.spaceShip = spaceShip;
-        this.collisionDetection = new CollisionDetection();
         this.init();
     }
 

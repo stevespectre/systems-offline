@@ -1,10 +1,12 @@
 import Base from './base.js';
+import CollisionDetection from './collision-detection';
 
 export default class BaseObject extends Base {
     constructor() {
         super();
         this.x = 0;
         this.y = 0;
+        this.collisionDetection = new CollisionDetection();
     }
 
     getX() {

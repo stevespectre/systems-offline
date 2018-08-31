@@ -7,13 +7,13 @@ class Controls {
     }
 
     init() {
-        document.getElementById('burst').addEventListener('mousedown', () => {
+        /*document.getElementById('burst').addEventListener('mousedown', () => {
             this.burst();
         });
 
         document.getElementById('burst').addEventListener('mouseup', () => {
             this.standard();
-        });
+        });*/
 
         document.addEventListener('keydown', e => {
             e = e || window.event;

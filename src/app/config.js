@@ -2,7 +2,8 @@ module.exports = {
     spaceship: {
         speed: 5,
         burstSpeed: 5 * 3,
-        engineParticlesEnabled: true
+        engineParticlesEnabled: true,
+        posYOffset: -150
     },
     stars: {
         enabled: true,

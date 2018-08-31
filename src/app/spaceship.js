@@ -13,10 +13,26 @@ export default class Spaceship extends Base {
         this.width = 15;
         this.height = 40;
         this.x = this.windowWidth / 2 - (this.width / 2);
-        this.y = this.windowHeight - 150 + (this.height / 2);
+        this.y = (this.windowHeight - 150) + (this.height / 2);
 
         this.particles = [];
         this.particleNum = 0.001;
+    }
+
+    getX() {
+        return this.x;
+    }
+
+    getY() {
+        return this.y;
+    }
+
+    setX() {
+        return this.windowWidth / 2 - (this.width / 2)
+    }
+
+    setY() {
+        return (this.windowHeight - config.posYOffset) + (this.height / 2)
     }
 
     getSpeed() {

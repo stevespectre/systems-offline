@@ -6,7 +6,8 @@ export default class Explosion extends Base {
         this.canvas = document.getElementById('effects');
         this.ctx = this.canvas.getContext("2d", { alpha: true });
         this.particles = [];
-        this.numParticles = 200;
+        this.numParticles = 180;
+        this.colors = [];
     }
 
     _setCanvasDimensions() {
@@ -14,10 +15,11 @@ export default class Explosion extends Base {
         this.canvas.height = this.windowHeight;
     }
 
-    render() {
+    render(spaceShip) {
+        this.spaceShip = spaceShip;
         this._setCanvasDimensions();
         for(var i = 0; i<this.numParticles; i++){
-            this.particles.push(new Particle(this.windowWidth/2,(this.windowHeight/3)*2,Math.random()*10,Math.random()*2*Math.PI));
+            this.particles.push(new Particle(this.spaceShip.getX(),this.spaceShip.getY(),Math.random()*10,Math.random()*2*Math.PI));
         }
         this.interval = setInterval(this._renderParticles.bind(this), 30);
     }
@@ -29,7 +31,6 @@ export default class Explosion extends Base {
             this.ctx.beginPath();
             this.ctx.arc(this.particles[i].position.getX(),this.particles[i].position.getY(), 4, 0, Math.PI*2);
             this.ctx.fill();
-            console.log('this.particles[i]',this.particles[i]);
             this.particles[i].update();
         }
 
@@ -42,6 +43,7 @@ export default class Explosion extends Base {
         }
 
         for(i; i< this.numParticles; i++){
+            this.ctx.fillStyle = this.color;
             this.ctx.beginPath();
             this.ctx.arc(this.particles[i].position.getX(),this.particles[i].position.getY(), 3, 0, Math.PI*2);
             this.ctx.fill();
@@ -91,36 +93,12 @@ class Vector {
         return (Math.sqrt(this.x*this.x+this.y*this.y));
     }
     _generateVector(){
-
         this.setX(this.x);
         this.setY(this.y);
-
-        // return obj;
-    }
-    add(v2){
-        const x = this.x + v2.x;
-        const y = this.y + v2.y;
-
-        return this._generateVector(x,y);
     }
     addTo(v2){
         v2.x += this.getX();
         v2.y += this.getY();
-    }
-    subtract(v2){
-        const x = this.x - v2.x;
-        const y = this.y - v2.y;
-
-        const o = this._generateVector(x,y);
-        return o;
-    }
-    subtractFrom(v2){
-        v2.setX(v2.getX() - this.getX());
-        v2.setY(v2.getY() - this.getY());
-    }
-    multiply(val){
-        this.x *= val;
-        this.y *= val;
     }
 }
 
@@ -134,7 +112,6 @@ class Particle {
         this.speed = speed;
         this.angle = angle;
         this.grav = grav;
-        //this.vector = new Vector();
         this._generateParticle();
     }
 
@@ -145,15 +122,13 @@ class Particle {
     }
 
     _generateParams() {
-        return {
-            position: new Vector(this.x,this.y),
-            velocity: new Vector(0,0)
-        }
+        this.position = new Vector(this.x,this.y);
+        this.velocity = new Vector(0,0);
     }
 
     _setParticleVelocity(particle, speed, angle) {
-        particle.velocity.setLength(speed);
-        particle.velocity.setAngle(angle);
+        this.velocity.setLength(speed);
+        this.velocity.setAngle(angle);
     }
 
     update(){

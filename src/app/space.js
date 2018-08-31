@@ -119,7 +119,8 @@ export default class Space extends Base {
 
     _gameOver() {
         clearInterval(this.interval);
-        this.explosion.render();
+        console.log('this.spaceShip',this.spaceShip);
+        this.explosion.render(this.spaceShip);
         document.body.classList.add('gameover');
 
         const score = this.score.getScore();

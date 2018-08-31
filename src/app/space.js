@@ -119,7 +119,6 @@ export default class Space extends Base {
 
     _gameOver() {
         clearInterval(this.interval);
-        console.log('this.spaceShip',this.spaceShip);
         this.explosion.render(this.spaceShip);
         document.body.classList.add('gameover');
 

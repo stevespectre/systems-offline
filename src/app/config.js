@@ -15,7 +15,7 @@ module.exports = {
     planet: {
         gridFillRate: 0.57,
         maxInARow: 3,
-        gravityRate: 0.53,
+        gravityRate: 0.52,
         maxCraterCount: 5,
         colors: ['#333333', '#666666', '#999999']
     },

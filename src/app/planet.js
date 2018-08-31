@@ -43,9 +43,10 @@ export default class Planet extends Base {
 
     render(speed) {
         this._calculatePosition(speed);
-        this._renderGravityField();
         this._renderPlanet();
-        this._renderSunLitSurfice();
+        this._renderSunShadowSurface();
+        this._renderGravityField();
+
         this.craters.render();
     }
 
@@ -98,6 +99,7 @@ export default class Planet extends Base {
     }
 
     _renderPlanet() {
+        this.ctx.globalAlpha = 1;
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius, 0, TWO_PI);
         this.ctx.fillStyle = this.color;
@@ -106,6 +108,7 @@ export default class Planet extends Base {
     }
 
     _renderGravityField() {
+        this.ctx.globalCompositeOperation = 'destination-over';
         this.ctx.globalAlpha = 0.1;
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.gravityRadius, 0, TWO_PI);
@@ -113,17 +116,19 @@ export default class Planet extends Base {
         this.ctx.fill();
         this.ctx.closePath();
         this.ctx.globalAlpha = 1;
+        this.ctx.globalCompositeOperation = 'source-over';
     }
 
-    _renderSunLitSurfice() {
-        const sunlitRadius = this.radius / 1.13;
-        const radialDifference = this.radius - sunlitRadius;
-        this.ctx.globalAlpha = 0.1;
-        this.ctx.fillStyle = '#ffffff';
+    _renderSunShadowSurface() {
+        const xOffset = this.radius / 3 ;
+        this.ctx.globalCompositeOperation = 'source-atop';
+
+        this.ctx.fillStyle = '#aaa';
         this.ctx.beginPath();
-        this.ctx.arc(this.x - (radialDifference / 2), this.y - (radialDifference / 2), sunlitRadius, 0, TWO_PI);
+        this.ctx.arc(this.x - xOffset, this.y, this.radius, 0, TWO_PI);
         this.ctx.fill();
         this.ctx.closePath();
+        this.ctx.globalCompositeOperation = 'source-over';
     }
 }
 
@@ -191,6 +196,7 @@ class Crater {
         this.ctx.fillStyle = '#000000';
         this.ctx.arc(this.planet.x - this.x, this.planet.y - this.y, this.radius, 0, TWO_PI);
         this.ctx.fill();
+        this.ctx.closePath();
         return this;
     }
 }

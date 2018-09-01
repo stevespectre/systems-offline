@@ -1,4 +1,4 @@
-import Planet from './planet';
+import Planet from './index';
 
 export default class Moon extends Planet {
     constructor(ctx, planets) {

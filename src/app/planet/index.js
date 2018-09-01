@@ -1,5 +1,5 @@
-import BaseObject from './base-object';
-import config from './config';
+import BaseObject from '../base-object';
+import config from '../config';
 
 export default class Planet extends BaseObject {
     constructor(ctx, planets = []) {

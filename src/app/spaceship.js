@@ -38,20 +38,12 @@ export default class Spaceship extends Engine {
         super();
         this.ctx = ctx;
         this.element = document.getElementById('ship');
-        this.speed = config.spaceship.speed;
+        this.speed = config.spaceship.startSpeed;
         this.width = 15;
         this.height = 40;
         this.x = this.windowWidth / 2 - (this.width / 2);
-        this.y = (this.windowHeight - 150) + (this.height / 2);
+        this.y = (this.windowHeight - config.spaceship.posYOffset) + (this.height / 2);
         this.burstOn = false;
-    }
-
-    setX() {
-        return this.windowWidth / 2 - (this.width / 2);
-    }
-
-    setY() {
-        return (this.windowHeight - config.spaceship.posYOffset) + (this.height / 2);
     }
 
     getSpeed() {
@@ -63,7 +55,7 @@ export default class Spaceship extends Engine {
     }
 
     speedBurst() {
-        this.incrieseSpeed(1);
+        this.incrieseSpeed(config.spaceship.incrieseSpeedVelocity);
         this.burstOn = true;
         this.element.classList.add('burst');
     }
@@ -77,16 +69,18 @@ export default class Spaceship extends Engine {
         this._renderParticles();
 
         if (!this.isOnBurstSpeed()) {
-            this.decreaseSpeed(0.15);
+            this.decreaseSpeed(config.spaceship.decreaseSpeedVelocity);
         }
     }
 
     incrieseSpeed(value = 1) {
-        this.speed += value;
+        if ((this.speed + value) <= config.spaceship.maxSpeed) {
+            this.speed += value;
+        }
     }
 
     decreaseSpeed(value = 0.5) {
-        if ((this.speed - value) > config.spaceship.minSpeed) {
+        if ((this.speed - value) >= config.spaceship.minSpeed) {
             this.speed -= value;
         }
     }

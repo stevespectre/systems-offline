@@ -1,15 +1,38 @@
-module.exports = {
-    fps: 30,
-    spaceship: {
-        speed: 0,
-        minSpeed: 2,
-        posYOffset: -150,
-        engineParticlesEnabled: true,
+const difficulty = {
+    easy: {
+        startSpeed: 5,
+        minSpeed: 5,
+        maxSpeed: 15,
+        incrieseSpeedVelocity: 10, // use (maxSpeed - minSpeed) for static speed
+        decreaseSpeedVelocity: 10, // use (maxSpeed - minSpeed) for static speed
+        gravitydecreaseSpeedVelocity: 0,
         turn: {
             enabled: false,
             duration: 1000,
             angle: 4
         }
+    },
+    medium: {
+        startSpeed: 0,
+        minSpeed: 1,
+        maxSpeed: Infinity,
+        incrieseSpeedVelocity: 1,
+        decreaseSpeedVelocity: 0.15,
+        gravitydecreaseSpeedVelocity: 0.01,
+        turn: {
+            enabled: true,
+            duration: 1000,
+            angle: 4
+        }
+    }
+};
+
+module.exports = {
+    fps: 30,
+    spaceship: {
+        ...difficulty.easy,
+        engineParticlesEnabled: true,
+        posYOffset: 150
     },
     stars: {
         enabled: true,

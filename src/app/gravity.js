@@ -1,3 +1,5 @@
+import config from './config';
+
 export default class Gravity {
     constructor(planets = [], spaceShip, equipments = []) {
         this.planets = planets;
@@ -26,7 +28,7 @@ export default class Gravity {
             this.rotateObjects(angle);
                         
             // this.spaceShip.decreaseSpeed(0.01 * realDistance);
-            this.spaceShip.decreaseSpeed(0.01);
+            this.spaceShip.decreaseSpeed(config.spaceship.gravitydecreaseSpeedVelocity);
         }
     }
 

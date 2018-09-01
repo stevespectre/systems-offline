@@ -14,7 +14,7 @@ const difficulty = {
     },
     medium: {
         startSpeed: 0,
-        minSpeed: 1,
+        minSpeed: 3,
         maxSpeed: Infinity,
         incrieseSpeedVelocity: 1,
         decreaseSpeedVelocity: 0.15,
@@ -23,6 +23,19 @@ const difficulty = {
             enabled: true,
             duration: 1000,
             angle: 4
+        }
+    },
+    hard: {
+        startSpeed: 0,
+        minSpeed: 1,
+        maxSpeed: Infinity,
+        incrieseSpeedVelocity: 1,
+        decreaseSpeedVelocity: 0,
+        gravitydecreaseSpeedVelocity: 0.1,
+        turn: {
+            enabled: true,
+            duration: 50,
+            angle: 30
         }
     }
 };

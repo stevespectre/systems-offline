@@ -76,7 +76,8 @@ export default class BackgroundStars extends Base {
     }
 
     updateStarPosition(star) {
-        star.posY += this.velocity.y === 0 ? this.velocity.y : (this.velocity.y / (1- star.radius));
+        star.posY += this.velocity.y === 0 ? this.velocity.y : (this.velocity.y / (1 - star.radius));
+        star.posX += this.velocity.x === 0 ? this.velocity.x : (this.velocity.x / (1 - star.radius));
 
         this.eventuallyKeepStarOnCanvas(star);
     }
@@ -84,6 +85,10 @@ export default class BackgroundStars extends Base {
     eventuallyKeepStarOnCanvas(star) {
         if(star.posY > this.windowHeight){
             star.posY = 0;
+        }
+
+        if(star.posX > this.windowWidth){
+            star.posX = 0;
         }
     }
 

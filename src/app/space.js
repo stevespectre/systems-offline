@@ -31,8 +31,8 @@ export default class Space extends Base {
         this.spaceShip = new Spaceship(this.ctx);
         this.controls = new Controls(this.spaceShip, this.backgroundStars, this);
         this.equipment = new Equipment(this.ctx, this.planets, this.spaceShip);
-        this.gravity = new Gravity(this.planets, this.spaceShip, this.equipment.get());
         this.backgroundStars = new BackgroundStars();
+        this.gravity = new Gravity(this.spaceShip, this.planets, this.equipment.get());
 
         this.collisionDetection = new CollisionDetection();
         this.explosion = new Explosion();

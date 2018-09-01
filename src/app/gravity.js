@@ -1,9 +1,9 @@
 import config from './config';
 
 export default class Gravity {
-    constructor(planets = [], spaceShip, equipments = []) {
-        this.planets = planets;
+    constructor(spaceShip, planets = [], equipments = []) {
         this.spaceShip = spaceShip;
+        this.planets = planets;
         this.equipments = equipments;
     }
 
@@ -26,7 +26,7 @@ export default class Gravity {
             const direction = distanceX > 0 ? -1 : 1;
             const angle = objectGravityForce * direction;
             this.rotateObjects(angle);
-                        
+
             // this.spaceShip.decreaseSpeed(0.01 * realDistance);
             this.spaceShip.decreaseSpeed(config.spaceship.gravitydecreaseSpeedVelocity);
         }

@@ -15,6 +15,7 @@ export default class Planet extends BaseObject {
         this.gridForPlanet = Math.min(this.windowWidth, this.windowHeight) / this.maxPlanetInARow;
         this.maxRadius = this.gridForPlanet * this.gridFillRate;
         this.minRadius = (this.maxRadius / 3) * 2;
+        this.moons = [];
 
         this._generateRandomParameters();
     }
@@ -24,12 +25,12 @@ export default class Planet extends BaseObject {
         this._renderPlanet();
         this._renderSunLightSurface();
         this._renderGravityField();
-
+        this.moons.forEach(m => m.render());
         this.craters.render();
     }
 
     _generateRandomParameters() {
-        this.color = this._getRandomPlanetColor();
+        this.color = this._getRandomColor();
         this.gravityRadius = this._getRandomPlanetOuterRadius();
         this.radius = this._getPlanetRadius();
         this.x = this._getRandomX();
@@ -38,6 +39,15 @@ export default class Planet extends BaseObject {
         this.vy = Math.floor(Math.random() * config.planet.maxVelocity);
         this._checkCollision();
         this.craters = new Craters(this.ctx, this);
+        this._generateRandomMoons();
+    }
+
+    _generateRandomMoons() {
+        this.moons = [];
+        for(let i = 0; i < this.random(0, config.planet.maxMoonCount); i++) {
+            const moon = new Moon(this.ctx, this)
+            this.moons.push(moon);
+        }
     }
     
     _calculatePosition(speed) {
@@ -75,8 +85,8 @@ export default class Planet extends BaseObject {
         return Math.floor(Math.random() * (this.maxRadius - this.minRadius + 1) + this.minRadius);
     }
 
-    _getRandomPlanetColor() {
-        return this.planetColors[Math.floor(Math.random() * this.planetColors.length)];
+    _getRandomColor() {
+        return config.planet.colors[Math.floor(Math.random() * config.planet.colors.length)];
     }
 
     _renderPlanet() {
@@ -107,6 +117,60 @@ export default class Planet extends BaseObject {
         this.ctx.fill();
         this.ctx.closePath();
         this.ctx.globalCompositeOperation = 'source-over';
+    }
+}
+
+class Moon extends BaseObject {
+    constructor(ctx, planet) {
+        super();
+        this.ctx = ctx;
+        this.planet = planet;
+
+        this.theta = this.random(this.TWO_PI);
+        this.radius = this.random(5, 10);
+        this.period = this.random(20, 100) + this.radius;
+        this.freq = 1 / this.period;
+
+        const minOrbit = this.planet.radius + this.radius * 2;
+        const maxOrbit = this.planet.gravityRadius + this.radius;
+        this.orbitRadius = this.random(minOrbit, maxOrbit);
+
+        this.color = this._getRandomColor();
+    }
+
+    render() {
+        this._calculatePosition();
+        this.ctx.beginPath();
+        this.ctx.arc(this.x, this.y, this.radius, 0, this.TWO_PI);
+        this.ctx.fillStyle = this.color;
+        this.ctx.fill();
+        this.ctx.closePath();
+
+        this._renderSunLightSurface();
+    }
+
+    _calculatePosition() {
+        this.theta += this.freq;
+		if(this.theta >= this.TWO_PI) this.theta = 0;
+
+		this.x = (this.orbitRadius * Math.cos(this.theta)) + this.planet.getX();
+        this.y = (this.orbitRadius * Math.sin(this.theta)) + this.planet.getY();
+    }
+
+    _renderSunLightSurface() {
+        const xOffset = this.radius / 3 ;
+        this.ctx.globalCompositeOperation = 'source-atop';
+
+        this.ctx.fillStyle = 'rgba(255,255,255,.1)';
+        this.ctx.beginPath();
+        this.ctx.arc(this.x - xOffset, this.y, this.radius, 0, this.TWO_PI);
+        this.ctx.fill();
+        this.ctx.closePath();
+        this.ctx.globalCompositeOperation = 'source-over';
+    }
+
+    _getRandomColor() {
+        return config.planet.colors[Math.floor(Math.random() * config.planet.colors.length)];
     }
 }
 

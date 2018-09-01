@@ -14,9 +14,7 @@ class Engine extends BaseObject {
             return;
         }
 
-        if((Math.random() > this.particleNum) && this.isOnBurstSpeed()){
-            this._addParticle();
-        }
+        this._eventuallyAddParticle();
 
         for(let i in this.particles) {
             const particle = this.particles[i].draw();
@@ -26,10 +24,20 @@ class Engine extends BaseObject {
         }
     }
 
-    _addParticle() {
+    _eventuallyAddParticle() {
+        if(!(Math.random() > this.particleNum)) {
+            return;
+        }
+
+        if (this.burstOn) this._addParticle('bottom');
+        if (this.leftEngineOn) this._addParticle('left');
+        if (this.rightEngineOn) this._addParticle('right');
+    }
+
+    _addParticle(direction) {
         const x = this.x + this.width / 2;
-        const y = this.y + this.height;
-        this.particles.push(new Particle(this.ctx, x, y));
+        const y = this.y + this.height / 3;
+        this.particles.push(new Particle(this.ctx, x, y, direction, this));
     }
 }
 
@@ -44,6 +52,8 @@ export default class Spaceship extends Engine {
         this.x = this.windowWidth / 2 - (this.width / 2);
         this.y = (this.windowHeight - config.spaceship.posYOffset) + (this.height / 2);
         this.burstOn = false;
+        this.leftEngineOn = false;
+        this.rightEngineOn = false;
     }
 
     getSpeed() {
@@ -65,14 +75,6 @@ export default class Spaceship extends Engine {
         this.element.classList.remove('burst');
     }
 
-    render() {
-        this._renderParticles();
-
-        if (!this.isOnBurstSpeed()) {
-            this.decreaseSpeed(config.spaceship.decreaseSpeedVelocity);
-        }
-    }
-
     incrieseSpeed(value = 1) {
         if ((this.speed + value) <= config.spaceship.maxSpeed) {
             this.speed += value;
@@ -82,6 +84,27 @@ export default class Spaceship extends Engine {
     decreaseSpeed(value = 0.5) {
         if ((this.speed - value) >= config.spaceship.minSpeed) {
             this.speed -= value;
+        }
+    }
+
+    turnLeft() {
+        this.rightEngineOn = true;
+    }
+
+    turnRight() {
+        this.leftEngineOn = true;
+    }
+
+    turnEnd() {
+        this.leftEngineOn = false;
+        this.rightEngineOn = false;
+    }
+    
+    render() {
+        this._renderParticles();
+
+        if (!this.isOnBurstSpeed()) {
+            this.decreaseSpeed(config.spaceship.decreaseSpeedVelocity);
         }
     }
 }

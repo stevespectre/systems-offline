@@ -61,12 +61,14 @@ export default class Space extends Base {
         // cancel previous turn
         if (this.animationInterval) {
             clearInterval(this.animationInterval);
+            this.spaceShip.turnEnd();
         }
         
         this.animationInterval = setInterval(() => {
             const now = Date.now();
             if (now - start >= config.spaceship.turn.duration) {
                 clearInterval(this.animationInterval);
+                this.spaceShip.turnEnd();
             }
 
             const p = (now - start) / config.spaceship.turn.duration;

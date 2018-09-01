@@ -18,9 +18,9 @@ export default class Menu {
 
         document.querySelectorAll('.nav').forEach(menu => {
            menu.addEventListener('click', () => {
-               const id = menu.id;
+               const target = menu.dataset.target;
                document.querySelectorAll('.menu').forEach(menu => menu.classList.remove('active'));
-               document.getElementById(`menu-${id}`).classList.add('active');
+               document.getElementById(target).classList.add('active');
 
            });
         });

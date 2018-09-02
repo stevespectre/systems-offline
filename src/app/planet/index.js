@@ -29,6 +29,15 @@ export default class Planet extends BaseObject {
         this.craters.render();
     }
 
+    isPointWithinGravityField(point) {
+        const distanceX = this.getX() - point.getX();
+        const distanceY = this.getY() - point.getY();
+
+        const realDistance = Math.sqrt((distanceX * distanceX) + (distanceY * distanceY));
+
+        return realDistance <= this.gravityRadius && realDistance > this.radius;
+    }
+
     _generateRandomParameters() {
         this.color = this._getRandomColor();
         this.gravityRadius = this._getRandomPlanetOuterRadius();

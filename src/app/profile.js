@@ -2,10 +2,14 @@ import config from './config';
 
 export default class Profile {
     constructor() {
-        this.chance = config.profile.chance;
+        this.chance = this._getChance();
     }
 
     _getChance() {
+        return localStorage.getItem('offlineChance') || config.profile.chance;
+    }
+
+    _getUpdateProgress() {
         return localStorage.getItem('offlineChance') || config.profile.chance;
     }
 

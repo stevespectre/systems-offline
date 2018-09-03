@@ -1,6 +1,7 @@
 .game {
   #hud {
     opacity: 1;
+    z-index: 1110;
   }
 }
 
@@ -12,7 +13,7 @@
   height: 100%;
   opacity: 0;
   transition: opacity .5s;
-  z-index: 1090;
+  z-index: 1010;
 
   .burst {
     background: red;
@@ -50,7 +51,8 @@
     opacity: .3;
   }
   div {
-    background: #5fccff;
+    //background: #5fccff;
+    background: green;
   }
 
 }

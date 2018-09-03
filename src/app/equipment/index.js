@@ -14,10 +14,19 @@ export default class Equipment extends Base {
         ];
 
         this.equipments = [];
+        this.collectedEquipments = this._getCollectedEquipments();
     }
 
     get() {
         return this.equipments;
+    }
+
+    _getCollectedEquipments() {
+        let collected = {};
+        this.possibleEquipments.forEach(equipment => {
+            collected[equipment.name] = 0;
+        });
+        return collected;
     }
 
     eventuallyAdd(traveledDistance) {
@@ -39,7 +48,8 @@ export default class Equipment extends Base {
             const equipment = this.equipments[i].render(speed);
 
             if(equipment.isPickedUpBySpacehip()) {
-                equipment.activate();
+                // equipment.activate();
+                this._addToCollection(equipment);
                 this.equipments.splice(i, 1);
                 continue;
             }
@@ -50,11 +60,18 @@ export default class Equipment extends Base {
         }
     }
 
+    _addToCollection(equipment) {
+        this.collectedEquipments.push(equipment);
+        localStorage.setItem('collectedEquipments', this.collectedEquipments);
+    }
+
     _addRandom() {
         const randomKey = Math.floor(Math.random() * this.possibleEquipments.length);
         const equipment = this.possibleEquipments[randomKey];
 
         this.equipments.push(new equipment(this.ctx, this.planets, this.spaceShip));
+
         return this;
     }
+
 }

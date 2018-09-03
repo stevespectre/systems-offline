@@ -47,5 +47,11 @@ export default class Controls {
                 this.spaceShip.speedStandard();
             }
         });
+
+        this._activateEquipments();
     };
+
+    _activateEquipments() {
+        document.getElementById('beam').addEventListener('click', ()=> console.log('0',0));
+    }
 }

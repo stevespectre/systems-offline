@@ -14,7 +14,7 @@ export default class Menu {
             document.body.classList.remove('gameover');
             document.body.classList.add('game');
             //this.space.init().startGame();
-        })
+        });
 
         document.querySelectorAll('.nav').forEach(menu => {
            menu.addEventListener('click', () => {

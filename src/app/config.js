@@ -66,11 +66,11 @@ module.exports = {
     },
     profile: {
         chance: 0.5,
-        beamRadius: 200
+        beamRadius: 150
     },
     beam: {
-        radius: 200,
-        color: '#5fccff'
+        radius: 150,
+        color: 'green'
     },
     equipments: {
         /*beam: {

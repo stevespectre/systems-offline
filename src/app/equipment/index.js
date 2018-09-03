@@ -1,6 +1,8 @@
 import Base from '../base';
+import Profile from '../profile';
 import Plasma from './plasma';
 import Beam from './beam';
+import Money from './money';
 
 export default class Equipment extends Base {
     constructor(ctx, planets = [], spaceShip) {
@@ -9,7 +11,8 @@ export default class Equipment extends Base {
         this.planets = planets;
         this.spaceShip = spaceShip;
         this.possibleEquipments = [
-            Plasma,
+            //Plasma,
+            Money,
             Beam
         ];
         this.equipments = [];
@@ -72,7 +75,16 @@ export default class Equipment extends Base {
     _addToCollection(equipment) {
         const name = equipment.constructor.name;
         this.collectedEquipments[name]++;
-        this._updateButtonText(name);
+
+        if (equipment.hasOwnProperty('isPassiveEquipment')) {
+            this.updateMoney()
+        } else {
+            this._updateButtonText(name)
+        }
+    }
+
+    updateMoney() {
+        console.log('money-money-money')
     }
 
     _updateButtonText(equipmentName) {

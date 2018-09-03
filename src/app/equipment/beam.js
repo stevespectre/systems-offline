@@ -9,6 +9,7 @@ export default class Beam extends EquipmentBase {
     }
 
     activate() {
+        alert('activate');
         this._renderBeamEffectRadius();
     }
 

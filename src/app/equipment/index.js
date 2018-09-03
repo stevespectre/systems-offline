@@ -9,12 +9,16 @@ export default class Equipment extends Base {
         this.planets = planets;
         this.spaceShip = spaceShip;
         this.possibleEquipments = [
-            Plasma,
+            //Plasma,
             Beam
         ];
+        /*this.collectedEquipments = {
+            Beam: 0
+        };*/
 
         this.equipments = [];
         this.collectedEquipments = this._getCollectedEquipments();
+        //this.collectedEquipments = {};
     }
 
     get() {
@@ -22,9 +26,12 @@ export default class Equipment extends Base {
     }
 
     _getCollectedEquipments() {
+        //alert('c');
         // if we want to keep equipments in storage
         /*let stored = localStorage.getItem('collectedEquipments');
         if (stored) return JSON.parse(stored);*/
+
+        if (this.collectedEquipments) return;
 
         let collected = {};
 
@@ -36,14 +43,13 @@ export default class Equipment extends Base {
     }
 
     activateEquipment(equipmentName) {
-        console.log('activate',equipmentName);
-        if (this.collectedEquipments[equipmentName] > 0) {
-            console.log('0',0);
-            this.possibleEquipments.forEach(possibleEquipment => {
-                console.log('1',1);
-                if (possibleEquipment.name == equipmentName) possibleEquipment.activate();
-            });
-            //this.possibleEquipments[equipmentName].activate();
+        if (this.collectedEquipments[equipmentName] == 0) return;
+        for(let i in this.equipments) {
+            const equipment = this.equipments[i];
+            console.log('equipment',equipment.constructor.name);
+            if (equipment.constructor.name == equipmentName) equipment.activate();
+            this.collectedEquipments[equipmentName]--;
+            this._updateButtonText(equipmentName);
         }
     }
 
@@ -81,9 +87,11 @@ export default class Equipment extends Base {
     _addToCollection(equipment) {
         const name = equipment.constructor.name;
         this.collectedEquipments[name]++;
-        document.getElementById(`${ name.toLowerCase() }-num`).innerHTML = this.collectedEquipments[name];
-        // if we want to keep equipments in storage
-        // localStorage.setItem('collectedEquipments', JSON.stringify(this.collectedEquipments));
+        this._updateButtonText(name);
+    }
+
+    _updateButtonText(equipmentName) {
+        document.getElementById(`${ equipmentName.toLowerCase() }-num`).innerHTML = this.collectedEquipments[equipmentName];
     }
 
     _addRandom() {

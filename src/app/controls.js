@@ -9,11 +9,12 @@ const LEFT_ARROW_KEY_CODE = 37;
 const RIGHT_ARROW_KEY_CODE = 39;
 
 export default class Controls {
-    constructor(spaceShip, backgroundStars, space) {
+    constructor(spaceShip, backgroundStars, space, equipment) {
+        this.equipment = equipment;
         this.spaceShip = spaceShip;
         this.backgroundStars = backgroundStars;
         this.space = space;
-        this.equipment = new Equipment();
+        // this.equipment = new Equipment();
     }
 
     init() {

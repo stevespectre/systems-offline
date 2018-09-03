@@ -1,4 +1,4 @@
-import Base from './base.js';
+import Base from './base';
 import config from './config';
 
 export default class BackgroundStars extends Base {

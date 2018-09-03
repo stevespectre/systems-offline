@@ -13,6 +13,7 @@ import Controls from './controls';
 import CollisionDetection from './collision-detection';
 import Records from './records';
 import config from './config';
+import Path from './path';
 
 export default class Space extends Base {
     constructor() {
@@ -37,6 +38,7 @@ export default class Space extends Base {
         this.collisionDetection = new CollisionDetection();
         this.explosion = new Explosion();
         this.record = new Records();
+        this.path = new Path(this.ctx, this.planets, this.spaceShip);
     }
 
     init() {
@@ -103,6 +105,7 @@ export default class Space extends Base {
         this.spaceShip.render();
         this.equipment.render(speed);
         this.planets.forEach(planet => planet.render(speed));
+        this.path.render();
 
         if (this.collisionDetection.checkObjectCollision(this.planets, this.spaceShip)) {
             this.gameIsOver = true;
@@ -155,5 +158,4 @@ export default class Space extends Base {
             location.reload();
         }, 10000);
     }
-
 }

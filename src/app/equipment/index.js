@@ -22,8 +22,9 @@ export default class Equipment extends Base {
     }
 
     _getCollectedEquipments() {
-        let stored = localStorage.getItem('collectedEquipments');
-        if (stored) return JSON.parse(stored);
+        // if we want to keep equipments in storage
+        /*let stored = localStorage.getItem('collectedEquipments');
+        if (stored) return JSON.parse(stored);*/
 
         let collected = {};
 
@@ -35,8 +36,15 @@ export default class Equipment extends Base {
     }
 
     activateEquipment(equipmentName) {
-        console.log('activate', equipmentName);
-        this.possibleEquipments[equipmentName].activate();
+        console.log('activate',equipmentName);
+        if (this.collectedEquipments[equipmentName] > 0) {
+            console.log('0',0);
+            this.possibleEquipments.forEach(possibleEquipment => {
+                console.log('1',1);
+                if (possibleEquipment.name == equipmentName) possibleEquipment.activate();
+            });
+            //this.possibleEquipments[equipmentName].activate();
+        }
     }
 
     eventuallyAdd(traveledDistance) {
@@ -71,9 +79,11 @@ export default class Equipment extends Base {
     }
 
     _addToCollection(equipment) {
-        this.collectedEquipments[equipment.constructor.name]++;
-        console.log('this.collectedEquipments',this.collectedEquipments);
-        localStorage.setItem('collectedEquipments', JSON.stringify(this.collectedEquipments));
+        const name = equipment.constructor.name;
+        this.collectedEquipments[name]++;
+        document.getElementById(`${ name.toLowerCase() }-num`).innerHTML = this.collectedEquipments[name];
+        // if we want to keep equipments in storage
+        // localStorage.setItem('collectedEquipments', JSON.stringify(this.collectedEquipments));
     }
 
     _addRandom() {

@@ -24,7 +24,7 @@ export default class Equipment extends Base {
     _getCollectedEquipments() {
         let collected = {};
         this.possibleEquipments.forEach(equipment => {
-            collected[equipment.name] = 0;
+            collected[equipment.name] = localStorage.getItem('collectedEquipments') || 0;
         });
         return collected;
     }

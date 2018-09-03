@@ -15,7 +15,6 @@ export default class Equipment extends Base {
 
         this.equipments = [];
         this.collectedEquipments = this._getCollectedEquipments();
-        console.log('this.collectedEquipments',this.collectedEquipments);
     }
 
     get() {
@@ -23,10 +22,15 @@ export default class Equipment extends Base {
     }
 
     _getCollectedEquipments() {
+        let stored = localStorage.getItem('collectedEquipments');
+        if (stored) return JSON.parse(stored);
+
         let collected = {};
+
         this.possibleEquipments.forEach(equipment => {
-            collected[equipment.name] = localStorage.getItem('collectedEquipments') || 0;
+            collected[equipment.name] = 0;
         });
+
         return collected;
     }
 
@@ -67,11 +71,9 @@ export default class Equipment extends Base {
     }
 
     _addToCollection(equipment) {
-        console.log('equipment',equipment.constructor.name);
-        //console.log('this.collectedEquipments[equipment.name]',this.collectedEquipments[equipment.name]);
         this.collectedEquipments[equipment.constructor.name]++;
         console.log('this.collectedEquipments',this.collectedEquipments);
-        localStorage.setItem('collectedEquipments', this.collectedEquipments);
+        localStorage.setItem('collectedEquipments', JSON.stringify(this.collectedEquipments));
     }
 
     _addRandom() {

@@ -156,6 +156,6 @@ export default class Space extends Base {
 
         setTimeout(() => {
             location.reload();
-        }, 10000);
+        }, 20000);
     }
 }

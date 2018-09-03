@@ -57,11 +57,6 @@ export default class Controls {
     _activateEquipments() {
         document.getElementById('beam').addEventListener('click', ()=> {
             this.equipment.activateEquipment('Beam');
-            /*let numBeam = this.equipment.collectedEquipments[Beam];
-            console.log('numBeam',numBeam);
-            if(this.equipment.collectedEquipments[Beam] > 0) {
-
-            }*/
         });
     }
 }

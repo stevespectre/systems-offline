@@ -2,7 +2,7 @@ import EquipmentBase from './equipment-base';
 
 export default class Plasma extends EquipmentBase {
     init() {
-        this.radius = 50;
+        this.radius = 100;
         this.color = '#ff0000';
         this.x = this._getXWithoutPlanetCollision();
         this.y = 0;

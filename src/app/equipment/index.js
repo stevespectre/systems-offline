@@ -15,6 +15,7 @@ export default class Equipment extends Base {
 
         this.equipments = [];
         this.collectedEquipments = this._getCollectedEquipments();
+        console.log('this.collectedEquipments',this.collectedEquipments);
     }
 
     get() {
@@ -27,6 +28,11 @@ export default class Equipment extends Base {
             collected[equipment.name] = localStorage.getItem('collectedEquipments') || 0;
         });
         return collected;
+    }
+
+    activateEquipment(equipmentName) {
+        console.log('activate', equipmentName);
+        this.possibleEquipments[equipmentName].activate();
     }
 
     eventuallyAdd(traveledDistance) {
@@ -61,7 +67,10 @@ export default class Equipment extends Base {
     }
 
     _addToCollection(equipment) {
-        this.collectedEquipments.push(equipment);
+        console.log('equipment',equipment.constructor.name);
+        //console.log('this.collectedEquipments[equipment.name]',this.collectedEquipments[equipment.name]);
+        this.collectedEquipments[equipment.constructor.name]++;
+        console.log('this.collectedEquipments',this.collectedEquipments);
         localStorage.setItem('collectedEquipments', this.collectedEquipments);
     }
 

@@ -1,5 +1,7 @@
 import config from './config';
 
+import Equipment from './equipment/index';
+
 const SPACE_KEY_CODE = 32;
 
 const UP_ARROW_KEY_CODE = 38;
@@ -11,6 +13,7 @@ export default class Controls {
         this.spaceShip = spaceShip;
         this.backgroundStars = backgroundStars;
         this.space = space;
+        this.equipment = new Equipment();
     }
 
     init() {
@@ -52,6 +55,13 @@ export default class Controls {
     };
 
     _activateEquipments() {
-        document.getElementById('beam').addEventListener('click', ()=> console.log('0',0));
+        document.getElementById('beam').addEventListener('click', ()=> {
+            this.equipment.activateEquipment('Beam');
+            /*let numBeam = this.equipment.collectedEquipments[Beam];
+            console.log('numBeam',numBeam);
+            if(this.equipment.collectedEquipments[Beam] > 0) {
+
+            }*/
+        });
     }
 }

@@ -5,7 +5,6 @@ export default class Menu {
 
     init() {
         document.getElementById('start').addEventListener('click', ()=> {
-            console.log('start');
             this.space.startGame();
             document.body.classList.add('game')
         });
@@ -23,6 +22,11 @@ export default class Menu {
                document.getElementById(target).classList.add('active');
 
            });
+        });
+
+        document.getElementById('reset-progress').addEventListener('click', ()=> {
+            localStorage.removeItem('collectedEquipments');
+            console.log('Progress has reseted!');
         });
     }
 }

@@ -59,5 +59,9 @@ export default class Controls {
         document.getElementById('beam').addEventListener('click', ()=> {
             this.equipment.activateEquipment('Beam');
         });
+
+        document.getElementById('plasma').addEventListener('click', ()=> {
+            this.equipment.activateEquipment('Plasma');
+        });
     }
 }

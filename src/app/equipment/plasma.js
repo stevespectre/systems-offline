@@ -9,6 +9,7 @@ export default class Plasma extends EquipmentBase {
     }
 
     activate() {
+        alert('plasma');
         console.info('[equipment] Plasma ACTIVE');
     }
 }

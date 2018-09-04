@@ -50,10 +50,14 @@
     <p>Equipments:</p>
     <ul>
       <li>
-        <p>Beam - level:
+        <div>Chance of spawning powerups - level:
+          <i id="chance-lvl">1</i>
+          <button type="button" data-update="chance" class="update-equipment"><i>+</i> ( $<i class="price chance-price">2</i>)</button>
+        </div>
+        <div>Beam (radius) - level:
           <i id="beam-lvl">1</i>
-          <button type="button" class="update-equipment"><i>+</i><i class="price beam-price">( $2 )</i></button>
-        </p>
+          <button type="button" data-update="beam" class="update-equipment"><i>+</i> ( $<i class="price beam-price">2</i>)</button>
+        </div>
       </li>
       <li data-target="main-menu" class="nav">Back</li>
     </ul>

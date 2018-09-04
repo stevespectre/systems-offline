@@ -1,4 +1,4 @@
-import Base from '../base';;
+import Base from '../base';
 import Plasma from './plasma';
 import Beam from './beam';
 import Money from './money';
@@ -16,7 +16,7 @@ export default class Equipment extends Base {
             Beam
         ];
         this.equipments = [];
-        this.collectedEquipments = this._getCollectedEquipments();
+        this.collectedEquipments = [];
     }
 
     get() {
@@ -54,7 +54,17 @@ export default class Equipment extends Base {
             return;
         }
 
-        this._addRandom();
+        // TODO: true is just for dev mode
+        if (true || this._haveYouLuckToSpawnEquipment()) {
+            this._addRandom();
+        }
+    }
+
+    _haveYouLuckToSpawnEquipment() {
+        const rand = Math.floor(Math.random() * 100) + 1;
+        const chanceInPercent = this.profile.getProgressOfItem('chance') * 5;
+
+        return rand <= chanceInPercent;
     }
 
     render(speed) {

@@ -65,7 +65,11 @@ module.exports = {
         colors: ['#333333', '#666666', '#999999']
     },
     profile: {
-        chance: 0.5,
+        progress: {
+            money: 0,
+            chance: 1,
+            beam: 1
+        },
         beamRadius: 150
     },
     beam: {

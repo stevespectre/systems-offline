@@ -2,36 +2,24 @@ import config from './config';
 
 export default class Profile {
     constructor() {
-        this.chance = this._getChance();
-        this.money = this.getMoney();
+        this.progress = this._getStoredProfileData();
     }
 
-    _getChance() {
-        return localStorage.getItem('offlineChance') || config.profile.chance;
+    _getStoredProfileData() {
+        return  JSON.parse(localStorage.getItem('offlineProfileData')) || config.profile.progress;
     }
 
-    getMoney() {
-        return localStorage.getItem('offlineMoney') || 0;
+    _saveToLocalStorage() {
+        localStorage.setItem('offlineProfileData', JSON.stringify(this.progress));
     }
 
-    setMoney() {
-        localStorage.setItem('offlineMoney', this.money);
+    getProgressOfItem(item) {
+        return this.progress[item]
     }
 
-    addMoney() {
-        this.money++;
-        this.setMoney();
-    }
-
-    _getUpdateProgress() {
-        return localStorage.getItem('offlineChance') || config.profile.chance;
-    }
-
-    _setChance() {
-
-    }
-
-    calcChance() {
-        return true;
+    updateItem(item) {
+        console.log('update',item);
+        this.progress[item]++;
+        this._saveToLocalStorage();
     }
 }

@@ -28,14 +28,26 @@ export default class Menu {
         document.getElementById('reset-progress').addEventListener('click', ()=> {
             localStorage.removeItem('collectedEquipments');
             localStorage.removeItem('offlineChance');
+            localStorage.removeItem('offlineProfileData');
             localStorage.removeItem('offlineMoney');
             console.log('Progress has reseted!');
         });
 
-        this._initProfileData();
+        this._loadProfileData();
+        this._updateEquipment();
     }
 
-    _initProfileData() {
-        document.getElementById('money').innerHTML = this.profile.money;
+    _loadProfileData() {
+        document.getElementById('money').innerHTML = this.profile.getProgressOfItem('money');
+        document.getElementById('chance-lvl').innerHTML = this.profile.getProgressOfItem('chance');
+        document.getElementById('beam-lvl').innerHTML = this.profile.getProgressOfItem('beam');
+    }
+
+    _updateEquipment() {
+        document.querySelectorAll('.update-equipment').forEach(btn => {
+            btn.addEventListener('click', () => {
+                this.profile.updateItem(btn.dataset.update);
+            });
+        })
     }
 }

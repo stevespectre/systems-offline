@@ -43,10 +43,17 @@ class CollisionDetection {
         return false;
     }
 
-    checkCollision(planets, object) {
-        planets.forEach( planet => {
+    checkCollision(object, anotherObject) {
+        const distanceX = object.x - anotherObject.x;
+        const distanceY = object.y - anotherObject.y;
 
-        });
+        const realDistance = Math.sqrt((distanceX * distanceX) + (distanceY * distanceY));
+
+        if (realDistance <= object.radius + anotherObject.radius && realDistance != 0) {
+            return true;
+        }
+
+        return false;
     }
 
 }

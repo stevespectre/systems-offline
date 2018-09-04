@@ -13,7 +13,7 @@ export default class Money extends EquipmentBase {
         this.profile.updateItem('money');
     }
 
-    pickedUp() {
+    pickUp() {
         this.active = true;
     }
 

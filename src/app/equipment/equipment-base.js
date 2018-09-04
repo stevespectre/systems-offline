@@ -1,11 +1,14 @@
 import BaseObject from '../base-object';
 
 export default class EquipmentBase extends BaseObject {
-    constructor(ctx, planets, spaceShip) {
+    constructor(ctx, planets, spaceShip, equipments) {
         super();
         this.ctx = ctx;
         this.planets = planets;
         this.spaceShip = spaceShip;
+        this.equipments = equipments;
+
+        this.pickedUp = false;
         this.active = false;
         this.removeable = false;
         this.init();
@@ -19,7 +22,7 @@ export default class EquipmentBase extends BaseObject {
         throw Error('[Equipment].activate() method needs to be implemented in child class');
     }
 
-    pickedUp() {
+    pickUp() {
         throw Error('[Equipment].pickedUp() method needs to be implemented in child class');
     }
 
@@ -50,8 +53,8 @@ export default class EquipmentBase extends BaseObject {
         return this.x > this.windowWidth || this.y > this.windowHeight;
     }
 
-    isPickedUpBySpacehip() {
-        return this.collisionDetection.isCollisedWithObject(this, this.spaceShip);
+    isPickedUp() {
+        return this.pickedUp || this.collisionDetection.isCollisedWithObject(this, this.spaceShip);
     }
 
     // todo refactor!

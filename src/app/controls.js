@@ -56,7 +56,7 @@ export default class Controls {
     };
 
     _activateEquipments() {
-        document.getElementById('beam').addEventListener('click', ()=> {
+        document.getElementById('beam').addEventListener('click', () => {
             this.equipment.activateEquipment('Beam');
         });
 

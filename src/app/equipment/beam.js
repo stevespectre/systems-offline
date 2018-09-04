@@ -12,11 +12,12 @@ export default class Beam extends EquipmentBase {
 
     pickedUp() {
         console.log('BEAM has been picked up');
-        // this.activate(); // todo remove! testing only
+        this.updateButtonText(1);
     }
 
     activate() {
         this.active = true;
+        this.updateButtonText(-1);
 
         setTimeout(() => {
             this.removeable = true;

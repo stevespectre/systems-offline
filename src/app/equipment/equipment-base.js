@@ -54,6 +54,21 @@ export default class EquipmentBase extends BaseObject {
         return this.collisionDetection.isCollisedWithObject(this, this.spaceShip);
     }
 
+    // todo refactor!
+    updateButtonText(val = 1) {
+        const equipmentName = this.constructor.name;
+        const domElement = document.getElementById(`${ equipmentName.toLowerCase() }`);
+        if (!domElement) return;
+        const newVal = parseInt(domElement.innerHTML) + val;
+        domElement.innerHTML = newVal;
+
+        if (newVal) {
+            domElement.classList.remove('out');            
+        } else {
+            domElement.classList.add('out');
+        }
+    }
+
     _calculatePosition(speed) {
         this.y += speed;
     }

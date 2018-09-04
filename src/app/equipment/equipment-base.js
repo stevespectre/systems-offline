@@ -28,7 +28,7 @@ export default class EquipmentBase extends BaseObject {
     }
 
     isActive() {
-        return this.activate;
+        return this.active;
     }
 
     isRemoveable() {

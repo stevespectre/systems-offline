@@ -2,6 +2,7 @@ import EquipmentBase from './equipment-base';
 
 export default class Beam extends EquipmentBase {
     init() {
+        this.duration = 5000;
         this.radius = 100;
         this.activeRadius = 150;
         this.color = 'green';
@@ -9,24 +10,29 @@ export default class Beam extends EquipmentBase {
         this.y = 0;
     }
 
-    activate(ctx, spaceShip, profile) {
-        alert('activate');
-        this.ctx = ctx;
-        this.spaceShip = spaceShip;
-        this.profile = profile;
+    pickedUp() {
+        console.log('BEAM has been picked up');
+        // this.activate(); // todo remove! testing only
+    }
 
-        this._updateButtonText(name);
+    activate() {
+        this.active = true;
+
+        setTimeout(() => {
+            this.removeable = true;
+        }, this.duration);
+    }
+
+    doEffect() {
         this._renderBeamEffectRadius();
     }
 
-    _updateButtonText(equipmentName) {
-        document.getElementById(`${ equipmentName.toLowerCase() }-num`).innerHTML = this.collectedEquipments[equipmentName];
-    }
-
     _renderBeamEffectRadius() {
-        console.log('renderBeamRadius');
+        const x = this.spaceShip.getX() + this.spaceShip.width/2;
+        const y = this.spaceShip.getY() + this.spaceShip.height/2;
+
         this.ctx.beginPath();
-        this.ctx.arc(this.spaceShip.x, this.spaceShip.y, this.radius, 0, this.TWO_PI);
+        this.ctx.arc(x, y, this.activeRadius, 0, this.TWO_PI);
         this.ctx.strokeStyle = this.color;
         this.ctx.lineWidth = 3;
         this.ctx.stroke();

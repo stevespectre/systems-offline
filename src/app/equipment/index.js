@@ -11,9 +11,9 @@ export default class Equipment extends Base {
         this.spaceShip = spaceShip;
         this.profile = profile;
         this.possibleEquipments = [
-            //Plasma,
-            Money,
-            // Beam
+            // Plasma,
+            // Money,
+            Beam
         ];
         this.equipments = [];
         this.collectedEquipments = [];
@@ -23,13 +23,13 @@ export default class Equipment extends Base {
         return this.equipments;
     }
 
-    _getCollectedEquipments() {
-        if (this.collectedEquipments) return;
-        let collected = {};
-        this.possibleEquipments.forEach(equipment => {
-            collected[equipment.name] = 0;
-        });
-        return collected;
+    activateEquipment(type) {
+        for(let e of this.collectedEquipments) {
+            if (e.constructor.name === type) {
+                e.activate();
+                break;
+            }
+        }
     }
 
     eventuallyAdd(traveledDistance) {
@@ -85,7 +85,7 @@ export default class Equipment extends Base {
             if (!equipment.isActive()) {
                 continue;
             }
-
+            
             this.collectedEquipments[i].doEffect();
 
             if (equipment.isRemoveable()) {

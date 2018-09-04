@@ -6,6 +6,8 @@ export default class EquipmentBase extends BaseObject {
         this.ctx = ctx;
         this.planets = planets;
         this.spaceShip = spaceShip;
+        this.active = false;
+        this.removeable = false;
         this.init();
     }
 
@@ -15,6 +17,22 @@ export default class EquipmentBase extends BaseObject {
 
     activate() {
         throw Error('[Equipment].activate() method needs to be implemented in child class');
+    }
+
+    pickedUp() {
+        throw Error('[Equipment].pickedUp() method needs to be implemented in child class');
+    }
+
+    doEffect() {
+        throw Error('[Equipment].doEffect() method needs to be implemented in child class');
+    }
+
+    isActive() {
+        return this.activate;
+    }
+
+    isRemoveable() {
+        return this.removeable;
     }
 
     render(speed) {

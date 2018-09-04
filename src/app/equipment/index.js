@@ -13,7 +13,7 @@ export default class Equipment extends Base {
         this.possibleEquipments = [
             //Plasma,
             Money,
-            Beam
+            // Beam
         ];
         this.equipments = [];
         this.collectedEquipments = [];
@@ -32,17 +32,6 @@ export default class Equipment extends Base {
         return collected;
     }
 
-    activateEquipment(equipmentName) {
-        if (this.collectedEquipments[equipmentName] == 0) return;
-        console.log('0',equipmentName);
-        for(let i in this.equipments) {
-            const equipment = this.equipments[i];
-            if (equipment.constructor.name == equipmentName) equipment.activate();
-            this.collectedEquipments[equipmentName]--;
-            this._updateButtonText(equipmentName);
-        }
-    }
-
     eventuallyAdd(traveledDistance) {
         // only one equipment is allowed on the screen at once...
         if (this.equipments.length) {
@@ -50,7 +39,7 @@ export default class Equipment extends Base {
         }
 
         // not far enough...
-        if (traveledDistance % 100 !== 0) {
+        if (Math.round(traveledDistance % 100) !== 0) {
             return;
         }
 
@@ -68,11 +57,17 @@ export default class Equipment extends Base {
     }
 
     render(speed) {
+        this._renderPickabbleEquipments(speed);
+        this._renderPickedEquipments();         
+    }
+
+    _renderPickabbleEquipments(speed) {
         for(let i in this.equipments) {
             const equipment = this.equipments[i].render(speed);
 
             if(equipment.isPickedUpBySpacehip()) {
-                this._addToCollection(equipment);
+                equipment.pickedUp();
+                this.collectedEquipments.push(equipment);
                 this.equipments.splice(i, 1);
                 continue;
             }
@@ -83,25 +78,20 @@ export default class Equipment extends Base {
         }
     }
 
-    _addToCollection(equipment) {
-        const name = equipment.constructor.name;
-        this.collectedEquipments[name]++;
+    _renderPickedEquipments() {
+        for(let i in this.collectedEquipments) {
+            const equipment = this.collectedEquipments[i];
 
-        if (equipment.hasOwnProperty('isPassiveEquipment')) {
-            this.updateMoney()
-        } else {
-            this._updateButtonText(name)
+            if (!equipment.isActive()) {
+                continue;
+            }
+
+            this.collectedEquipments[i].doEffect();
+
+            if (equipment.isRemoveable()) {
+                this.collectedEquipments.splice(i, 1);
+            }
         }
-    }
-
-    updateMoney() {
-        console.log('money-money-money');
-        console.log('this.profile',this.profile);
-        this.profile.addMoney();
-    }
-
-    _updateButtonText(equipmentName) {
-        document.getElementById(`${ equipmentName.toLowerCase() }-num`).innerHTML = this.collectedEquipments[equipmentName];
     }
 
     _addRandom() {

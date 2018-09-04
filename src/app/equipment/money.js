@@ -1,4 +1,5 @@
 import EquipmentBase from './equipment-base';
+import Profile from '../profile';
 
 export default class Money extends EquipmentBase {
     init() {
@@ -10,5 +11,16 @@ export default class Money extends EquipmentBase {
 
     activate() {
         this.profile.updateItem('money');
+    }
+
+    pickedUp() {
+        this.active = true;
+    }
+
+    doEffect() {
+        const profile = new Profile();
+        profile.updateItem('money');
+        
+        this.removeable = true;
     }
 }

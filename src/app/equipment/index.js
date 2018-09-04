@@ -34,6 +34,7 @@ export default class Equipment extends Base {
 
     activateEquipment(equipmentName) {
         if (this.collectedEquipments[equipmentName] == 0) return;
+        console.log('0',equipmentName);
         for(let i in this.equipments) {
             const equipment = this.equipments[i];
             if (equipment.constructor.name == equipmentName) equipment.activate();

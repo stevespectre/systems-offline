@@ -60,8 +60,8 @@ export default class Controls {
             this.equipment.activateEquipment('Beam');
         });
 
-        document.getElementById('plasma').addEventListener('click', ()=> {
+        /*document.getElementById('plasma').addEventListener('click', ()=> {
             this.equipment.activateEquipment('Plasma');
-        });
+        });*/
     }
 }

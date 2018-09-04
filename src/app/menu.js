@@ -30,6 +30,7 @@ export default class Menu {
             localStorage.removeItem('offlineChance');
             localStorage.removeItem('offlineProfileData');
             localStorage.removeItem('offlineMoney');
+            localStorage.removeItem('offlineRecord');
             console.log('Progress has reseted!');
         });
 

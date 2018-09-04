@@ -1,0 +1,19 @@
+button {
+  border: none;
+  background: $primary;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.update-equipment {
+  margin-left: 10px;
+
+  .price {
+    margin-left: 5px;
+  }
+  &:hover {
+    background: $primary-hov;
+  }
+}

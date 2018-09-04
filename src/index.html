@@ -10,10 +10,10 @@
 <canvas id="space-canvas"></canvas>
 <canvas id="effects"></canvas>
 <div id="hud">
-  <span id="score">0</span>
+  <i id="score">0</i>
   <!--button id="burst">Lightspeed</button-->
   <ul id="equipments">
-    <li id="beam"><div><span id="beam-num">0</span></div></li>
+    <li id="beam"><div><i id="beam-num">0</i></div></li>
     <!--li id="plasma"><div><span id="plasma-num">0</span></div></li-->
   </ul>
 </div>
@@ -29,8 +29,8 @@
 
   <section>
     <p id="new-record">Congratulation! New record!</p>
-    <p>Your score: <span id="end-score"></span></p>
-    <p>Record: <span id="record"></span></p>
+    <p>Your score: <i id="end-score"></i></p>
+    <p>Record: <i id="record"></i></p>
     <ul>
       <li id="restart">Restart</li>
     </ul>
@@ -46,10 +46,15 @@
 
   <div id="profile" class="menu">
     <h2>Profile / Updates</h2>
-    <p>Your money: <span id="money">0</span></p>
+    <p>Your money: $<i id="money">0</i></p>
     <p>Equipments:</p>
     <ul>
-      <li>Beam - level: 1</li>
+      <li>
+        <p>Beam - level:
+          <i id="beam-lvl">1</i>
+          <button type="button" class="update-equipment"><i>+</i><i class="price beam-price">( $2 )</i></button>
+        </p>
+      </li>
       <li data-target="main-menu" class="nav">Back</li>
     </ul>
   </div>

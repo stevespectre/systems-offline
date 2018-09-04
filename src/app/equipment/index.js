@@ -12,7 +12,7 @@ export default class Equipment extends Base {
         this.profile = profile;
         this.possibleEquipments = [
             // Plasma,
-            // Money,
+            Money,
             Beam
         ];
         this.equipments = [];

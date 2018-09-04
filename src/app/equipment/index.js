@@ -1,15 +1,15 @@
-import Base from '../base';
-import Profile from '../profile';
+import Base from '../base';;
 import Plasma from './plasma';
 import Beam from './beam';
 import Money from './money';
 
 export default class Equipment extends Base {
-    constructor(ctx, planets = [], spaceShip) {
+    constructor(ctx, planets = [], spaceShip, profile) {
         super();
         this.ctx = ctx;
         this.planets = planets;
         this.spaceShip = spaceShip;
+        this.profile = profile;
         this.possibleEquipments = [
             //Plasma,
             Money,
@@ -84,7 +84,9 @@ export default class Equipment extends Base {
     }
 
     updateMoney() {
-        console.log('money-money-money')
+        console.log('money-money-money');
+        console.log('this.profile',this.profile);
+        this.profile.addMoney();
     }
 
     _updateButtonText(equipmentName) {

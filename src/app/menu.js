@@ -1,6 +1,7 @@
 export default class Menu {
-    constructor(space) {
+    constructor(space, profile) {
         this.space = space;
+        this.profile = profile;
     }
 
     init() {
@@ -26,7 +27,15 @@ export default class Menu {
 
         document.getElementById('reset-progress').addEventListener('click', ()=> {
             localStorage.removeItem('collectedEquipments');
+            localStorage.removeItem('offlineChance');
+            localStorage.removeItem('offlineMoney');
             console.log('Progress has reseted!');
         });
+
+        this._initProfileData();
+    }
+
+    _initProfileData() {
+        document.getElementById('money').innerHTML = this.profile.money;
     }
 }

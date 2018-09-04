@@ -16,7 +16,7 @@ import config from './config';
 import Path from './path';
 
 export default class Space extends Base {
-    constructor() {
+    constructor(profile) {
         super();
 
         this.planets = [];
@@ -28,9 +28,10 @@ export default class Space extends Base {
         this.ctx = this.canvas.getContext('2d', { alpha: true });
 
         this.score = new Score();
-        this.profile = new Profile();
+        this.profile = profile;
+        console.log('profile',profile);
         this.spaceShip = new Spaceship(this.ctx);
-        this.equipment = new Equipment(this.ctx, this.planets, this.spaceShip);
+        this.equipment = new Equipment(this.ctx, this.planets, this.spaceShip, profile);
         this.controls = new Controls(this.spaceShip, this.backgroundStars, this, this.equipment);
         this.backgroundStars = new BackgroundStars();
         this.gravity = new Gravity(this.spaceShip, this.planets, this.equipment.get());

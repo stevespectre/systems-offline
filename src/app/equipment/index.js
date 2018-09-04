@@ -58,15 +58,15 @@ export default class Equipment extends Base {
 
     render(speed) {
         this._renderPickabbleEquipments(speed);
-        this._renderPickedEquipments();         
+        this._renderPickedEquipments();
     }
 
     _renderPickabbleEquipments(speed) {
         for(let i in this.equipments) {
             const equipment = this.equipments[i].render(speed);
 
-            if(equipment.isPickedUpBySpacehip()) {
-                equipment.pickedUp();
+            if(equipment.isPickedUp()) {
+                equipment.pickUp();
                 this.collectedEquipments.push(equipment);
                 this.equipments.splice(i, 1);
                 continue;
@@ -98,7 +98,7 @@ export default class Equipment extends Base {
         const randomKey = Math.floor(Math.random() * this.possibleEquipments.length);
         const equipment = this.possibleEquipments[randomKey];
 
-        this.equipments.push(new equipment(this.ctx, this.planets, this.spaceShip));
+        this.equipments.push(new equipment(this.ctx, this.planets, this.spaceShip, this.equipments));
 
         return this;
     }

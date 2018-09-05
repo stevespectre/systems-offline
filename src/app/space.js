@@ -22,7 +22,7 @@ export default class Space extends Base {
         this.planets = [];
         this.gameIsOver = false;
         this.traveledDistance = 0;
-        this.maxPlanets = 5;
+        this.maxPlanets = 6;
 
         this.canvas = document.getElementById('space-canvas');
         this.ctx = this.canvas.getContext('2d', { alpha: true });

@@ -62,7 +62,7 @@ module.exports = {
         maxCraterCount: 5,
         maxMoonCount: 2,
         maxVelocity: 0, // to move planets randomly, 0: disabled
-        colors: ['#333333', '#666666', '#999999']
+        colors: ['#333333', '#666666', '#999999', '#581818']
     },
     profile: {
         progress: {

@@ -30,7 +30,6 @@ export default class Space extends Base {
 
         this.score = new Score();
         this.profile = profile;
-        console.log('profile',profile);
         this.spaceShip = new Spaceship(this.ctx);
         this.equipment = new Equipment(this.ctx, this.planets, this.spaceShip, profile);
         this.controls = new Controls(this.spaceShip, this.backgroundStars, this, this.equipment);

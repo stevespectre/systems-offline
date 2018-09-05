@@ -47,8 +47,16 @@ export default class Menu {
     _updateEquipment() {
         document.querySelectorAll('.update-equipment').forEach(btn => {
             btn.addEventListener('click', () => {
-                this.profile.updateItem(btn.dataset.update);
+                if (this._isEnoughMoneyToUpdate()) {
+                    this.profile.updateItem(btn.dataset.update);
+                }
             });
         })
+    }
+
+    _isEnoughMoneyToUpdate() {
+        if (this.profile.getProgressOfItem() >= 1) {
+
+        }
     }
 }

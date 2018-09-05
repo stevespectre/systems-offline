@@ -14,9 +14,9 @@ const difficulty = {
     },
     medium: {
         startSpeed: 0,
-        minSpeed: 3,
+        minSpeed: 4,
         maxSpeed: Infinity,
-        incrieseSpeedVelocity: 1,
+        incrieseSpeedVelocity: 1.5,
         decreaseSpeedVelocity: 0.15,
         gravitydecreaseSpeedVelocity: 0.01,
         turn: {
@@ -56,9 +56,9 @@ module.exports = {
         color: '#ffffff'
     },
     planet: {
-        gridFillRate: 0.57,
+        gridFillRate: 0.56,
         maxInARow: 3,
-        gravityRate: 0.51,
+        gravityRate: 0.50,
         maxCraterCount: 5,
         maxMoonCount: 2,
         maxVelocity: 0, // to move planets randomly, 0: disabled

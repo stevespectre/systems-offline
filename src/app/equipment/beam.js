@@ -1,10 +1,12 @@
 import EquipmentBase from './equipment-base';
 import config from '../config';
+import Profile from '../profile';
 
 export default class Beam extends EquipmentBase {
     init() {
+        this.profile = new Profile();
         this.duration = 10000;
-        this.radius = 100;
+        this.radius = config.equipments.beam.radius;
         this.color = 'green';
         this.x = this._getXWithoutPlanetCollision();
         this.y = 0;
@@ -16,7 +18,7 @@ export default class Beam extends EquipmentBase {
 
     activate() {
         this.active = true;
-        this.radius = 150;
+        this.radius = config.equipments.beam.effectRadius * this.profile.getProgressOfItem('beam');
         this.x = this.spaceShip.getX() + this.spaceShip.width / 2;
         this.y = this.spaceShip.getY() + this.spaceShip.height / 2;
 

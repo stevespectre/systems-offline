@@ -72,16 +72,12 @@ module.exports = {
         },
         beamRadius: 150
     },
-    beam: {
-        radius: 150,
-        color: 'green'
-    },
     equipments: {
-        /*beam: {
-            color: '#ffffff',
-            speed: 10,
-            radius: 50
-        },*/
+        beam: {
+            color: 'green',
+            radius: 100,
+            effectRadius: 50
+        },
         plasma: {
             frequency: 50,
             radius: 50,

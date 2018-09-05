@@ -14,6 +14,7 @@ import CollisionDetection from './collision-detection';
 import Records from './records';
 import config from './config';
 import Path from './path';
+import Music from './music';
 
 export default class Space extends Base {
     constructor(profile) {
@@ -55,6 +56,7 @@ export default class Space extends Base {
     }
 
     startGame() {
+        this.music = new Music().playMusic();
         this.interval = setInterval(this._render.bind(this), config.fps);
     }
 
@@ -91,6 +93,7 @@ export default class Space extends Base {
     }
 
     _render() {
+
         const speed = this.spaceShip.getSpeed();
 
         if (this.gameIsOver) {

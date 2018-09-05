@@ -14,7 +14,7 @@ import CollisionDetection from './collision-detection';
 import Records from './records';
 import config from './config';
 import Path from './path';
-import Music from './music';
+// import Music from './music';
 
 export default class Space extends Base {
     constructor(profile) {
@@ -23,7 +23,7 @@ export default class Space extends Base {
         this.planets = [];
         this.gameIsOver = false;
         this.traveledDistance = 0;
-        this.maxPlanets = 6;
+        this.maxPlanets = 7;
 
         this.canvas = document.getElementById('space-canvas');
         this.ctx = this.canvas.getContext('2d', { alpha: true });
@@ -56,7 +56,9 @@ export default class Space extends Base {
     }
 
     startGame() {
-        this.music = new Music().playMusic();
+         //this.music = new Music().playMusic();
+        //this.music = new Music().init();
+        // this.music.play();
         this.interval = setInterval(this._render.bind(this), config.fps);
     }
 

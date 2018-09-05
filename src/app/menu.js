@@ -34,29 +34,38 @@ export default class Menu {
             console.log('Progress has reseted!');
         });
 
-        this._loadProfileData();
+        this._updateDataInMenu();
         this._updateEquipment();
     }
 
-    _loadProfileData() {
+    _updateDataInMenu() {
         document.getElementById('money').innerHTML = this.profile.getProgressOfItem('money');
         document.getElementById('chance-lvl').innerHTML = this.profile.getProgressOfItem('chance');
+        document.getElementById('chance-price').innerHTML = parseInt(this.profile.getProgressOfItem('chance') *2);
         document.getElementById('beam-lvl').innerHTML = this.profile.getProgressOfItem('beam');
+        document.getElementById('beam-price').innerHTML = parseInt(this.profile.getProgressOfItem('beam') *2);
     }
 
     _updateEquipment() {
         document.querySelectorAll('.update-equipment').forEach(btn => {
             btn.addEventListener('click', () => {
-                if (this._isEnoughMoneyToUpdate()) {
-                    this.profile.updateItem(btn.dataset.update);
+                const price = btn.querySelector('.price').innerHTML;
+                console.log('price',price);
+                if (this._isEnoughMoneyToUpdate(price)) {
+                    this.profile.updateItem(btn.dataset.update, 1);
+                    this.profile.updateItem('money', -1 * parseInt(price));
+                    this._updateDataInMenu();
                 }
             });
         })
     }
 
-    _isEnoughMoneyToUpdate() {
-        if (this.profile.getProgressOfItem() >= 1) {
-
+    _isEnoughMoneyToUpdate(price) {
+        if (parseInt(this.profile.getProgressOfItem('money')) >= price) {
+            return true;
         }
+
+        return false;
     }
+
 }

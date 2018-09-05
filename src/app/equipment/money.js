@@ -10,17 +10,16 @@ export default class Money extends EquipmentBase {
     }
 
     activate() {
-        this.profile.updateItem('money');
+        return;
     }
 
     pickUp() {
         this.active = true;
+        const profile = new Profile();
+        profile.updateItem('money', 1);
     }
 
     doEffect() {
-        const profile = new Profile();
-        profile.updateItem('money');
-        
         this.removeable = true;
     }
 }

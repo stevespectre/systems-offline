@@ -17,9 +17,9 @@ export default class Profile {
         return this.progress[item]
     }
 
-    updateItem(item) {
+    updateItem(item, value = 1) {
         console.log('update',item);
-        this.progress[item]++;
+        this.progress[item] += value;
         this._saveToLocalStorage();
     }
 }

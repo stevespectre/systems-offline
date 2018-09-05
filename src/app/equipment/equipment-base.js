@@ -26,10 +26,11 @@ export default class EquipmentBase extends BaseObject {
         throw Error('[Equipment].pickedUp() method needs to be implemented in child class');
     }
 
+    // Runs in every frame
     doEffect() {
         throw Error('[Equipment].doEffect() method needs to be implemented in child class');
     }
-
+    // Runs when a connected button is pushed
     isActive() {
         return this.active;
     }

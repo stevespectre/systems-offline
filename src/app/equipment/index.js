@@ -2,6 +2,7 @@ import Base from '../base';
 import Plasma from './plasma';
 import Beam from './beam';
 import Money from './money';
+import Fuel from './fuel';
 
 export default class Equipment extends Base {
     constructor(ctx, planets = [], spaceShip, profile) {
@@ -12,6 +13,7 @@ export default class Equipment extends Base {
         this.profile = profile;
         this.possibleEquipments = [
             // Plasma,
+            Fuel,
             Money,
             Beam
         ];

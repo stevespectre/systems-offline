@@ -68,7 +68,8 @@ module.exports = {
         progress: {
             money: 0,
             chance: 1,
-            beam: 1
+            beam: 1,
+            fuel: 1
         },
         beamRadius: 150
     },
@@ -82,6 +83,12 @@ module.exports = {
             frequency: 50,
             radius: 50,
             color: '#ff0000',
+            x: 0,
+            y: 0
+        },
+        fuel: {
+            color: 'orange',
+            radius: 50,
             x: 0,
             y: 0
         }

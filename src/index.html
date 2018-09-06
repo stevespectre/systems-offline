@@ -16,6 +16,8 @@
     <li id="beam" class="out">0</li>
     <!--li id="plasma"><div><span id="plasma-num">0</span></div></li-->
   </ul>
+
+  <div id="fuel-line"><i id="fuel"></i></div>
 </div>
 
 <div id="ship">
@@ -50,13 +52,17 @@
     <p>Equipments:</p>
     <ul>
       <li>
-        <div>Chance of spawning powerups - level:
+        <div>Chance (of spawning powerups) - level:
           <i id="chance-lvl">1</i>
-          <button type="button" data-update="chance" class="update-equipment"><i>+</i> ( $<i id="chance-price" class="price chance-price">2</i>)</button>
+          <button type="button" data-update="chance" class="update-equipment"><i>+</i> ( $<i id="chance-price" class="price">2</i> )</button>
         </div>
         <div>Beam (radius) - level:
           <i id="beam-lvl">1</i>
-          <button type="button" data-update="beam" class="update-equipment"><i>+</i> ( $<i id="beam-price" class="price beam-price">2</i>)</button>
+          <button type="button" data-update="beam" class="update-equipment"><i>+</i> ( $<i id="beam-price" class="price">2</i> )</button>
+        </div>
+        <div>Fuel (tank size) - level:
+          <i id="fuel-lvl">1</i>
+          <button type="button" data-update="fuel" class="update-equipment"><i>+</i> ( $<i id="fuel-price" class="price">2</i> )</button>
         </div>
       </li>
       <li data-target="main-menu" class="nav">Back</li>

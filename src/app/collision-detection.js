@@ -35,7 +35,7 @@ class CollisionDetection {
 
             const realDistance = Math.sqrt( (distanceX * distanceX) + (distanceY * distanceY) );
 
-            if (realDistance <= (planet.gravityRadius + planetToPlace.gravityRadius + (planetToPlace.gravityRadius * 1.15))
+            if (realDistance <= (planet.gravityRadius + planetToPlace.gravityRadius + (planetToPlace.gravityRadius * 1.1))
                 && realDistance != 0) {
                 return true;
             }

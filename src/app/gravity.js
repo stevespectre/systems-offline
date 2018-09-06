@@ -46,6 +46,7 @@ export default class Gravity {
         this.equipments.forEach(e => this._doMove(e, direction));
     }
 
+    // TODO: this is not a real gravity function, need some refactor
     _doMove(object, direction) {
         const newX = object.getX() + (direction);
         object.setX(newX);

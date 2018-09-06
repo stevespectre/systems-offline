@@ -66,7 +66,7 @@ module.exports = {
     },
     profile: {
         progress: {
-            money: 0,
+            money: 10,
             chance: 1,
             beam: 1,
             fuel: 1

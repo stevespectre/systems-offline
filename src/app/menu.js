@@ -45,6 +45,8 @@ export default class Menu {
         this.updateLevelAndPrice('chance');
         this.updateLevelAndPrice('beam');
         this.updateLevelAndPrice('fuel');
+
+        this.space.spaceShip.setStartingFuelLevel();
     }
 
     updateLevelAndPrice(item) {
@@ -56,7 +58,6 @@ export default class Menu {
         document.querySelectorAll('.update-equipment').forEach(btn => {
             btn.addEventListener('click', () => {
                 const price = btn.querySelector('.price').innerHTML;
-                console.log('price',price);
                 if (this._isEnoughMoneyToUpdate(price)) {
                     this.profile.updateItem(btn.dataset.update, 1);
                     this.profile.updateItem('money', -1 * parseInt(price));

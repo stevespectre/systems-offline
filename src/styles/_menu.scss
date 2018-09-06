@@ -29,6 +29,10 @@
   }
 }
 
+#reset-progress {
+  color: red;
+}
+
 #menu-wrapper {
 
   position: absolute;
@@ -42,9 +46,23 @@
   transition: all .5s;
   ul {
 
-
     li {
       cursor: pointer;
+      font-weight: bold;
+
+      &.nav:hover {
+        color: #dedede;
+        text-decoration: underline;
+      }
+    }
+
+    &.menu {
+      li {
+        &:hover  {
+          color: #dedede;
+          text-decoration: underline;
+        }
+      }
     }
   }
 }

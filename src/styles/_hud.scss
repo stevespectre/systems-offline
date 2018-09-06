@@ -76,11 +76,8 @@
 }
 
 #plasma {
+  background: #ff3f3c;
   &.out {
     opacity: .3;
   }
-  div {
-    background: #ff3f3c;
-  }
-
 }

@@ -9,6 +9,7 @@ const LEFT_ARROW_KEY_CODE = 37;
 const RIGHT_ARROW_KEY_CODE = 39;
 
 const KEY_CODE_1 = 49;
+const KEY_CODE_2 = 50;
 
 export default class Controls {
     constructor(spaceShip, backgroundStars, space, equipment) {
@@ -53,6 +54,10 @@ export default class Controls {
             if(e.keyCode == KEY_CODE_1) {
                 this.equipment.activateEquipment('Beam');
             }
+
+            if(e.keyCode == KEY_CODE_2) {
+                this.equipment.activateEquipment('Plasma');
+            }
         });
 
         document.addEventListener('keyup', e => {
@@ -69,6 +74,10 @@ export default class Controls {
 
         document.getElementById('beam').addEventListener('click', () => {
             this.equipment.activateEquipment('Beam');
+        });
+
+        document.getElementById('plasma').addEventListener('click', () => {
+            this.equipment.activateEquipment('Plasma');
         });
     }
 }

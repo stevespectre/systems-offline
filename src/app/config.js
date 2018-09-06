@@ -69,7 +69,8 @@ module.exports = {
             money: 10,
             chance: 1,
             beam: 1,
-            fuel: 1
+            fuel: 1,
+            plasma: 1
         },
         beamRadius: 150
     },
@@ -80,11 +81,11 @@ module.exports = {
             effectRadius: 50
         },
         plasma: {
-            frequency: 50,
             radius: 50,
             color: '#ff0000',
             x: 0,
-            y: 0
+            y: 0,
+            speed: 21
         },
         fuel: {
             color: 'orange',

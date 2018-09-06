@@ -12,10 +12,10 @@ export default class Equipment extends Base {
         this.spaceShip = spaceShip;
         this.profile = profile;
         this.possibleEquipments = [
-            // Plasma,
-            Fuel,
-            Money,
-            Beam
+            //Fuel,
+            // Money,
+            //Beam,
+            Plasma
         ];
         this.equipments = [];
         this.collectedEquipments = [];

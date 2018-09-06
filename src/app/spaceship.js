@@ -130,7 +130,6 @@ export default class Spaceship extends Engine {
     }
 
     checkHasEnoughFuel() {
-        console.log('newFuelLevel',this.fuelLevel);
         if (this.getFuelLevel() > 0) {
             return true;
         }

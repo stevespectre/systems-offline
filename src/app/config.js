@@ -7,7 +7,7 @@ const difficulty = {
         decreaseSpeedVelocity: 10, // use (maxSpeed - minSpeed) for static speed
         gravitydecreaseSpeedVelocity: 0,
         turn: {
-            enabled: false,
+            enabled: true,
             duration: 1000,
             angle: 4
         }

@@ -8,6 +8,8 @@ const UP_ARROW_KEY_CODE = 38;
 const LEFT_ARROW_KEY_CODE = 37;
 const RIGHT_ARROW_KEY_CODE = 39;
 
+const KEY_CODE_1 = 49;
+
 export default class Controls {
     constructor(spaceShip, backgroundStars, space, equipment) {
         this.equipment = equipment;
@@ -33,15 +35,17 @@ export default class Controls {
             }
 
             if(e.keyCode == LEFT_ARROW_KEY_CODE && config.spaceship.turn.enabled) {
-                console.info('[turn] Left');
                 this.space.turn(config.spaceship.turn.angle);
                 this.spaceShip.turnLeft();
             }
 
             if(e.keyCode == RIGHT_ARROW_KEY_CODE && config.spaceship.turn.enabled) {
-                console.info('[turn] Right');
                 this.space.turn(config.spaceship.turn.angle * -1);
                 this.spaceShip.turnRight();
+            }
+
+            if(e.keyCode == KEY_CODE_1) {
+                this.equipment.activateEquipment('Beam');
             }
         });
 
@@ -56,12 +60,9 @@ export default class Controls {
     };
 
     _activateEquipments() {
+
         document.getElementById('beam').addEventListener('click', () => {
             this.equipment.activateEquipment('Beam');
         });
-
-        /*document.getElementById('plasma').addEventListener('click', ()=> {
-            this.equipment.activateEquipment('Plasma');
-        });*/
     }
 }

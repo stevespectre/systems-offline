@@ -11,8 +11,9 @@ export default class Menu {
         });
 
         document.getElementById('restart').addEventListener('click', ()=> {
-            document.body.classList.remove('gameover');
-            document.body.classList.add('game');
+            window.location.reload();
+            // document.body.classList.remove('gameover');
+            // document.body.classList.add('game');
             //this.space.init().startGame();
         });
 
@@ -40,10 +41,15 @@ export default class Menu {
 
     _updateDataInMenu() {
         document.getElementById('money').innerHTML = this.profile.getProgressOfItem('money');
-        document.getElementById('chance-lvl').innerHTML = this.profile.getProgressOfItem('chance');
-        document.getElementById('chance-price').innerHTML = parseInt(this.profile.getProgressOfItem('chance') *2);
-        document.getElementById('beam-lvl').innerHTML = this.profile.getProgressOfItem('beam');
-        document.getElementById('beam-price').innerHTML = parseInt(this.profile.getProgressOfItem('beam') *2);
+
+        this.updateLevelAndPrice('chance');
+        this.updateLevelAndPrice('beam');
+        this.updateLevelAndPrice('fuel');
+    }
+
+    updateLevelAndPrice(item) {
+        document.getElementById(`${ item }-lvl`).innerHTML = this.profile.getProgressOfItem(item);
+        document.getElementById(`${ item }-price`).innerHTML = parseInt(this.profile.getProgressOfItem(item) *2);
     }
 
     _updateEquipment() {

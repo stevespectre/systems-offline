@@ -35,12 +35,14 @@ export default class Controls {
             }
 
             if(e.keyCode == LEFT_ARROW_KEY_CODE && config.spaceship.turn.enabled) {
-                this.space.turn(config.spaceship.turn.angle);
+                // this.space.turn(config.spaceship.turn.angle);
+                this.space.pushShip(1);
                 this.spaceShip.turnLeft();
             }
 
             if(e.keyCode == RIGHT_ARROW_KEY_CODE && config.spaceship.turn.enabled) {
-                this.space.turn(config.spaceship.turn.angle * -1);
+                // this.space.turn(config.spaceship.turn.angle * -1);
+                this.space.pushShip(-1);
                 this.spaceShip.turnRight();
             }
 

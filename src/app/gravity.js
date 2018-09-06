@@ -41,6 +41,16 @@ export default class Gravity {
         this.equipments.forEach(e => this._doTransform(e, angle));
     }
 
+    moveObjects(direction) {
+        this.planets.forEach(p => this._doMove(p, direction));
+        this.equipments.forEach(e => this._doMove(e, direction));
+    }
+
+    _doMove(object, direction) {
+        const newX = object.getX() + (direction);
+        object.setX(newX);
+    }
+
     _doTransform(object, angle) {
         const newX = ((object.getX() - this.shipFrontX) * Math.cos(angle) - (object.getY() - this.shipFrontY) * Math.sin(angle)) + this.shipFrontX;
         const newY = ((object.getX() - this.shipFrontX) * Math.sin(angle) + (object.getY() - this.shipFrontY) * Math.cos(angle)) + this.shipFrontY;

@@ -61,7 +61,7 @@ export default class Space extends Base {
         this.interval = setInterval(this._render.bind(this), config.fps);
     }
 
-    turn(angle) {
+    pushShip(direction) {
         const start = Date.now();
 
         // cancel previous turn
@@ -69,7 +69,7 @@ export default class Space extends Base {
             clearInterval(this.animationInterval);
             this.spaceShip.turnEnd();
         }
-        
+
         this.animationInterval = setInterval(() => {
             const now = Date.now();
             if (now - start >= config.spaceship.turn.duration) {
@@ -77,10 +77,7 @@ export default class Space extends Base {
                 this.spaceShip.turnEnd();
             }
 
-            const p = (now - start) / config.spaceship.turn.duration;
-            const rotationAngle = angle * this._easingOutCube(p);
-
-            this.gravity.rotateObjects(rotationAngle / 1000);
+            this.gravity.moveObjects(direction);
         }, config.fps);
     }
 

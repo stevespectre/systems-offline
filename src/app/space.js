@@ -158,9 +158,5 @@ export default class Space extends Base {
         }
 
         document.getElementById('record').innerHTML = this.record.getRecord();
-
-        setTimeout(() => {
-            location.reload();
-        }, 20000);
     }
 }

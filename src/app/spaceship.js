@@ -1,4 +1,5 @@
 import config from './config';
+import Profile from './profile';
 import Particle from './particle';
 import BaseObject from './base-object';
 
@@ -54,6 +55,9 @@ export default class Spaceship extends Engine {
         this.burstOn = false;
         this.leftEngineOn = false;
         this.rightEngineOn = false;
+        this.profile = new Profile();
+        this.fuelLevel = 10;
+        this.setStartingFuelLevel();
     }
 
     getSpeed() {
@@ -89,10 +93,12 @@ export default class Spaceship extends Engine {
 
     turnLeft() {
         this.rightEngineOn = true;
+        this.setFuelLevel(this.fuelLevel - 1);
     }
 
     turnRight() {
         this.leftEngineOn = true;
+        this.setFuelLevel(this.fuelLevel - 1);
     }
 
     turnEnd() {
@@ -106,5 +112,29 @@ export default class Spaceship extends Engine {
         if (!this.isOnBurstSpeed()) {
             this.decreaseSpeed(config.spaceship.decreaseSpeedVelocity);
         }
+    }
+
+    getFuelLevel() {
+        return this.fuelLevel;
+    }
+
+    setStartingFuelLevel() {
+        const newFuelLevel = this.profile.getProgressOfItem('fuel') * 10;
+
+        this.setFuelLevel(newFuelLevel);
+    }
+
+    setFuelLevel(fuelLevel) {
+        this.fuelLevel = fuelLevel;
+        document.getElementById('fuel').style.width = `${ fuelLevel }%`;
+    }
+
+    checkHasEnoughFuel() {
+        console.log('newFuelLevel',this.fuelLevel);
+        if (this.getFuelLevel() > 0) {
+            return true;
+        }
+
+        return false;
     }
 }

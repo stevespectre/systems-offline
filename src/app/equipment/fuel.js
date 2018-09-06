@@ -17,8 +17,8 @@ export default class Fuel extends EquipmentBase {
 
     pickUp() {
         this.active = true;
-        console.log('1',this.profile.getProgressOfItem('fuel'));
-        document.getElementById('fuel').style.width = `${ this.profile.getProgressOfItem('fuel') * 30}%`;
+        const newFuelLevel = this.profile.getProgressOfItem('fuel') * 10;
+        this.spaceShip.setFuelLevel(newFuelLevel);
     }
 
     doEffect() {

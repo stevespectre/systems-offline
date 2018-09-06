@@ -72,7 +72,7 @@ module.exports = {
             fuel: 1,
             plasma: 1
         },
-        beamRadius: 150
+        beamRadius: 1502
     },
     equipments: {
         beam: {

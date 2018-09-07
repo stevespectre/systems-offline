@@ -3,6 +3,7 @@ import Profile from '../profile';
 
 export default class Fuel extends EquipmentBase {
     init() {
+        this.name = 'fuel';
         this.profile = new Profile();
         this.radius = 100;
         this.color = 'orange';

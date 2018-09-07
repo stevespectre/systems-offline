@@ -3,6 +3,7 @@ import Profile from '../profile';
 
 export default class Money extends EquipmentBase {
     init() {
+        this.name = 'money';
         this.radius = 100;
         this.color = 'yellow';
         this.x = this._getXWithoutPlanetCollision();

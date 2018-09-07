@@ -4,6 +4,7 @@ import Profile from '../profile';
 
 export default class Beam extends EquipmentBase {
     init() {
+        this.name = 'beam';
         this.profile = new Profile();
         this.duration = 10000;
         this.radius = config.equipments.beam.radius;
@@ -13,7 +14,8 @@ export default class Beam extends EquipmentBase {
     }
 
     pickUp() {
-        this.updateButtonText(1);
+        console.log('pick beam');
+        this.updateButtonText(1, 'beam');
     }
 
     activate() {
@@ -22,7 +24,7 @@ export default class Beam extends EquipmentBase {
         this.x = this.spaceShip.getX() + this.spaceShip.width / 2;
         this.y = this.spaceShip.getY() + this.spaceShip.height / 2;
 
-        this.updateButtonText(-1);
+        this.updateButtonText(-1, 'beam');
 
         // setTimeout(() => {
         //     this.removeable = true;

@@ -28,10 +28,13 @@ export default class Equipment extends Base {
     activateEquipment(type) {
         for(let i in this.collectedEquipments) {
             const e = this.collectedEquipments[i];
+            console.log('e',e.name);
+            console.log('t',type);
 
-            if (e.constructor.name === type && !e.isActive()) {
+            if (e.name === type && !e.isActive()) {
+                console.log('activate');
+            //if (e.constructor.toString().match(/^function\s(.+)\(/)[1] === type && !e.isActive()) {
                 e.activate();
-                // this.collectedEquipments.splice(i, 1);
                 break;
             }
         }

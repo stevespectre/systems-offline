@@ -59,9 +59,10 @@ export default class EquipmentBase extends BaseObject {
     }
 
     // todo refactor!
-    updateButtonText(val = 1) {
-        const equipmentName = this.constructor.name;
-        const domElement = document.getElementById(`${ equipmentName.toLowerCase() }`);
+    updateButtonText(val = 1, selector) {
+        /*let equipmentName = this.constructor.name;
+        equipmentName = equipmentName.toLowerCase();*/
+        const domElement = document.getElementById(selector);
         if (!domElement) return;
         const newVal = parseInt(domElement.innerHTML) + val;
         domElement.innerHTML = newVal;

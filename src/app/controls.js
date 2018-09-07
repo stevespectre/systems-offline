@@ -52,11 +52,13 @@ export default class Controls {
             }
 
             if(e.keyCode == KEY_CODE_1) {
-                this.equipment.activateEquipment('Beam');
+                console.log('0',0);
+                this.equipment.activateEquipment('beam');
             }
 
             if(e.keyCode == KEY_CODE_2) {
-                this.equipment.activateEquipment('Plasma');
+                console.log('0',1);
+                this.equipment.activateEquipment('plasma');
             }
         });
 

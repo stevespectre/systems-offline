@@ -4,6 +4,7 @@ import Profile from '../profile';
 
 export default class Plasma extends EquipmentBase {
     init() {
+        this.name = 'plasma';
         this.profile = new Profile();
         this.radius = 100;
         this.color = '#ff0000';
@@ -14,7 +15,8 @@ export default class Plasma extends EquipmentBase {
     }
 
     pickUp() {
-        this.updateButtonText(1);
+        console.log('pick plasma');
+        this.updateButtonText(1, 'plasma');
     }
 
     activate() {
@@ -24,7 +26,7 @@ export default class Plasma extends EquipmentBase {
         this.x = this.spaceShip.getX() + this.plasmaWidth/2;
         this.y = this.spaceShip.getY() - this.plasmaHeight;
 
-        this.updateButtonText(-1);
+        this.updateButtonText(-1, 'plasma');
     }
 
     doEffect() {

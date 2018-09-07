@@ -2,9 +2,26 @@ export default class Menu {
     constructor(space, profile) {
         this.space = space;
         this.profile = profile;
+        this.intro = this._isIntroSeen();
+    }
+
+    _isIntroSeen() {
+        if (this.profile.getProgressOfItem('intro')) {
+            return false;
+        }
+
+        return true;
     }
 
     init() {
+        console.log('this.intro',this.intro);
+        if (this.intro) {
+            document.getElementById('legend').classList.add('active');
+            this.profile.updateItem('intro', 1);
+        } else {
+            document.getElementById('main-menu').classList.add('active');
+        }
+
         document.getElementById('start').addEventListener('click', ()=> {
             this.space.startGame();
             document.body.classList.add('game')

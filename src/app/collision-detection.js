@@ -1,4 +1,7 @@
 class CollisionDetection {
+    constructor() {
+        this.planets = [];
+    }
 
     checkObjectCollision(objects, spaceShip) {
         for (let i = 0; i < objects.length; i++) {
@@ -27,6 +30,7 @@ class CollisionDetection {
     }
 
     checkCirclesCollision(planets, planetToPlace) {
+        this.planets = planets;
         for (let i = 0; i < planets.length; i++) {
             const planet = planets[i];
 
@@ -41,6 +45,17 @@ class CollisionDetection {
             }
         }
         return false;
+    }
+
+    checkPlasmaCollision(plasma) {
+        console.log('c');
+        for (let i = 0; i < this.planets.length; i++) {
+            const planet = this.planets[i];
+            if (this.checkCollision(planet, plasma)) {
+                console.log('DESTROOOY');
+            }
+        }
+
     }
 
     checkCollision(object, anotherObject) {

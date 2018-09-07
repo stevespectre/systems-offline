@@ -55,7 +55,7 @@ export default class Space extends Base {
     }
 
     startGame() {
-         //this.music = new Music().playMusic();
+        //this.music = new Music().playMusic();
         //this.music = new Music().init();
         // this.music.play();
         this.interval = setInterval(this._render.bind(this), config.fps);
@@ -71,7 +71,19 @@ export default class Space extends Base {
         return this;
     }
 
-    pushShip(direction) {
+    turnLeft() {
+        if(!this.spaceShip.isAllowedToTurn()) return;
+        this._turn(1);
+        this.spaceShip.turnLeft();
+    }
+
+    turnRight() {
+        if(!this.spaceShip.isAllowedToTurn()) return;
+        this._turn(-1);
+        this.spaceShip.turnRight();
+    }
+
+    _turn(direction) {
         const start = Date.now();
 
         // cancel previous turn
@@ -89,10 +101,6 @@ export default class Space extends Base {
 
             this.gravity.moveObjects(direction);
         }, config.fps);
-    }
-
-    _easingOutCube(n){
-        return --n * n * n + 1;
     }
 
     _setSpaceDimensions() {

@@ -114,6 +114,13 @@ export default class Spaceship extends Engine {
         }
     }
 
+    isAllowedToTurn() {
+        if(!config.spaceship.turn.enabled) return false;
+        if(!this.hasEnoughFuel()) return false;
+
+        return true;
+    }
+
     getFuelLevel() {
         return this.fuelLevel;
     }
@@ -129,11 +136,7 @@ export default class Spaceship extends Engine {
         document.getElementById('fuel').style.width = `${ fuelLevel }%`;
     }
 
-    checkHasEnoughFuel() {
-        if (this.getFuelLevel() > 0) {
-            return true;
-        }
-
-        return false;
+    hasEnoughFuel() {
+        return this.getFuelLevel() > 0;
     }
 }

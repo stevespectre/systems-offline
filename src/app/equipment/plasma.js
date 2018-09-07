@@ -35,7 +35,11 @@ export default class Plasma extends EquipmentBase {
         this.y = this.y - config.equipments.plasma.speed;
         this._renderPlasma();
 
-        if (this.getY <= 0 || this.collisionDetection.checkPlasmaCollision(this)) {
+        this.radius = 0;
+
+        if (this.getY() <= 0 || this.collisionDetection.checkPlasmaCollision(this)) {
+            console.log('this.getY',this.getY());
+            alert('remove');
             this.removeable = true;
             this.active = false;
             return;

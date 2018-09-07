@@ -1,0 +1,20 @@
+image: node:10
+
+stages:
+- build
+- deploy
+
+variables:
+  DEPLOY_SERVER: http://deploy.zerophp.org/systems-offline
+
+build:
+  stage: build
+  script:
+    - npm install && npm run build
+    
+deploy:
+  stage: deploy
+  before_script:
+    - echo "deploying..."
+  script:
+    - curl $DEPLOY_SERVER

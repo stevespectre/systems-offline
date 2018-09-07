@@ -47,6 +47,14 @@ export default class Controls {
             }
         });
 
+        document.addEventListener('touchstart', e => {
+            this.spaceShip.speedBurst();
+        });
+
+        document.addEventListener('touchend', e => {
+            this.spaceShip.speedStandard();
+        });
+
         this._activateEquipments();
     };
     
@@ -62,12 +70,14 @@ export default class Controls {
     }
 
     _activateEquipments() {
-        document.getElementById('beam').addEventListener('click', () => {
-            this.equipment.activateEquipment('beam');
-        });
+        ['beam', 'plasma'].forEach(equipmentName => {
+            const element = document.getElementById(equipmentName);
 
-        document.getElementById('plasma').addEventListener('click', () => {
-            this.equipment.activateEquipment('plasma');
+            ['click', 'touchstart'].forEach(eventName => {
+                element.addEventListener(eventName, () => {
+                    this.equipment.activateEquipment(equipmentName);
+                });
+            });
         });
     }
 }

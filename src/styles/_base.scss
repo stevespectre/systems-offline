@@ -1,6 +1,7 @@
 html {
   position: relative;
   height: 100%;
+  overflow: hidden;
   font-family: Helvetica, Arial, sans-serif;
 }
 body {
@@ -8,6 +9,7 @@ body {
   overflow: hidden;
   position: relative;
   height: 100%;
+  width: 100%;
 
   &.game {
     #hud,#score {

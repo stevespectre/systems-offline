@@ -38,6 +38,21 @@ export default class Planet extends BaseObject {
         return realDistance <= this.gravityRadius && realDistance > this.radius;
     }
 
+    newParametersAfterDestroyed(planet) {
+        planet.color = this._getRandomColor();
+        planet.gravityRadius = this._getRandomPlanetOuterRadius();
+        planet.radius = this._getPlanetRadius();
+        planet.x = this._getRandomX();
+        planet.y = Math.floor(Math.random() * (this.windowHeight/3)*2) - this.windowHeight/6;
+        planet.vx = Math.floor(Math.random() * config.planet.maxVelocity);
+        planet.vy = Math.floor(Math.random() * config.planet.maxVelocity);
+        planet._checkCollision();
+        planet.craters = new Craters(this.ctx, this);
+        planet._generateRandomMoons();
+
+        return planet;
+    }
+
     _generateRandomParameters() {
         this.color = this._getRandomColor();
         this.gravityRadius = this._getRandomPlanetOuterRadius();
@@ -54,7 +69,7 @@ export default class Planet extends BaseObject {
     _generateRandomMoons() {
         this.moons = [];
         for(let i = 0; i < this.random(0, config.planet.maxMoonCount); i++) {
-            const moon = new Moon(this.ctx, this)
+            const moon = new Moon(this.ctx, this);
             this.moons.push(moon);
         }
     }

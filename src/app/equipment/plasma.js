@@ -24,10 +24,6 @@ export default class Plasma extends EquipmentBase {
         this.x = this.spaceShip.getX() + this.plasmaWidth/2;
         this.y = this.spaceShip.getY() - this.plasmaHeight;
 
-        /*this.radius = config.equipments.beam.effectRadius * this.profile.getProgressOfItem('plasma');
-        this.x = this.spaceShip.getX() + this.spaceShip.width / 2;
-        this.y = this.spaceShip.getY() + this.spaceShip.height / 2;*/
-
         this.updateButtonText(-1);
     }
 
@@ -39,20 +35,10 @@ export default class Plasma extends EquipmentBase {
 
         if (this.getY() <= 0 || this.collisionDetection.checkPlasmaCollision(this)) {
             console.log('this.getY',this.getY());
-            alert('remove');
             this.removeable = true;
             this.active = false;
             return;
         }
-
-        // console.log('plasma activated');
-
-        /*for (let e of this.equipments) {
-            if (this.collisionDetection.checkPlasmaCollision(e, this)) {
-                console.log('[equipment] inside radius');
-                e.pickedUp = true;
-            }
-        }*/
     }
 
     _renderPlasma() {

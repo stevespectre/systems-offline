@@ -48,9 +48,14 @@ class CollisionDetection {
     }
 
     checkPlasmaCollision(plasma) {
+        console.log('this.planets.length',this.planets.length);
         for (let i = 0; i < this.planets.length; i++) {
             const planet = this.planets[i];
+
             if (this.checkCollision(planet, plasma)) {
+                planet._generateRandomParameters();
+                planet.y = 0 - Math.floor(Math.random() * (planet.gravityRadius * 2));
+                planet._checkCollision();
                 return true;
             }
         }

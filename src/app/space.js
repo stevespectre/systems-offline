@@ -110,7 +110,7 @@ export default class Space extends Base {
         this.path.render();
 
         if (this.collisionDetection.checkObjectCollision(this.planets, this.spaceShip)) {
-            this.gameIsOver = true;
+            //this.gameIsOver = true;
         }
     }
 

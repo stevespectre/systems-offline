@@ -14,7 +14,6 @@ export default class Menu {
     }
 
     init() {
-        console.log('this.intro',this.intro);
         if (this.intro) {
             document.getElementById('legend').classList.add('active');
             this.profile.updateItem('intro', 1);

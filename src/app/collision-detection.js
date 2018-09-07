@@ -48,7 +48,6 @@ class CollisionDetection {
     }
 
     checkPlasmaCollision(plasma) {
-        console.log('this.planets.length',this.planets.length);
         for (let i = 0; i < this.planets.length; i++) {
             const planet = this.planets[i];
 

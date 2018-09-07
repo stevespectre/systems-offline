@@ -49,6 +49,7 @@ export default class Menu {
             localStorage.removeItem('offlineMoney');
             localStorage.removeItem('offlineRecord');
             console.log('Progress has reseted!');
+            window.location.reload();
         });
 
         this._updateDataInMenu();

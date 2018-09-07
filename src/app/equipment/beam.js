@@ -35,6 +35,7 @@ export default class Beam extends EquipmentBase {
 
         if (this.radius <= 0) {
             this.removeable = true;
+            this.active = false;
             return;
         }
 

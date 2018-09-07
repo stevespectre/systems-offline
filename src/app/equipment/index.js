@@ -94,6 +94,7 @@ export default class Equipment extends Base {
             this.collectedEquipments[i].doEffect();
 
             if (equipment.isRemoveable()) {
+                alert('remove');
                 this.collectedEquipments.splice(i, 1);
             }
         }

@@ -48,14 +48,12 @@ class CollisionDetection {
     }
 
     checkPlasmaCollision(plasma) {
-        console.log('c');
         for (let i = 0; i < this.planets.length; i++) {
             const planet = this.planets[i];
             if (this.checkCollision(planet, plasma)) {
-                console.log('DESTROOOY');
+                return true;
             }
         }
-
     }
 
     checkCollision(object, anotherObject) {

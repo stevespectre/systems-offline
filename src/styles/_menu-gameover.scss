@@ -32,7 +32,7 @@
   background: rgba(0,0,0,.75);
   z-index: 1090;
   font-size: 18px;
-  transition: all 1s 3s;
+  transition: all 1s 1s;
 
   section {
     position: absolute;
@@ -60,7 +60,7 @@
   color: #fff;
   left: 0;
   text-align: center;
-  transform: translateY(150vh);
-  transition: all 6s;
+  transform: translateY(-150vh);
+  transition: all 2s;
   z-index: 1100;
 }

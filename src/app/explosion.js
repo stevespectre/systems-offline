@@ -23,6 +23,13 @@ export default class Explosion extends Base {
         this.interval = setInterval(this._renderParticles.bind(this), 30);
     }
 
+    reset() {
+        if (this.interval) {
+            clearInterval(this.interval);
+            this._clearCanvas();
+        }
+    }
+
     _renderParticles(){
         this._clearCanvas();
         let i;

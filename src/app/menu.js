@@ -1,16 +1,11 @@
+import Profile from './profile'
+import Space from './space';
+
 export default class Menu {
-    constructor(space, profile) {
-        this.space = space;
-        this.profile = profile;
+    constructor() {
+        this.space = new Space().init();
+        this.profile = new Profile();
         this.intro = this._isIntroSeen();
-    }
-
-    _isIntroSeen() {
-        if (this.profile.getProgressOfItem('intro')) {
-            return false;
-        }
-
-        return true;
     }
 
     init() {
@@ -27,10 +22,11 @@ export default class Menu {
         });
 
         document.getElementById('restart').addEventListener('click', ()=> {
-            window.location.reload();
-            // document.body.classList.remove('gameover');
-            // document.body.classList.add('game');
-            //this.space.init().startGame();
+            // window.location.reload();
+            document.body.classList.remove('gameover');
+            document.body.classList.add('game');
+            this.space.resetGame();
+            this.space = new Space().init().startGame();
         });
 
         document.querySelectorAll('.nav').forEach(menu => {
@@ -54,6 +50,10 @@ export default class Menu {
 
         this._updateDataInMenu();
         this._updateEquipment();
+    }
+
+    _isIntroSeen() {
+        return !this.profile.getProgressOfItem('intro');
     }
 
     _updateDataInMenu() {

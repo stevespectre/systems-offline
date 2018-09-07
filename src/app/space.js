@@ -17,7 +17,7 @@ import Path from './path';
 // import Music from './music';
 
 export default class Space extends Base {
-    constructor(profile) {
+    constructor() {
         super();
 
         this.planets = [];
@@ -29,9 +29,9 @@ export default class Space extends Base {
         this.ctx = this.canvas.getContext('2d', { alpha: true });
 
         this.score = new Score();
-        this.profile = profile;
+        this.profile = new Profile();
         this.spaceShip = new Spaceship(this.ctx);
-        this.equipment = new Equipment(this.ctx, this.planets, this.spaceShip, profile);
+        this.equipment = new Equipment(this.ctx, this.planets, this.spaceShip, this.profile);
         this.controls = new Controls(this.spaceShip, this.backgroundStars, this, this.equipment);
         this.backgroundStars = new BackgroundStars();
         this.gravity = new Gravity(this.spaceShip, this.planets, this.equipment.get());
@@ -59,6 +59,15 @@ export default class Space extends Base {
         //this.music = new Music().init();
         // this.music.play();
         this.interval = setInterval(this._render.bind(this), config.fps);
+        return this;
+    }
+
+    resetGame() {
+        if (this.interval) clearInterval(this.interval);
+        if (this.animationInterval) clearInterval(this.animationInterval);
+
+        this.explosion.reset();
+        return this;
     }
 
     pushShip(direction) {
@@ -91,7 +100,6 @@ export default class Space extends Base {
     }
 
     _render() {
-
         const speed = this.spaceShip.getSpeed();
 
         if (this.gameIsOver) {

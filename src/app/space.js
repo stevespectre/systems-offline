@@ -67,6 +67,7 @@ export default class Space extends Base {
         if (this.animationInterval) clearInterval(this.animationInterval);
 
         this.explosion.reset();
+        this.controls.reset();
         return this;
     }
 

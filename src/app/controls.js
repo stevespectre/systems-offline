@@ -1,9 +1,6 @@
 import config from './config';
 
-import Equipment from './equipment/index';
-
 const SPACE_KEY_CODE = 32;
-
 const UP_ARROW_KEY_CODE = 38;
 const LEFT_ARROW_KEY_CODE = 37;
 const RIGHT_ARROW_KEY_CODE = 39;
@@ -71,15 +68,25 @@ export default class Controls {
 
         this._activateEquipments();
     };
+    
+    reset() {
+        this._resetEquipmentButton('beam');
+        this._resetEquipmentButton('plasma');
+    }
+
+    _resetEquipmentButton(selector) {
+        const domElement = document.getElementById(selector);
+        domElement.classList.add('out');
+        domElement.innerHTML = 0;
+    }
 
     _activateEquipments() {
-
         document.getElementById('beam').addEventListener('click', () => {
-            this.equipment.activateEquipment('Beam');
+            this.equipment.activateEquipment('beam');
         });
 
         document.getElementById('plasma').addEventListener('click', () => {
-            this.equipment.activateEquipment('Plasma');
+            this.equipment.activateEquipment('plasma');
         });
     }
 }

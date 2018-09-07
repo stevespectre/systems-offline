@@ -31,7 +31,7 @@ export default class Equipment extends Base {
 
             if (e.constructor.name === type) {
                 e.activate();
-                this.collectedEquipments.splice(i, 1);
+                // this.collectedEquipments.splice(i, 1);
                 break;
             }
         }

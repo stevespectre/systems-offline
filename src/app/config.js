@@ -58,7 +58,7 @@ module.exports = {
     planet: {
         gridFillRate: 0.56,
         maxInARow: 3,
-        gravityRate: 0.50,
+        gravityRate: 0.49,
         maxCraterCount: 5,
         maxMoonCount: 2,
         maxVelocity: 0, // to move planets randomly, 0: disabled

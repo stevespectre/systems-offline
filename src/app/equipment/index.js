@@ -12,9 +12,9 @@ export default class Equipment extends Base {
         this.spaceShip = spaceShip;
         this.profile = profile;
         this.possibleEquipments = [
-            //Fuel,
-            // Money,
-            //Beam,
+            Fuel,
+            Money,
+            Beam,
             Plasma
         ];
         this.equipments = [];
@@ -26,9 +26,12 @@ export default class Equipment extends Base {
     }
 
     activateEquipment(type) {
-        for(let e of this.collectedEquipments) {
+        for(let i in this.collectedEquipments) {
+            const e = this.collectedEquipments[i];
+
             if (e.constructor.name === type) {
                 e.activate();
+                this.collectedEquipments.splice(i, 1);
                 break;
             }
         }

@@ -36,7 +36,7 @@ export default class Plasma extends EquipmentBase {
         this._renderPlasma();
 
 
-        console.log('plasma activated');
+        // console.log('plasma activated');
 
         /*for (let e of this.equipments) {
             if (this.collisionDetection.checkCollision(e, this)) {
@@ -47,7 +47,6 @@ export default class Plasma extends EquipmentBase {
     }
 
     _renderPlasma() {
-        console.log('this.spaceShip.getX()',this.spaceShip.getX());
         this.ctx.beginPath();
         this.ctx.rect(this.x, this.y, this.plasmaWidth, this.plasmaHeight);
         this.ctx.fillStyle = 'rgba(255,0,0,.5)';

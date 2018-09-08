@@ -78,11 +78,11 @@ module.exports = {
     equipments: {
         beam: {
             color: 'green',
-            radius: 100,
+            radius: 30,
             effectRadius: 50
         },
         plasma: {
-            radius: 50,
+            radius: 30,
             color: '#ff0000',
             x: 0,
             y: 0,
@@ -90,7 +90,7 @@ module.exports = {
         },
         fuel: {
             color: 'orange',
-            radius: 50,
+            radius: 30,
             x: 0,
             y: 0
         }

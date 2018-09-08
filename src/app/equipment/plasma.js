@@ -6,7 +6,7 @@ export default class Plasma extends EquipmentBase {
     init() {
         this.name = 'plasma';
         this.profile = new Profile();
-        this.radius = 100;
+        this.radius = 30;
         this.color = '#ff0000';
         this.x = this._getXWithoutPlanetCollision();
         this.y = 0;

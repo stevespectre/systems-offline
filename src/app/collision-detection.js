@@ -51,13 +51,19 @@ class CollisionDetection {
         for (let i = 0; i < this.planets.length; i++) {
             const planet = this.planets[i];
 
-            if (this.checkCollision(planet, plasma)) {
+            console.log(' this.strengthEnoughToDestroy(planet, plasma)', this.strengthEnoughToDestroy(planet, plasma));
+            if (this.checkCollision(planet, plasma) && this.strengthEnoughToDestroy(planet, plasma)) {
                 planet._generateRandomParameters();
                 planet.y = 0 - Math.floor(Math.random() * (planet.gravityRadius * 2));
                 planet._checkCollision();
                 return true;
             }
         }
+    }
+
+    strengthEnoughToDestroy(planet, plasma) {
+        const power = planet.minRadius + ((planet.maxRadius - planet.minRadius) / 10) * plasma.level;
+        return planet.radius < power;
     }
 
     checkCollision(object, anotherObject) {

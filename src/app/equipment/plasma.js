@@ -12,6 +12,12 @@ export default class Plasma extends EquipmentBase {
         this.y = 0;
         this.plasmaWidth = 8;
         this.plasmaHeight = 24;
+        this.level = this.profile.getProgressOfItem('plasma');
+    }
+
+    calcStrength() {
+        console.log('config',config);
+        return ((config.planet.maxRadius - config.planet.minRadius) / 10) * this.profile.getProgressOfItem('plasma');
     }
 
     pickUp() {

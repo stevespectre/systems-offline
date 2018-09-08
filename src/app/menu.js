@@ -62,6 +62,7 @@ export default class Menu {
         this.updateLevelAndPrice('chance');
         this.updateLevelAndPrice('beam');
         this.updateLevelAndPrice('fuel');
+        this.updateLevelAndPrice('plasma');
 
         this.space.spaceShip.setStartingFuelLevel();
     }
@@ -85,11 +86,7 @@ export default class Menu {
     }
 
     _isEnoughMoneyToUpdate(price) {
-        if (parseInt(this.profile.getProgressOfItem('money')) >= price) {
-            return true;
-        }
-
-        return false;
+        return parseInt(this.profile.getProgressOfItem('money')) >= price;
     }
 
 }

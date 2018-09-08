@@ -25,10 +25,6 @@ export default class Beam extends EquipmentBase {
         this.y = this.spaceShip.getY() + this.spaceShip.height / 2;
 
         this.updateButtonText(-1, 'beam');
-
-        // setTimeout(() => {
-        //     this.removeable = true;
-        // }, this.duration);
     }
 
     doEffect() {
@@ -45,7 +41,6 @@ export default class Beam extends EquipmentBase {
 
         for (let e of this.equipments) {
             if (this.collisionDetection.checkCollision(e, this)) {
-                console.log('[equipment] inside radius');
                 e.pickedUp = true;
             }
         }

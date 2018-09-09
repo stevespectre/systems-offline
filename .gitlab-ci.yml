@@ -4,9 +4,6 @@ stages:
 - build
 - deploy
 
-variables:
-  DEPLOY_SERVER: http://deploy.zerophp.org/systems-offline
-
 build:
   stage: build
   script:
@@ -17,4 +14,4 @@ deploy:
   before_script:
     - echo "deploying..."
   script:
-    - curl $DEPLOY_SERVER
+    - curl http://deploy.zerophp.org/systems-offline/$CI_COMMIT_SHA

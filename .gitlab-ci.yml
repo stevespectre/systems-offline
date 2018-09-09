@@ -14,4 +14,4 @@ deploy:
   before_script:
     - echo "deploying..."
   script:
-    - curl http://deploy.zerophp.org/systems-offline/$CI_COMMIT_SHA
+    - curl $DEPLOY_URL/systems-offline/$CI_COMMIT_SHA

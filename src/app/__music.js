@@ -65,9 +65,9 @@ export default class Music {
         this.sequence4.smoothing = 0.4;
 
 // adjust the levels so the this.bass and harmony aren't too loud
-        this.sequence1.gain.gain.value = 1.0 / 2;
-        this.sequence3.gain.gain.value = 0.65 / 2;
-        this.sequence4.gain.gain.value = 0.65 / 2;
+        this.sequence1.gain.gain.value = 1.0 / 12;
+        this.sequence3.gain.gain.value = 0.65 / 12;
+        this.sequence4.gain.gain.value = 0.65 / 12;
 
 // apply EQ settings
         this.sequence1.mid.frequency.value = 800;

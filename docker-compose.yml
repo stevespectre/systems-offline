@@ -1,8 +1,8 @@
-version: '2'
+version: '3'
 services:
   node:
     image: node:latest
     working_dir: /home/node
     volumes:
       - ./:/home/node
-    command: bash -c "[ -d 'node_modules' ] || npm i -ddd && npm update && npm run build"
+    command: make build

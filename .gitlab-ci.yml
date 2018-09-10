@@ -7,7 +7,7 @@ stages:
 build:
   stage: build
   script:
-    - npm install && npm rebuild node-sass && npm run build
+    - make build
     
 deploy:
   stage: deploy

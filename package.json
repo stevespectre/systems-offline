@@ -1,7 +1,7 @@
 {
   "name": "systems-offline",
   "private": true,
-  "author": "Istvan Erdos (istvan.erdos86@gmail.com), Adam Pinter ()",
+  "author": "Istvan Erdos (istvan.erdos86@gmail.com), Adam Pinter (adam.pinter@me.com)",
   "license": "ISC",
   "scripts": {
     "start": "webpack-dev-server --mode development",

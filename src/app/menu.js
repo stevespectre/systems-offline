@@ -29,6 +29,10 @@ export default class Menu {
             this.space = new Space().init().startGame();
         });
 
+        document.getElementById('back-to-menu').addEventListener('click', ()=> {
+            window.location.reload();
+        });
+
         document.querySelectorAll('.nav').forEach(menu => {
            menu.addEventListener('click', () => {
                const target = menu.dataset.target;

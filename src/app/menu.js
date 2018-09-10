@@ -39,12 +39,10 @@ export default class Menu {
         });
 
         document.getElementById('reset-progress').addEventListener('click', ()=> {
-            localStorage.removeItem('collectedEquipments');
             localStorage.removeItem('offlineChance');
             localStorage.removeItem('offlineProfileData');
             localStorage.removeItem('offlineMoney');
             localStorage.removeItem('offlineRecord');
-            console.log('Progress has reseted!');
             window.location.reload();
         });
 
@@ -58,6 +56,7 @@ export default class Menu {
 
     _updateDataInMenu() {
         document.getElementById('money').innerHTML = this.profile.getProgressOfItem('money');
+        document.getElementById('money-collected').innerHTML = this.profile.getProgressOfItem('money');
 
         this.updateLevelAndPrice('chance');
         this.updateLevelAndPrice('beam');

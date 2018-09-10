@@ -1,6 +1,8 @@
 {
-  "name": "js13k-setup",
+  "name": "systems-offline",
   "private": true,
+  "author": "Istvan Erdos (istvan.erdos86@gmail.com), Adam Pinter ()",
+  "license": "ISC",
   "scripts": {
     "start": "webpack-dev-server --mode development",
     "build": "webpack --mode production",

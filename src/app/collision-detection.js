@@ -51,7 +51,6 @@ class CollisionDetection {
         for (let i = 0; i < this.planets.length; i++) {
             const planet = this.planets[i];
 
-            console.log(' this.strengthEnoughToDestroy(planet, plasma)', this.strengthEnoughToDestroy(planet, plasma));
             if (this.checkCollision(planet, plasma) && this.strengthEnoughToDestroy(planet, plasma)) {
                 planet._generateRandomParameters();
                 planet.y = 0 - Math.floor(Math.random() * (planet.gravityRadius * 2));

@@ -5,7 +5,7 @@ export default class Fuel extends EquipmentBase {
     init() {
         this.name = 'fuel';
         this.profile = new Profile();
-        this.radius = 30;
+        this.radius = 35;
         this.color = 'orange';
         this.x = this._getXWithoutPlanetCollision();
         this.y = 0;

@@ -14,7 +14,6 @@ export default class Beam extends EquipmentBase {
     }
 
     pickUp() {
-        console.log('pick beam');
         this.updateButtonText(1, 'beam');
     }
 

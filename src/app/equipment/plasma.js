@@ -6,7 +6,7 @@ export default class Plasma extends EquipmentBase {
     init() {
         this.name = 'plasma';
         this.profile = new Profile();
-        this.radius = 30;
+        this.radius = 35;
         this.color = '#ff0000';
         this.x = this._getXWithoutPlanetCollision();
         this.y = 0;
@@ -21,7 +21,6 @@ export default class Plasma extends EquipmentBase {
     }
 
     pickUp() {
-        console.log('pick plasma');
         this.updateButtonText(1, 'plasma');
     }
 
@@ -42,7 +41,6 @@ export default class Plasma extends EquipmentBase {
         this.radius = 0;
 
         if (this.getY() <= 0 || this.collisionDetection.checkPlasmaCollision(this)) {
-            console.log('this.getY',this.getY());
             this.removeable = true;
             this.active = false;
             return;

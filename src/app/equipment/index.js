@@ -30,7 +30,6 @@ export default class Equipment extends Base {
             const e = this.collectedEquipments[i];
 
             if (e.name === type && !e.isActive()) {
-                console.log('activate');
                 e.activate();
                 break;
             }
@@ -57,7 +56,6 @@ export default class Equipment extends Base {
     _haveYouLuckToSpawnEquipment() {
         const rand = Math.floor(Math.random() * 100) + 1;
         const chanceInPercent = this.profile.getProgressOfItem('chance') * 5;
-        console.log('chanceInPercent',rand <= chanceInPercent);
 
         return rand <= chanceInPercent;
     }

@@ -14,7 +14,7 @@ import CollisionDetection from './collision-detection';
 import Records from './records';
 import config from './config';
 import Path from './path';
-// import Music from './music';
+import Music from './__music';
 
 export default class Space extends Base {
     constructor() {
@@ -55,7 +55,7 @@ export default class Space extends Base {
     }
 
     startGame() {
-        //this.music = new Music().playMusic();
+        this.music = new Music().playMusic();
         //this.music = new Music().init();
         // this.music.play();
         this.interval = setInterval(this._render.bind(this), config.fps);

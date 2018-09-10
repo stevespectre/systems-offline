@@ -140,7 +140,7 @@ export default class Space extends Base {
         if (!this.spaceShip.burstOn) {
             this.score.updateScore(this.traveledDistance / 2);
         } else {
-            this.score.updateScore((this.traveledDistance / 2) * this.spaceShip.getSpeed());
+            this.score.updateScore(this.traveledDistance * 2);
         }
 
     }

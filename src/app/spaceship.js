@@ -93,12 +93,12 @@ export default class Spaceship extends Engine {
 
     turnLeft() {
         this.rightEngineOn = true;
-        this.setFuelLevel(this.fuelLevel - 1);
+        this.setFuelLevel(this.fuelLevel - 2);
     }
 
     turnRight() {
         this.leftEngineOn = true;
-        this.setFuelLevel(this.fuelLevel - 1);
+        this.setFuelLevel(this.fuelLevel - 2);
     }
 
     turnEnd() {

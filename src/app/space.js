@@ -84,6 +84,7 @@ export default class Space extends Base {
     }
 
     _turn(direction) {
+
         const start = Date.now();
 
         // cancel previous turn

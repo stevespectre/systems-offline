@@ -115,6 +115,9 @@ export default class Spaceship extends Engine {
     }
 
     isAllowedToTurn() {
+        if (this.leftEngineOn || this.rightEngineOn) {
+            return;
+        }
         if(!config.spaceship.turn.enabled) return false;
         if(!this.hasEnoughFuel()) return false;
 

@@ -80,9 +80,13 @@ export default class EquipmentBase extends BaseObject {
 
     _getXWithoutPlanetCollision() {
         this.x = this._getRandomX();
-        if (this.collisionDetection.checkCirclesCollision(this.planets, this)) {
-            return this._getXWithoutCollision();
+        for (let i= 0; i < this.planets.length; i++) {
+            const planet = this.planets[i];
+            if (this.collisionDetection.checkCollision(planet, this)) {
+                return this._getXWithoutPlanetCollision();
+            }
         }
+
 
         return this.x;
     }

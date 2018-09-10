@@ -22,7 +22,6 @@ export default class Menu {
         });
 
         document.getElementById('restart').addEventListener('click', ()=> {
-            // window.location.reload();
             document.body.classList.remove('gameover');
             document.body.classList.add('game');
             this.space.resetGame();

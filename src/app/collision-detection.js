@@ -47,22 +47,26 @@ class CollisionDetection {
         return false;
     }
 
-    checkPlasmaCollision(plasma) {
-        for (let i = 0; i < this.planets.length; i++) {
-            const planet = this.planets[i];
+    checkPlasmaCollision(planets, plasma) {
+        for (let i = 0; i < planets.length; i++) {
+            const planet = planets[i];
 
-            if (this.checkCollision(planet, plasma) && this.strengthEnoughToDestroy(planet, plasma)) {
-                planet._generateRandomParameters();
-                planet.y = 0 - Math.floor(Math.random() * (planet.gravityRadius * 2));
-                planet._checkCollision();
+            if (this.checkCollision(planet, plasma)) {
+                this.destroyPlanetIfPowerIsEnough(planet, plasma);
+
                 return true;
             }
+
         }
     }
 
-    strengthEnoughToDestroy(planet, plasma) {
+    destroyPlanetIfPowerIsEnough(planet, plasma) {
         const power = planet.minRadius + ((planet.maxRadius - planet.minRadius) / 10) * plasma.level;
-        return planet.radius < power;
+        if( planet.gravityRadius < power) {
+            planet._generateRandomParameters();
+            planet.y = 0 - Math.floor(Math.random() * (planet.gravityRadius * 2));
+            planet._checkCollision();
+        }
     }
 
     checkCollision(object, anotherObject) {

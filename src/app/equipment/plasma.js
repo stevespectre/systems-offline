@@ -15,11 +15,6 @@ export default class Plasma extends EquipmentBase {
         this.level = this.profile.getProgressOfItem('plasma');
     }
 
-    calcStrength() {
-        console.log('config',config);
-        return ((config.planet.maxRadius - config.planet.minRadius) / 10) * this.profile.getProgressOfItem('plasma');
-    }
-
     pickUp() {
         this.updateButtonText(1, 'plasma');
     }
@@ -40,7 +35,7 @@ export default class Plasma extends EquipmentBase {
 
         this.radius = 0;
 
-        if (this.getY() <= 0 || this.collisionDetection.checkPlasmaCollision(this)) {
+        if (this.getY() <= 0 || this.collisionDetection.checkPlasmaCollision(this.planets, this)) {
             this.removeable = true;
             this.active = false;
             return;

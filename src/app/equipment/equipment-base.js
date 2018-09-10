@@ -87,7 +87,6 @@ export default class EquipmentBase extends BaseObject {
             }
         }
 
-
         return this.x;
     }
     

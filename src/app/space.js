@@ -118,7 +118,7 @@ export default class Space extends Base {
 
         this._setDistance();
         this._clearCanvas();
-        this.score.updateScore(this.traveledDistance);
+        this.updateScore();
         this.equipment.eventuallyAdd(this.traveledDistance);
         this.gravity.calcGravityImpact();
         this.backgroundStars.render(speed);
@@ -133,10 +133,17 @@ export default class Space extends Base {
     }
 
     _setDistance() {
-        console.log('this.spaceShip.getSpeed()',this.spaceShip.getSpeed());
         this.traveledDistance += this.spaceShip.getSpeed();
     }
 
+    updateScore() {
+        if (!this.spaceShip.burstOn) {
+            this.score.updateScore(this.traveledDistance / 2);
+        } else {
+            this.score.updateScore((this.traveledDistance / 2) * this.spaceShip.getSpeed());
+        }
+
+    }
     _addEarth() {
         const earth = new Earth(this.ctx, this.planets);
         this.planets.push(earth);

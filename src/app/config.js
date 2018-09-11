@@ -1,10 +1,10 @@
 const difficulty = {
     easy: {
-        startSpeed: 5,
-        minSpeed: 5,
-        maxSpeed: 15,
-        incrieseSpeedVelocity: 10, // use (maxSpeed - minSpeed) for static speed
-        decreaseSpeedVelocity: 10, // use (maxSpeed - minSpeed) for static speed
+        startSpeed: 3,
+        minSpeed: 3,
+        maxSpeed: 9,
+        incrieseSpeedVelocity: 6, // use (maxSpeed - minSpeed) for static speed
+        decreaseSpeedVelocity: 6, // use (maxSpeed - minSpeed) for static speed
         gravitydecreaseSpeedVelocity: 0,
         turn: {
             enabled: true,

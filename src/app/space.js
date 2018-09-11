@@ -1,3 +1,19 @@
+window.requestAnimationFrame = (function(){
+    return  window.requestAnimationFrame       ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame    ||
+        window.oRequestAnimationFrame      ||
+        window.msRequestAnimationFrame     ||
+        function (callback) {
+            window.setTimeout(callback, 1000 / 60);
+        };
+})();
+
+window.cancelAnimationFrame = (function(){
+    return  window.cancelAnimationFrame ||
+        window.mozCancelAnimationFrame
+})();
+
 import Base from './base';
 import BackgroundStars from './background-stars';
 import Planet from './planet/index';
@@ -14,7 +30,7 @@ import CollisionDetection from './collision-detection';
 import Records from './records';
 import config from './config';
 import Path from './path';
-// import Music from './__music';
+// import Music from './music';
 
 export default class Space extends Base {
     constructor() {
@@ -55,10 +71,11 @@ export default class Space extends Base {
     }
 
     startGame() {
-        //this.music = new Music().playMusic();
-        //this.music = new Music().init();
+        // this.music = new Music().playMusic();
+        // this.music = new Music().init();
         // this.music.play();
-        this.interval = setInterval(this._render.bind(this), config.fps);
+        //this.interval = setInterval(this._render.bind(this), config.fps);
+        this.animFrame = requestAnimationFrame(this._render.bind(this));
         return this;
     }
 
@@ -114,6 +131,7 @@ export default class Space extends Base {
 
         if (this.gameIsOver) {
             this._gameOver();
+            return;
         }
 
         this._setDistance();
@@ -130,6 +148,7 @@ export default class Space extends Base {
         if (this.collisionDetection.checkObjectCollision(this.planets, this.spaceShip)) {
             this.gameIsOver = true;
         }
+        requestAnimationFrame(this._render.bind(this));
     }
 
     _setDistance() {
@@ -168,7 +187,8 @@ export default class Space extends Base {
     }
 
     _gameOver() {
-        clearInterval(this.interval);
+        // clearInterval(this.interval);
+        cancelAnimationFrame(this.animFrame);
         this.explosion.render(this.spaceShip);
         document.body.classList.add('gameover');
         document.body.classList.remove('game');

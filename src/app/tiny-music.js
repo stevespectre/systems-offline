@@ -87,7 +87,8 @@
 // create gain and EQ nodes, then connect 'em
     Sequence.prototype.createFxNodes = function() {
         var eq = [ [ 'bass', 100 ], [ 'mid', 1000 ], [ 'treble', 2500 ] ],
-            prev = this.gain = this.ac.createGain();
+            prev = this.gain = this.ac.createGain(),
+            convolver = this.convolver = this.ac.createConvolver();
         eq.forEach(function( config, filter ) {
             filter = this[ config[ 0 ] ] = this.ac.createBiquadFilter();
             filter.type = 'peaking';
@@ -135,6 +136,7 @@
             this.osc.type = this.waveType || 'square';
         }
 
+        this.convolver.connect(this.gain);
         this.osc.connect( this.gain );
         return this;
     };

@@ -15,7 +15,7 @@ export default class Gravity {
     }
 
     _calObjectGravityImpect(object) {
-        const objectGravityForce = object.gravityRadius / 3000 / this.spaceShip.getSpeed();
+        const objectGravityForce = object.gravityRadius / 2400 / this.spaceShip.getSpeed();
 
         const distanceX = object.getX() - this.shipFrontX;
         const distanceY = object.getY() - this.shipFrontY;

@@ -51,6 +51,7 @@ export default class Menu {
 
         this._updateDataInMenu();
         this._updateEquipment();
+        this._cheatCode();
     }
 
     _isIntroSeen() {
@@ -89,6 +90,27 @@ export default class Menu {
 
     _isEnoughMoneyToUpdate(price) {
         return parseInt(this.profile.getProgressOfItem('money')) >= price;
+    }
+
+    _cheatCode() {
+        let clicks = 0;
+        let timer, timeout = 350;
+        let _self = this;
+
+        document.getElementById('i-money').addEventListener('click', e => {
+
+            clearTimeout(timer);
+            clicks++;
+            timer = setTimeout(() => {
+                if(clicks==3) _self._tripleClick();
+                clicks = 0;
+            }, timeout);
+        });
+    }
+
+    _tripleClick() {
+        this.profile.updateItem('money', 10);
+        this._updateDataInMenu();
     }
 
 }
